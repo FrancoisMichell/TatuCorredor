@@ -7,28 +7,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.tatu.game.TatuBola;
 
-public class Hud {
+public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
     private Integer worldTimer;
     private float timeCount;
     private Integer score;
 
-    Label countdownLabel;
-    Label scoreLabel;
-    Label timeLabel;
-    Label levelLabel;
-    Label worldLabel;
-    Label tatuLabel;
+    private Label countdownLabel;
+    private Label scoreLabel;
+    private Label timeLabel;
+    private Label levelLabel;
+    private Label worldLabel;
+    private Label tatuLabel;
 
     public Hud(SpriteBatch sb) {
         worldTimer = 300;
         timeCount = 0;
         score = 0;
-        viewport = new ScreenViewport(new OrthographicCamera());
+        viewport = new FitViewport(TatuBola.V_WIDTH, TatuBola.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         Table table = new Table();
@@ -42,13 +44,6 @@ public class Hud {
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         tatuLabel = new Label("TATU", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        countdownLabel.setFontScale(4);
-        scoreLabel.setFontScale(4);
-        timeLabel.setFontScale(4);
-        levelLabel.setFontScale(4);
-        worldLabel.setFontScale(4);
-        tatuLabel.setFontScale(4);
-
         table.add(tatuLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
@@ -60,5 +55,10 @@ public class Hud {
 
         stage.addActor(table);
 
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }

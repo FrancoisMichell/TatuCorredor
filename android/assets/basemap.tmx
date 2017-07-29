@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="12">
+ <tileset firstgid="1" source="untitled.tsx"/>
+ <layer name="bg" width="240" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt2TsOgCAMANB6FD2993PwM+mmgxKjRNG84S1ACiWEJtBGRAsAAAAAAD9RL5oC1gGsuiqiv2iq9mMNi3HTv9d+NDYV542+O3v61DreyDv3nDnj5cq/lPNUh9oJX5OqrXfvBAAAAHiStyn4jjP/Pd6moEwzpCNqEw==
+  </data>
+ </layer>
+ <objectgroup name="Ground">
+  <object id="2" x="1" y="223" width="148" height="16"/>
+  <object id="3" x="184" y="145" width="114" height="16"/>
+  <object id="4" x="327" y="112" width="241" height="16"/>
+  <object id="8" x="481" y="96" width="32" height="16"/>
+  <object id="9" x="209" y="127" width="32" height="16"/>
+  <object id="10" x="58" y="206" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="Tatu"/>
+ <objectgroup name="Jaguatirica"/>
+</map>

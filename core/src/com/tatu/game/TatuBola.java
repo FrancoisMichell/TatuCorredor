@@ -5,12 +5,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tatu.game.Screens.PlayScreen;
 
 public class TatuBola extends Game {
-    public SpriteBatch batch;
+    public static final int V_WIDTH = 360;
+    public static final int V_HEIGHT = 224;
+    public static final float PPM = 100;
+
+    public static SpriteBatch batch;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        setScreen(new PlayScreen(this));
+        setScreen(new PlayScreen());
     }
 
     @Override
