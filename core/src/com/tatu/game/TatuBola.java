@@ -14,7 +14,8 @@ public class TatuBola extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        setScreen(new PlayScreen());
+        TatuBola game = new TatuBola();
+        setScreen(new PlayScreen(game));
     }
 
     @Override

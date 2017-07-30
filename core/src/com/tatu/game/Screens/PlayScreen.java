@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -15,7 +16,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
 import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Sprites.Tatu;
+import com.tatu.game.TatuBola;
 import com.tatu.game.Tools.B2WorldCreator;
+import com.tatu.game.Tools.WorldContactListener;
 
 import static com.tatu.game.TatuBola.PPM;
 import static com.tatu.game.TatuBola.V_HEIGHT;
@@ -23,9 +26,12 @@ import static com.tatu.game.TatuBola.V_WIDTH;
 import static com.tatu.game.TatuBola.batch;
 
 public class PlayScreen implements Screen {
+    private TatuBola game;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
+
+    private TextureAtlas atlas;
 
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -37,7 +43,9 @@ public class PlayScreen implements Screen {
     private Tatu player;
     private Controller controller;
 
-    public PlayScreen() {
+    public PlayScreen(TatuBola game) {
+        atlas = new TextureAtlas("testeTatu.atlas");
+        this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FillViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
         hud = new Hud(batch);
@@ -53,16 +61,26 @@ public class PlayScreen implements Screen {
 
         new B2WorldCreator(world, map);
 
-        player = new Tatu(world);
+        b2dr.SHAPE_STATIC.set(1, 0, 0, 1);
+
+        player = new Tatu(world, this);
+
+        world.setContactListener(new WorldContactListener());
 
         controller = new Controller();
 
     }
 
-    private void update() {
+    public TextureAtlas getAtlas() {
+        return atlas;
+    }
+
+    private void update(float dt) {
         handleInput();
 
         world.step(1 / 60f, 6, 2);
+
+        player.update(dt);
 
         gameCam.position.x = player.b2body.getPosition().x;
 
@@ -72,7 +90,7 @@ public class PlayScreen implements Screen {
 
     private void handleInput() {
         if (controller.isUpPressed()) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 0.5f), player.b2body.getWorldCenter(), true);
         }
 
         if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 2)) {
@@ -91,13 +109,18 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        update();
+        update(delta);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
 
         b2dr.render(world, gameCam.combined);
+
+        batch.setProjectionMatrix(gameCam.combined);
+        batch.begin();
+        player.draw(batch);
+        batch.end();
 
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
