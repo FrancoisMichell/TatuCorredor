@@ -23,7 +23,7 @@ public class B2WorldCreator {
         FixtureDef fDef = new FixtureDef();
         Body body;
 
-        for (MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bDef.type = BodyDef.BodyType.StaticBody;
@@ -33,6 +33,7 @@ public class B2WorldCreator {
 
             shape.setAsBox((rect.getWidth() / 2) / TatuBola.PPM, (rect.getHeight() / 2) / TatuBola.PPM);
             fDef.shape = shape;
+
             body.createFixture(fDef);
         }
 

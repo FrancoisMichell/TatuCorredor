@@ -51,6 +51,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(batch);
 
         mapLoader = new TmxMapLoader();
+        //map = mapLoader.load("mapa1.tmx");
         map = mapLoader.load("basemap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
@@ -110,9 +111,8 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(204, 230, 254, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         renderer.render();
 
         b2dr.render(world, gameCam.combined);

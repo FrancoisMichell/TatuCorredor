@@ -12,6 +12,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import static com.badlogic.gdx.utils.Align.center;
+
 
 public class Controller implements Disposable {
     private Viewport viewport;
@@ -25,10 +27,12 @@ public class Controller implements Disposable {
         Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
-        table.left().bottom();
+        //table.left().bottom();
+        table.top();
+        table.setFillParent(true);
 
         Image upImg = new Image(new Texture("up.png"));
-        upImg.setSize(50, 50);
+        upImg.setSize(150, 150);
         upImg.addListener(new InputListener() {
 
             @Override
@@ -44,7 +48,7 @@ public class Controller implements Disposable {
         });
 
         Image downImg = new Image(new Texture("down.png"));
-        downImg.setSize(50, 50);
+        downImg.setSize(150, 150);
         downImg.addListener(new InputListener() {
 
             @Override
@@ -60,7 +64,7 @@ public class Controller implements Disposable {
         });
 
         Image leftImg = new Image(new Texture("left.png"));
-        leftImg.setSize(50, 50);
+        leftImg.setSize(150, 150);
         leftImg.addListener(new InputListener() {
 
             @Override
@@ -76,7 +80,7 @@ public class Controller implements Disposable {
         });
 
         Image rightImg = new Image(new Texture("right.png"));
-        rightImg.setSize(50, 50);
+        rightImg.setSize(150, 150);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -91,18 +95,26 @@ public class Controller implements Disposable {
             }
         });
 
-        table.add();
+        /*table.add();
         table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
         table.add();
 
-        table.row().pad(5, 5, 5, 5);
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
+        table.row();
+        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).right();
         table.add();
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
+        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).left();
+        */
 
-        table.row().padBottom(5);
-        table.add();
-        table.add(downImg).size(downImg.getWidth(), downImg.getHeight());
+        table.add().height(75).expandX().padTop(10);
+        table.add(upImg).size(upImg.getWidth(), upImg.getHeight()).expandX().padTop(10);
+        table.add().height(75).expandX().padTop(10);
+
+        table.row();
+        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).expandX();
+        table.add().expandX();
+        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).expandX();
+
+
 
         stage.addActor(table);
     }
