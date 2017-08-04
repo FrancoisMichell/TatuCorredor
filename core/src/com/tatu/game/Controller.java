@@ -12,13 +12,21 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import static com.badlogic.gdx.utils.Align.center;
-
 
 public class Controller implements Disposable {
     private Viewport viewport;
     private Stage stage;
     private boolean upPressed, downPressed, leftPressed, rightPressed;
+
+    public Long getLastTap() {
+        return lastTap;
+    }
+
+    public void setLastTap(Long lastTap) {
+        this.lastTap = lastTap;
+    }
+
+    private Long lastTap = System.currentTimeMillis();
 
     public Controller() {
         OrthographicCamera cam = new OrthographicCamera();
@@ -37,8 +45,12 @@ public class Controller implements Disposable {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                upPressed = true;
-                return true;
+                if (System.currentTimeMillis() - lastTap > 800) {
+                    upPressed = true;
+                } else {
+                    upPressed = false;
+                }
+                return upPressed;
             }
 
             @Override

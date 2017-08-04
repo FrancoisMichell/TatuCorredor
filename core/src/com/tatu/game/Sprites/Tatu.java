@@ -43,7 +43,7 @@ public class Tatu extends Sprite {
         tatuRun = new Animation(0.1f, frames);
         frames.clear();
 
-        tatuStand = new TextureRegion(getTexture(), 0, 0, 32, 32);
+        tatuStand = new TextureRegion(getTexture(), 256, 0, 32, 32);
 
         for (int i = 16; i < 27; i++)
             frames.add(new TextureRegion(getTexture(), i * 32, 0, 32, 32));
@@ -85,6 +85,7 @@ public class Tatu extends Sprite {
             region.flip(true, false);
             runningRight = true;
         }
+
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
         previousState = currentState;
         return region;
@@ -93,7 +94,8 @@ public class Tatu extends Sprite {
     private State getState() {
         if (b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
-        else if (b2body.getLinearVelocity().y < 0)
+        else if (b2body.getLinearVelocity().y < 0 || b2body.getLinearVelocity().y > 2)
+
             return State.FALLING;
         else if (b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
@@ -103,7 +105,7 @@ public class Tatu extends Sprite {
 
     private void defineTatu() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / TatuBola.PPM, 32 / TatuBola.PPM);
+        bdef.position.set(384 / TatuBola.PPM, 32 / TatuBola.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
