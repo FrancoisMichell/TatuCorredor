@@ -14,17 +14,13 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import sun.rmi.runtime.Log;
-
-import static com.badlogic.gdx.utils.Align.center;
-
-
 public class Controller implements Disposable {
     private Viewport viewport;
     private Stage stage;
     private boolean upPressed, downPressed, leftPressed, rightPressed;
     private long lastUpPressed = System.currentTimeMillis();
     private long lastDownPressed = 0;
+    private Long lastTap = System.currentTimeMillis();
 
     private static Controller controller = new Controller();
 
@@ -32,7 +28,8 @@ public class Controller implements Disposable {
         return controller;
     }
 
-    private Controller() {
+
+    public Controller() {
         OrthographicCamera cam = new OrthographicCamera();
         viewport = new FitViewport(800, 480, cam);
         stage = new Stage(viewport, TatuBola.batch);
@@ -47,8 +44,11 @@ public class Controller implements Disposable {
         upImg.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
-                upPressed = true;
+                if (System.currentTimeMillis() - lastTap > 1500) {
+                    upPressed = true;
+                } else {
+                    upPressed = false;
+                }
                 return upPressed;
             }
             @Override
@@ -99,6 +99,14 @@ public class Controller implements Disposable {
         table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).expandX();
 
         stage.addActor(table);
+    }
+
+    public Long getLastTap() {
+        return lastTap;
+    }
+
+    public void setLastTap(Long lastTap) {
+        this.lastTap = lastTap;
     }
 
     public void draw() {

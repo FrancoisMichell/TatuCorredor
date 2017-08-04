@@ -2,7 +2,6 @@ package com.tatu.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
 import com.tatu.game.Scenes.Hud;
@@ -29,6 +28,7 @@ public class PlayScreen implements Screen {
     private TatuBola game;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
+
     private Hud hud;
 
     private TextureAtlas atlas;
@@ -46,8 +46,8 @@ public class PlayScreen implements Screen {
     public PlayScreen(TatuBola game) {
         atlas = new TextureAtlas("testeTatu.atlas");
         this.game = game;
-        gameCam = new OrthographicCamera();
-        gamePort = new FillViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
+        gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
+        gamePort = new StretchViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
         hud = new Hud(batch);
 
         mapLoader = new TmxMapLoader();
@@ -61,8 +61,6 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         new B2WorldCreator(world, map);
-
-        b2dr.SHAPE_STATIC.set(1, 0, 0, 1);
 
         player = new Tatu(world, this);
 
@@ -90,9 +88,12 @@ public class PlayScreen implements Screen {
     }
 
     private void handleInput() {
-        if (controller.isUpPressed()) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 0.5f), player.b2body.getWorldCenter(), true);
+        if (System.currentTimeMillis() - controller.getLastTap() > 800) {
+            if (controller.isUpPressed() && (player.b2body.getLinearVelocity().y <= 2)) {
+                player.b2body.applyLinearImpulse(new Vector2(0, 0.5f), player.b2body.getWorldCenter(), true);
+            }
         }
+
 
         if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 2)) {
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
@@ -112,7 +113,8 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         update(delta);
         Gdx.gl.glClearColor(204, 230, 254, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
         b2dr.render(world, gameCam.combined);
@@ -131,6 +133,7 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
+
         controller.resize(width, height);
     }
 
