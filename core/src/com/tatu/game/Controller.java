@@ -1,6 +1,8 @@
 package com.tatu.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +14,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import sun.rmi.runtime.Log;
+
 import static com.badlogic.gdx.utils.Align.center;
 
 
@@ -19,47 +23,37 @@ public class Controller implements Disposable {
     private Viewport viewport;
     private Stage stage;
     private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private long lastUpPressed = System.currentTimeMillis();
+    private long lastDownPressed = 0;
 
-    public Controller() {
+    private static Controller controller = new Controller();
+
+    public static Controller getInstance(){
+        return controller;
+    }
+
+    private Controller() {
         OrthographicCamera cam = new OrthographicCamera();
         viewport = new FitViewport(800, 480, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
-        //table.left().bottom();
         table.top();
         table.setFillParent(true);
 
         Image upImg = new Image(new Texture("up.png"));
         upImg.setSize(150, 150);
         upImg.addListener(new InputListener() {
-
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                upPressed = true;
-                return true;
-            }
 
+                upPressed = true;
+                return upPressed;
+            }
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 upPressed = false;
-            }
-        });
-
-        Image downImg = new Image(new Texture("down.png"));
-        downImg.setSize(150, 150);
-        downImg.addListener(new InputListener() {
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                downPressed = true;
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                downPressed = false;
             }
         });
 
@@ -95,16 +89,6 @@ public class Controller implements Disposable {
             }
         });
 
-        /*table.add();
-        table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
-        table.add();
-
-        table.row();
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).right();
-        table.add();
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).left();
-        */
-
         table.add().height(75).expandX().padTop(10);
         table.add(upImg).size(upImg.getWidth(), upImg.getHeight()).expandX().padTop(10);
         table.add().height(75).expandX().padTop(10);
@@ -113,8 +97,6 @@ public class Controller implements Disposable {
         table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).expandX();
         table.add().expandX();
         table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).expandX();
-
-
 
         stage.addActor(table);
     }

@@ -68,7 +68,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        controller = new Controller();
+        controller = Controller.getInstance();
 
     }
 

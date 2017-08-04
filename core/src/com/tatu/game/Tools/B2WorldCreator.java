@@ -23,7 +23,7 @@ public class B2WorldCreator {
         FixtureDef fDef = new FixtureDef();
         Body body;
 
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("Ground").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bDef.type = BodyDef.BodyType.StaticBody;
@@ -37,6 +37,15 @@ public class B2WorldCreator {
             body.createFixture(fDef);
         }
 
+        for (MapObject object : map.getLayers().get("gotaCarrera").getObjects().getByType(RectangleMapObject.class)) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Agua(world, map, rect);
+
+        }
+
+
+        /*
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -59,6 +68,6 @@ public class B2WorldCreator {
 
             new Agua(world, map, rect);
         }
-
+        */
     }
 }
