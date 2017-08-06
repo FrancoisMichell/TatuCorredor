@@ -1,6 +1,5 @@
 package com.tatu.game.Tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -23,13 +22,12 @@ public class WorldContactListener implements ContactListener {
                 ((InteractiveTileObject) obj.getUserData()).onHeadHit();
             }
         }
-
-        Gdx.app.log("Begin Contact", "");
+        //Gdx.app.log("Begin Contact", "MOPA");
     }
 
     @Override
     public void endContact(Contact contact) {
-
+        //Gdx.app.log("END Contact", "MOPA");
     }
 
     @Override

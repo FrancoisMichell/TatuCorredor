@@ -15,9 +15,10 @@ import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
 public class Tatu extends Sprite {
-    private enum State {FALLING, JUMPING, RUNNING, IDLE}
 
-    private State currentState;
+    public enum State {FALLING, JUMPING, RUNNING, IDLE}
+
+    public State currentState;
     private State previousState;
 
     private World world;
@@ -120,17 +121,21 @@ public class Tatu extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(10 / TatuBola.PPM);
+        // CATEGORIA DO OBJETO
+        fdef.filter.categoryBits = TatuBola.TATU_BIT;
+        // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
+        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.AGUA_BIT;
+
         fdef.shape = shape;
 
         b2body.createFixture(fdef);
 
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / TatuBola.PPM, 10 / TatuBola.PPM), new Vector2(2 / TatuBola.PPM, 10 / TatuBola.PPM));
+        head.set(new Vector2(-2 / TatuBola.PPM, 11 / TatuBola.PPM), new Vector2(2 / TatuBola.PPM, 11 / TatuBola.PPM));
         fdef.shape = head;
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("head");
 
     }
-
 }

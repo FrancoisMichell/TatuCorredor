@@ -43,7 +43,14 @@ public class PlayScreen implements Screen {
     private Tatu player;
     private Controller controller;
 
+    private double forca_movimento;
+    private double forca_pulo;
+
+
     public PlayScreen(TatuBola game) {
+        forca_movimento = 0.5;
+        forca_pulo = 0.5;
+
         atlas = new TextureAtlas("testeTatu.atlas");
         this.game = game;
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
@@ -90,10 +97,10 @@ public class PlayScreen implements Screen {
     private void handleInput() {
         if (System.currentTimeMillis() - controller.getLastTap() > 800) {
             if (controller.isUpPressed() && (player.b2body.getLinearVelocity().y <= 2)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 0.5f), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+                Gdx.app.log("Begin Contact", "MOPA");
             }
         }
-
 
         if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 2)) {
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
@@ -161,5 +168,21 @@ public class PlayScreen implements Screen {
         hud.dispose();
         controller.dispose();
 
+    }
+
+    public double getForca_movimento() {
+        return forca_movimento;
+    }
+
+    public void setForca_movimento(double forca_movimento) {
+        this.forca_movimento += forca_movimento;
+    }
+
+    public double getForca_pulo() {
+        return forca_pulo;
+    }
+
+    public void setForca_pulo(double forca_pulo) {
+        this.forca_pulo += forca_pulo;
     }
 }

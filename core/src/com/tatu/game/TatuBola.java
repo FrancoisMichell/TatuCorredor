@@ -9,6 +9,14 @@ public class TatuBola extends Game {
     public static final int V_HEIGHT = 256;
     public static final float PPM = 100;
 
+    public static final short DEFAULT_BIT = 1;
+    public static final short TATU_BIT = 2;
+    public static final short AGUA_BIT = 4;
+    public static final short DESTRUIDO_BIT = 8;
+
+
+
+
     public static SpriteBatch batch;
 
     @Override
