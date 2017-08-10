@@ -18,6 +18,10 @@ public class Tatu extends Sprite {
 
     public enum State {FALLING, JUMPING, RUNNING, IDLE}
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
     public State currentState;
     private State previousState;
 
@@ -103,13 +107,14 @@ public class Tatu extends Sprite {
     private State getState() {
         if (b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
-        else if (b2body.getLinearVelocity().y < 0 || b2body.getLinearVelocity().y > 2)
-
+        else if (b2body.getLinearVelocity().y < 0 || b2body.getLinearVelocity().y > 4)
             return State.FALLING;
         else if (b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
-        else
+        else if (b2body.getLinearVelocity().y == 0)
             return State.IDLE;
+        else
+            return State.JUMPING;
     }
 
     private void defineTatu() {

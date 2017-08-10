@@ -1,8 +1,6 @@
 package com.tatu.game;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,11 +42,12 @@ public class Controller implements Disposable {
         upImg.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (System.currentTimeMillis() - lastTap > 1500) {
+                if (System.currentTimeMillis() - lastTap > 1500 && Gdx.input.isTouched()) {
                     upPressed = true;
                 } else {
                     upPressed = false;
                 }
+
                 return upPressed;
             }
             @Override
@@ -79,7 +78,9 @@ public class Controller implements Disposable {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                rightPressed = true;
+                if (pointer == 0)
+                    rightPressed = true;
+                else Gdx.app.log("Begin Contact", "MOPA");
                 return true;
             }
 

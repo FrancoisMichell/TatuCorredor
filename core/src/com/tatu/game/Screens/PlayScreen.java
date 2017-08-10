@@ -95,11 +95,8 @@ public class PlayScreen implements Screen {
     }
 
     private void handleInput() {
-        if (System.currentTimeMillis() - controller.getLastTap() > 800) {
-            if (controller.isUpPressed() && (player.b2body.getLinearVelocity().y <= 2)) {
-                player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-                Gdx.app.log("Begin Contact", "MOPA");
-            }
+        if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
+            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
         }
 
         if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 2)) {
