@@ -2,6 +2,7 @@ package com.tatu.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -43,23 +44,18 @@ public class PlayScreen implements Screen {
     private Tatu player;
     private Controller controller;
 
-    private double forca_movimento;
-    private double forca_pulo;
-
 
     public PlayScreen(TatuBola game) {
-        forca_movimento = 0.5;
-        forca_pulo = 0.5;
 
-        atlas = new TextureAtlas("testeTatu.atlas");
+        atlas = new TextureAtlas("sprites/Tatu64.atlas");
         this.game = game;
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
         gamePort = new StretchViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
         hud = new Hud(batch);
 
         mapLoader = new TmxMapLoader();
-        //map = mapLoader.load("mapa1.tmx");
-        map = mapLoader.load("basemap.tmx");
+        //map = mapLoader.load("mapas/map128.tmx");
+        map = mapLoader.load("mapas/map64.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
@@ -116,9 +112,9 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(204, 230, 254, 1);
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        //Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
         b2dr.render(world, gameCam.combined);
@@ -165,21 +161,5 @@ public class PlayScreen implements Screen {
         hud.dispose();
         controller.dispose();
 
-    }
-
-    public double getForca_movimento() {
-        return forca_movimento;
-    }
-
-    public void setForca_movimento(double forca_movimento) {
-        this.forca_movimento += forca_movimento;
-    }
-
-    public double getForca_pulo() {
-        return forca_pulo;
-    }
-
-    public void setForca_pulo(double forca_pulo) {
-        this.forca_pulo += forca_pulo;
     }
 }

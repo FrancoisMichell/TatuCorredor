@@ -37,7 +37,7 @@ public class Controller implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        Image upImg = new Image(new Texture("up.png"));
+        Image upImg = new Image(new Texture("controles/up.png"));
         upImg.setSize(150, 150);
         upImg.addListener(new InputListener() {
             @Override
@@ -56,7 +56,7 @@ public class Controller implements Disposable {
             }
         });
 
-        Image leftImg = new Image(new Texture("left.png"));
+        Image leftImg = new Image(new Texture("controles/left.png"));
         leftImg.setSize(150, 150);
         leftImg.addListener(new InputListener() {
 
@@ -72,7 +72,7 @@ public class Controller implements Disposable {
             }
         });
 
-        Image rightImg = new Image(new Texture("right.png"));
+        Image rightImg = new Image(new Texture("controles/right.png"));
         rightImg.setSize(150, 150);
         rightImg.addListener(new InputListener() {
 
@@ -80,7 +80,6 @@ public class Controller implements Disposable {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (pointer == 0)
                     rightPressed = true;
-                else Gdx.app.log("Begin Contact", "MOPA");
                 return true;
             }
 

@@ -35,6 +35,8 @@ public class Tatu extends Sprite {
     private boolean runningRight;
     private float stateTimer;
 
+    private int imgSize = 64;
+
     public Tatu(World world, PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
         this.world = world;
@@ -46,23 +48,23 @@ public class Tatu extends Sprite {
         Array<TextureRegion> framesIdle = new Array<TextureRegion>();
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 1; i < 8; i++)
-            frames.add(new TextureRegion(getTexture(), i * 32, 0, 32, 32));
+            frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
         tatuRun = new Animation(0.1f, frames);
         frames.clear();
 
         for (int i = 8; i < 14; i++)
-            framesIdle.add(new TextureRegion(getTexture(), i * 32, 0, 32, 32));
+            framesIdle.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
         tatuIdle = new Animation(0.1f,framesIdle);
         framesIdle.clear();
 
         for (int i = 16; i < 27; i++)
-            frames.add(new TextureRegion(getTexture(), i * 32, 0, 32, 32));
+            frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
         tatuJump = new Animation(0.1f, frames);
 
-        tatuStand = new TextureRegion(getTexture(), 0, 0, 32, 32);
+        tatuStand = new TextureRegion(getTexture(), 0, 0, imgSize, imgSize);
 
         defineTatu();
-        setBounds(0, 0, 32 / TatuBola.PPM, 32 / TatuBola.PPM);
+        setBounds(0, 0, imgSize / TatuBola.PPM, imgSize / TatuBola.PPM);
         setRegion(tatuStand);
     }
 
@@ -119,7 +121,7 @@ public class Tatu extends Sprite {
 
     private void defineTatu() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(384 / TatuBola.PPM, 32 / TatuBola.PPM);
+        bdef.position.set(384 / TatuBola.PPM, 256 / TatuBola.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

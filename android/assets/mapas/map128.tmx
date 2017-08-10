@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="240" height="10" tilewidth="128" tileheight="128" nextobjectid="6">
+ <tileset firstgid="1" source="ground128.tsx"/>
+ <tileset firstgid="7" source="bg128.tsx"/>
+ <layer name="bg" width="240" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzt1clOQkEURdE3AwEBEeQJqPSgoPSCSg/+/y+5CZXUsEZWHuTsZM3O6E5uPAiCGySQRAq3SCODGOIR2pwopc7dIYd75FHAA4oIkY3YJvyfMyh1kbl+XdT+r1LK5vp1Ufu/SilbGRU84RkvqKJmPKLk2PncKKVsTbTQRgddvOLNqKPh2PncKKVs7/jAAEOMMMbE6KHv2PncKKVsn5hjgS984wdLY4qZY+dzo5SybbDFDnsccMSvscLasfO5UUoppa6hP8FQM4k=
+  </data>
+ </layer>
+ <layer name="objects" width="240" height="10">
+  <data encoding="base64" compression="zlib">
+   eJzt1TkKACEQRUG38f5H1lQQJlFEqYKXNp39EAAAAADgDbFXf/qOfQcA95ptrE0FgLVKLy8sbbwtaawBll4DIA==
+  </data>
+ </layer>
+ <objectgroup name="Ground">
+  <object id="2" x="0" y="1152" width="2686" height="128"/>
+  <object id="4" x="513.333" y="897.333" width="765.333" height="46.6667"/>
+ </objectgroup>
+ <objectgroup name="gotaCarrera"/>
+ <objectgroup name="air"/>
+ <objectgroup name="tatu"/>
+ <objectgroup name="homem"/>
+ <objectgroup name="jaguatirica"/>
+</map>
