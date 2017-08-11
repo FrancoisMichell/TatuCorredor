@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Homem extends InteractiveTileObject {
 
     public Homem(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds);
+        super(world, map, bounds, false);
         fixture.setUserData(this);
     }
 

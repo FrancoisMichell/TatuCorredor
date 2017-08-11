@@ -3,11 +3,9 @@ package com.tatu.game.Sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -31,6 +29,9 @@ public class Tatu extends Sprite {
     private Animation tatuRun;
     private Animation tatuIdle;
     private Animation<TextureRegion> tatuJump;
+
+    private float pulo = 6f;
+    private float velocidade = 0.1f;
 
     private boolean runningRight;
     private float stateTimer;
@@ -127,7 +128,7 @@ public class Tatu extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(10 / TatuBola.PPM);
+        shape.setRadius(20 / TatuBola.PPM);
         // CATEGORIA DO OBJETO
         fdef.filter.categoryBits = TatuBola.TATU_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
@@ -137,12 +138,32 @@ public class Tatu extends Sprite {
 
         b2body.createFixture(fdef);
 
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / TatuBola.PPM, 11 / TatuBola.PPM), new Vector2(2 / TatuBola.PPM, 11 / TatuBola.PPM));
+        //EdgeShape head = new EdgeShape();
+        //head.set(new Vector2(-2 / TatuBola.PPM, 31 / TatuBola.PPM), new Vector2(2 / TatuBola.PPM, 31 / TatuBola.PPM));
+        //fdef.shape = head;
+        CircleShape head = new CircleShape();
+        head.setRadius(20 / TatuBola.PPM);
         fdef.shape = head;
         fdef.isSensor = true;
 
         b2body.createFixture(fdef).setUserData("head");
 
     }
+
+    public float getPulo() {
+        return pulo;
+    }
+
+    public void setPulo(float pulo) {
+        this.pulo = pulo;
+    }
+
+    public float getVelocidade() {
+        return velocidade;
+    }
+
+    public void setVelocidade(float velocidade) {
+        this.velocidade += velocidade;
+    }
+
 }

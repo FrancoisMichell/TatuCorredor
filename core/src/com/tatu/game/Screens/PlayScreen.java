@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
 
         player = new Tatu(world, this);
 
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(player));
 
         controller = Controller.getInstance();
 
@@ -92,15 +92,15 @@ public class PlayScreen implements Screen {
 
     private void handleInput() {
         if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
         }
 
-        if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 2)) {
-            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+        if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
+            player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
         }
 
-        if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -2)) {
-            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+        if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
+            player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
         }
     }
 

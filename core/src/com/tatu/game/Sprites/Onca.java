@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Onca extends InteractiveTileObject {
 
     public Onca(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds);
+        super(world, map, bounds, false);
     }
 
     @Override

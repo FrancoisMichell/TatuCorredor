@@ -9,8 +9,10 @@ import com.tatu.game.TatuBola;
 public class Agua extends InteractiveTileObject {
 
     public Agua(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds);
+        super(world, map, bounds, true);
+
         fixture.setUserData(this);
+
         setCategoryFilter(TatuBola.AGUA_BIT);
     }
 
@@ -19,5 +21,6 @@ public class Agua extends InteractiveTileObject {
         Gdx.app.log("Agua", "collision");
         setCategoryFilter(TatuBola.DESTRUIDO_BIT);
         getCell().setTile(null);
+
     }
 }
