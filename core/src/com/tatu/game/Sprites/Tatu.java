@@ -33,6 +33,10 @@ public class Tatu extends Sprite {
     private float pulo = 6f;
     private float velocidade = 0.1f;
 
+    private boolean powerUpCarreira = false;
+    private boolean powerUpPulo = false;
+    private boolean powerUpFreio = false ;
+
     private boolean runningRight;
     private float stateTimer;
 

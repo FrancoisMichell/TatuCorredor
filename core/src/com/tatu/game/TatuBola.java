@@ -2,7 +2,9 @@ package com.tatu.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.tatu.game.Screens.MenuScreen;
 import com.tatu.game.Screens.PlayScreen;
+import com.tatu.game.Screens.SplashScreen;
 
 public class TatuBola extends Game {
     public static final int V_WIDTH = 800;
@@ -14,16 +16,15 @@ public class TatuBola extends Game {
     public static final short AGUA_BIT = 4;
     public static final short DESTRUIDO_BIT = 8;
 
-
-
-
     public static SpriteBatch batch;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        TatuBola game = new TatuBola();
-        setScreen(new PlayScreen(game));
+        setScreen(new SplashScreen(this));
+        //setScreen(new PlayScreen(this));
+
+
     }
 
     @Override

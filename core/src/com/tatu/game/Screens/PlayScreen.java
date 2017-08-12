@@ -91,14 +91,22 @@ public class PlayScreen implements Screen {
     }
 
     private void handleInput() {
+        //Manipulando o pulo
         if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
+            //if (player.getPowerUpAgua() == true){
+            //    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo() * forca do power up ), player.b2body.getWorldCenter(), true);
+            //}else{
+                player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
+            //}
         }
 
+        //Manipulando a corrida pra direita
         if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
+
             player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
         }
 
+        //Manipulando a corrida pra esquerda
         if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
             player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
         }
