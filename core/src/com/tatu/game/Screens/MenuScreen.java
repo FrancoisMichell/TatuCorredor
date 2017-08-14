@@ -40,9 +40,9 @@ import static com.tatu.game.TatuBola.V_WIDTH;
 public class MenuScreen implements Screen {
 
     private Skin skin;
+    private Viewport viewport;
     private Stage stage;
-    private OrthographicCamera gameCam;
-    private Viewport gamePort;
+    private TatuBola game;
 
     //private LevelScreen levelScreen = new LevelScreen();
     //private OptionsScreen optionsScreen = new OptionsScreen();
@@ -53,9 +53,14 @@ public class MenuScreen implements Screen {
     private Button configuracoesButton;
     private Button sairButton;
 
-    public MenuScreen(){
+    public MenuScreen(TatuBola game){
+
+        this.game = game;
+
         //TODO corrigir problema com viewPort no menu
-        stage = new Stage();
+        OrthographicCamera cam = new OrthographicCamera();
+        viewport = new FitViewport(800, 480, cam);
+        stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -65,29 +70,30 @@ public class MenuScreen implements Screen {
         skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
         background= new Image(skin,"menuscreen");
-        background.setPosition(Gdx.graphics.getWidth()/2 - 800/2f , Gdx.graphics.getHeight()/2 - 300f);
+        background.setPosition(0,0);
+        //background.setPosition(Gdx.graphics.getWidth()/2 - 800/2f , Gdx.graphics.getHeight()/2 - 300f);
         stage.addActor(background);
 
-        bgMenu = new Image(skin,"menu_painel");
-        bgMenu.setPosition(Gdx.graphics.getWidth()/2 - 637/2f, Gdx.graphics.getHeight()/2 - 225f );
-        stage.addActor(bgMenu);
+        //bgMenu = new Image(skin,"menu_painel");
+        //bgMenu.setPosition( (800 - 637)/2 , (480 - 539)/2 ) ;
+        //stage.addActor(bgMenu);
 
         jogarButton = new Button(skin,"jogarButton");
-        jogarButton.setPosition(Gdx.graphics.getWidth()/2- 165/2f, Gdx.graphics.getHeight()/2 + 89f);
+        jogarButton.setPosition( 650 , 10+116+10+116+10) ;
         stage.addActor(jogarButton);
 
         configuracoesButton= new Button(skin,"configuracoesButton");
-        configuracoesButton.setPosition(Gdx.graphics.getWidth()/2- 219/2f, Gdx.graphics.getHeight()/2 - 0f);
+        configuracoesButton.setPosition( 650 , 10+116+10) ;
         stage.addActor(configuracoesButton);
 
         sairButton= new Button(skin,"sairButton");
-        sairButton.setPosition(Gdx.graphics.getWidth()/2- 144/2f, Gdx.graphics.getHeight()/2 - 89f);
+        sairButton.setPosition( 650 , 10) ;
         stage.addActor(sairButton);
 
         jogarButton.addListener( new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(new TatuBola()));
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
             }
         });
 

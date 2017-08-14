@@ -1,6 +1,8 @@
 package com.tatu.game.Screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -46,7 +48,6 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(TatuBola game) {
-
         atlas = new TextureAtlas("sprites/Tatu64.atlas");
         this.game = game;
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
@@ -80,6 +81,8 @@ public class PlayScreen implements Screen {
     private void update(float dt) {
         handleInput();
 
+        hud.update();
+
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
@@ -110,6 +113,11 @@ public class PlayScreen implements Screen {
         if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
             player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(this.game));
+        }
+
     }
 
     @Override

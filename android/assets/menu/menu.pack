@@ -5,41 +5,50 @@ filter: Nearest,Nearest
 repeat: none
 menuscreen
   rotate: false
-  xy: 1, 167
-  size: 800, 600
-  orig: 800, 600
+  xy: 1, 1
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
 configuracoesButton
   rotate: false
-  xy: 1, 82
-  size: 219, 83
-  orig: 219, 83
+  xy: 803, 365
+  size: 105, 116
+  orig: 105, 116
   offset: 0, 0
   index: -1
 jogarButton
   rotate: false
-  xy: 803, 678
-  size: 165, 89
-  orig: 165, 89
+  xy: 910, 365
+  size: 105, 116
+  orig: 105, 116
   offset: 0, 0
   index: -1
 sairButton
   rotate: false
-  xy: 1, 1
-  size: 144, 79
-  orig: 144, 79
+  xy: 803, 247
+  size: 105, 116
+  orig: 105, 116
   offset: 0, 0
   index: -1
-
-menu2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-menu_painel
+tempoScore
   rotate: false
-  xy: 1, 1
-  size: 637, 539
-  orig: 637, 539
+  xy: 803, 182
+  size: 170, 63
+  orig: 170, 63
+  offset: 0, 0
+  index: -1
+aguaCarreraScore
+  rotate: false
+  xy: 803, 117
+  size: 142, 63
+  orig: 142, 63
+  offset: 0, 0
+  index: -1
+aguaPuloScore
+  rotate: false
+  xy: 803, 52
+  size: 142, 63
+  orig: 142, 63
   offset: 0, 0
   index: -1

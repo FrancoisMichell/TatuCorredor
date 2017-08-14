@@ -13,4 +13,5 @@
 		configuracoesButton: { down: configuracoesButton, up: configuracoesButton },
 		sairButton: { down: sairButton, up: sairButton },	
 	}
+	
 }

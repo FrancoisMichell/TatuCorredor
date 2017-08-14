@@ -1,5 +1,7 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -76,8 +78,15 @@ public class Tatu extends Sprite {
     public void update(float dt) {
         setPosition(b2body.getPosition().x - getHeight() / 2, b2body.getPosition().y - getHeight() / 3);
         setRegion(getFrame(dt));
+        checkDeath();
     }
 
+    private void checkDeath(){
+        if (b2body.getPosition().y < 0 ){
+            // MORREU
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(new TatuBola()));
+        }
+    }
     private TextureRegion getFrame(float dt) {
         currentState = getState();
 

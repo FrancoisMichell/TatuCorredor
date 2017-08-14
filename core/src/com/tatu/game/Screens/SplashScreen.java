@@ -23,7 +23,7 @@ public class SplashScreen implements Screen {
     private Image splashImage = new Image(texture);
     private Stage stage = new Stage();
 
-    MenuScreen menuScreen = new MenuScreen();
+    MenuScreen menuScreen = new MenuScreen(new TatuBola());
     TatuBola game;
 
     public SplashScreen(TatuBola game){
