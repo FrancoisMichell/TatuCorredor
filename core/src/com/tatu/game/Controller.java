@@ -16,9 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class Controller implements Disposable {
     private Viewport viewport;
     private Stage stage;
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
-    private long lastUpPressed = System.currentTimeMillis();
-    private long lastDownPressed = 0;
+    private boolean upPressed, leftPressed, rightPressed;
     private Long lastTap = System.currentTimeMillis();
 
     private static Controller controller = new Controller();
@@ -27,7 +25,7 @@ public class Controller implements Disposable {
         return controller;
     }
 
-    public Controller() {
+    private Controller() {
         OrthographicCamera cam = new OrthographicCamera();
         viewport = new FitViewport(800, 480, cam);
         stage = new Stage(viewport, TatuBola.batch);
@@ -42,11 +40,7 @@ public class Controller implements Disposable {
         upImg.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (System.currentTimeMillis() - lastTap > 1500 && Gdx.input.isTouched()) {
-                    upPressed = true;
-                } else {
-                    upPressed = false;
-                }
+                upPressed = System.currentTimeMillis() - lastTap > 1500 && Gdx.input.isTouched();
 
                 return upPressed;
             }
@@ -101,14 +95,6 @@ public class Controller implements Disposable {
         stage.addActor(table);
     }
 
-    public Long getLastTap() {
-        return lastTap;
-    }
-
-    public void setLastTap(Long lastTap) {
-        this.lastTap = lastTap;
-    }
-
     public void draw() {
         stage.draw();
     }
@@ -119,10 +105,6 @@ public class Controller implements Disposable {
 
     public boolean isUpPressed() {
         return upPressed;
-    }
-
-    public boolean isDownPressed() {
-        return downPressed;
     }
 
     public boolean isLeftPressed() {

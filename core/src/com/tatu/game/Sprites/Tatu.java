@@ -1,7 +1,5 @@
 package com.tatu.game.Sprites;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,20 +14,20 @@ import com.tatu.game.TatuBola;
 
 public class Tatu extends Sprite {
 
-    public enum State {FALLING, JUMPING, RUNNING, IDLE}
+    public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
 
     public State getCurrentState() {
         return currentState;
     }
 
-    public State currentState;
+    private State currentState;
     private State previousState;
 
     private World world;
     public Body b2body;
     private TextureRegion tatuStand;
-    private Animation tatuRun;
-    private Animation tatuIdle;
+    private Animation<TextureRegion> tatuRun;
+    private Animation<TextureRegion> tatuIdle;
     private Animation<TextureRegion> tatuJump;
 
     private float pulo = 6f;
@@ -41,12 +39,11 @@ public class Tatu extends Sprite {
 
     private boolean runningRight;
     private float stateTimer;
+    private boolean tatuIsDead;
 
-    private int imgSize = 64;
-
-    public Tatu(World world, PlayScreen screen) {
+    public Tatu(PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
-        this.world = world;
+        this.world = screen.getWorld();
         currentState = State.IDLE;
         previousState = State.IDLE;
         stateTimer = 0;
@@ -54,19 +51,20 @@ public class Tatu extends Sprite {
 
         Array<TextureRegion> framesIdle = new Array<TextureRegion>();
         Array<TextureRegion> frames = new Array<TextureRegion>();
+        int imgSize = 64;
         for (int i = 1; i < 8; i++)
             frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
-        tatuRun = new Animation(0.1f, frames);
+        tatuRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
 
         for (int i = 8; i < 14; i++)
             framesIdle.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
-        tatuIdle = new Animation(0.1f,framesIdle);
+        tatuIdle = new Animation<TextureRegion>(0.1f, framesIdle);
         framesIdle.clear();
 
         for (int i = 16; i < 27; i++)
             frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
-        tatuJump = new Animation(0.1f, frames);
+        tatuJump = new Animation<TextureRegion>(0.1f, frames);
 
         tatuStand = new TextureRegion(getTexture(), 0, 0, imgSize, imgSize);
 
@@ -82,11 +80,11 @@ public class Tatu extends Sprite {
     }
 
     private void checkDeath(){
-        if (b2body.getPosition().y < 0 ){
-            // MORREU
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(new TatuBola()));
+        if (b2body.getPosition().y < -50) {
+            hit();
         }
     }
+
     private TextureRegion getFrame(float dt) {
         currentState = getState();
 
@@ -96,11 +94,11 @@ public class Tatu extends Sprite {
                 region = tatuJump.getKeyFrame(stateTimer);
                 break;
             case RUNNING:
-                region = (TextureRegion) tatuRun.getKeyFrame(stateTimer, true);
+                region = tatuRun.getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
             case IDLE:
-                region = (TextureRegion) tatuIdle.getKeyFrame(stateTimer, true);
+                region = tatuIdle.getKeyFrame(stateTimer, true);
                 break;
             default:
                 region = tatuStand;
@@ -121,7 +119,9 @@ public class Tatu extends Sprite {
     }
 
     private State getState() {
-        if (b2body.getLinearVelocity().y > 0)
+        if (tatuIsDead)
+            return State.DEAD;
+        else if (b2body.getLinearVelocity().y > 0)
             return State.JUMPING;
         else if (b2body.getLinearVelocity().y < 0 || b2body.getLinearVelocity().y > 4)
             return State.FALLING;
@@ -145,22 +145,32 @@ public class Tatu extends Sprite {
         // CATEGORIA DO OBJETO
         fdef.filter.categoryBits = TatuBola.TATU_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
-        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.AGUA_BIT;
+        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.AGUA_BIT | TatuBola.ENEMY_BIT;
 
         fdef.shape = shape;
 
         b2body.createFixture(fdef);
 
-        //EdgeShape head = new EdgeShape();
-        //head.set(new Vector2(-2 / TatuBola.PPM, 31 / TatuBola.PPM), new Vector2(2 / TatuBola.PPM, 31 / TatuBola.PPM));
-        //fdef.shape = head;
         CircleShape head = new CircleShape();
         head.setRadius(20 / TatuBola.PPM);
         fdef.shape = head;
         fdef.isSensor = true;
 
-        b2body.createFixture(fdef).setUserData("head");
+        b2body.createFixture(fdef);
 
+    }
+
+    public boolean isDead() {
+        return tatuIsDead;
+    }
+
+    public float getStateTimer() {
+        return stateTimer;
+    }
+
+    public void hit() {
+        if (!tatuIsDead)
+            tatuIsDead = true;
     }
 
     public float getPulo() {
@@ -178,5 +188,4 @@ public class Tatu extends Sprite {
     public void setVelocidade(float velocidade) {
         this.velocidade += velocidade;
     }
-
 }

@@ -10,15 +10,17 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
-public abstract class InteractiveTileObject {
+abstract class InteractiveTileObject {
     private TiledMap map;
     private Body body;
     Fixture fixture;
 
-    InteractiveTileObject(World world, TiledMap map, Rectangle bounds, boolean isSensor) {
-        this.map = map;
+    InteractiveTileObject(PlayScreen screen, Rectangle bounds, boolean isSensor) {
+        World world = screen.getWorld();
+        this.map = screen.getMap();
 
         BodyDef bDef = new BodyDef();
         FixtureDef fDef = new FixtureDef();

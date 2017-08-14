@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="120" height="15" tilewidth="64" tileheight="64" nextobjectid="38">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="120" height="15" tilewidth="64" tileheight="64" nextobjectid="42">
  <tileset firstgid="1" name="Ground" tilewidth="64" tileheight="64" spacing="1" tilecount="6" columns="6">
   <image source="Ground64.png" width="389" height="64"/>
  </tileset>
@@ -19,14 +19,20 @@
   <object id="2" x="-1.66667" y="897.333" width="1475" height="64"/>
   <object id="3" x="257.333" y="767.333" width="383.333" height="25.3333"/>
   <object id="6" x="0" y="0" width="1" height="900"/>
-  <object id="26" x="1724" y="896" width="898" height="66"/>
+  <object id="26" x="1728" y="896" width="894" height="66"/>
   <object id="33" x="280" y="795" width="333" height="9"/>
   <object id="34" x="295" y="802" width="309" height="10"/>
+  <object id="40" x="1472.76" y="959.818" width="0.666667" height="1907.7"/>
+  <object id="41" x="1728.03" y="961.266" height="1887.36" rotation="0.119594"/>
  </objectgroup>
  <objectgroup name="gotaCarrera">
   <object id="10" x="128.667" y="765.333" width="64" height="64"/>
   <object id="23" x="254" y="637" width="64" height="64"/>
   <object id="24" x="577" y="640" width="64" height="64"/>
   <object id="25" x="702" y="767" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Onca">
+  <object id="35" x="1404.24" y="832" width="64" height="64"/>
+  <object id="38" x="448.485" y="836.364" width="64" height="64"/>
  </objectgroup>
 </map>

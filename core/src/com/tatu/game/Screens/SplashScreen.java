@@ -13,18 +13,14 @@ import com.tatu.game.TatuBola;
 import static com.tatu.game.TatuBola.V_HEIGHT;
 import static com.tatu.game.TatuBola.V_WIDTH;
 
-/**
- * Created by Matheus Uehara on 12/08/2017.
- */
-
 public class SplashScreen implements Screen {
 
     private Texture texture = new Texture(Gdx.files.internal("screen/splashscreen.png"));
     private Image splashImage = new Image(texture);
     private Stage stage = new Stage();
 
-    MenuScreen menuScreen = new MenuScreen(new TatuBola());
-    TatuBola game;
+    private MenuScreen menuScreen = new MenuScreen(new TatuBola());
+    private TatuBola game;
 
     public SplashScreen(TatuBola game){
         this.game = game;
@@ -36,7 +32,7 @@ public class SplashScreen implements Screen {
         stage.addActor(splashImage);
 
         splashImage.addAction(Actions.sequence(Actions.alpha(0)
-                ,Actions.fadeIn(4.0f),Actions.delay(1),Actions.run(new Runnable() {
+                , Actions.fadeIn(2.0f), Actions.delay(1), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         game.setScreen(menuScreen);

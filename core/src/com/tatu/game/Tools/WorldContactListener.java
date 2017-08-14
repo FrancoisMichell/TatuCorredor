@@ -6,8 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.tatu.game.Sprites.Agua;
-import com.tatu.game.Sprites.InteractiveTileObject;
 import com.tatu.game.Sprites.Tatu;
+import com.tatu.game.TatuBola;
 
 public class WorldContactListener implements ContactListener {
 
@@ -22,7 +22,9 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        if ((fixA.getUserData() == "head") || (fixB.getUserData() == "head")) {
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+
+        /*if ((fixA.getUserData() == "head") || (fixB.getUserData() == "head")) {
             Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
             Fixture obj = head == fixA ? fixB : fixA;
 
@@ -33,7 +35,27 @@ public class WorldContactListener implements ContactListener {
             if (obj.getUserData() instanceof Agua) {
                 tatu.setVelocidade(0.1f);
             }
+        }*/
+
+        switch (cDef) {
+            case TatuBola.AGUA_BIT | TatuBola.TATU_BIT:
+                if (fixA.getFilterData().categoryBits == TatuBola.AGUA_BIT) {
+                    ((Agua) fixA.getUserData()).onHeadHit();
+                    tatu.setVelocidade(0.1f);
+                } else {
+                    ((Agua) fixB.getUserData()).onHeadHit();
+                    tatu.setVelocidade(0.1f);
+                }
+                break;
+            case TatuBola.ENEMY_BIT | TatuBola.TATU_BIT:
+                if (fixA.getFilterData().categoryBits == TatuBola.TATU_BIT) {
+                    tatu.hit();
+                } else {
+                    tatu.hit();
+                }
+                break;
         }
+
         //Gdx.app.log("Begin Contact", "MOPA");
     }
 

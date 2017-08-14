@@ -2,7 +2,6 @@ package com.tatu.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
 import com.tatu.game.Scenes.Hud;
+import com.tatu.game.Sprites.Enemy;
 import com.tatu.game.Sprites.Tatu;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Tools.B2WorldCreator;
@@ -36,26 +36,27 @@ public class PlayScreen implements Screen {
 
     private TextureAtlas atlas;
 
-    private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
 
     private Tatu player;
+
     private Controller controller;
 
 
     public PlayScreen(TatuBola game) {
-        atlas = new TextureAtlas("sprites/Tatu64.atlas");
         this.game = game;
+
+        atlas = new TextureAtlas("sprites/Tatu64 - Copia.atlas");
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
         gamePort = new StretchViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
         hud = new Hud(batch);
 
-        mapLoader = new TmxMapLoader();
-        //map = mapLoader.load("mapas/map128.tmx");
+        TmxMapLoader mapLoader = new TmxMapLoader();
         map = mapLoader.load("mapas/map64.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
@@ -64,14 +65,13 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world, map);
+        creator = new B2WorldCreator(this);
 
-        player = new Tatu(world, this);
+        player = new Tatu(this);
 
         world.setContactListener(new WorldContactListener(player));
 
         controller = Controller.getInstance();
-
     }
 
     public TextureAtlas getAtlas() {
@@ -81,43 +81,54 @@ public class PlayScreen implements Screen {
     private void update(float dt) {
         handleInput();
 
-        hud.update();
+        hud.update(dt);
 
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
+        for (Enemy enemy : creator.getOncas()) {
+            enemy.update(dt);
+            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(true);
+            } else if (enemy.getX() > player.getX() + 512) {
+                enemy.b2body.setActive(false);
+            }
+        }
+        hud.update(dt);
 
-        gameCam.position.x = player.b2body.getPosition().x;
+        if (!player.isDead()) {
+            gameCam.position.x = player.b2body.getPosition().x;
+        } else {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
+        }
 
         gameCam.update();
         renderer.setView(gameCam);
     }
 
     private void handleInput() {
-        //Manipulando o pulo
-        if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
-            //if (player.getPowerUpAgua() == true){
-            //    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo() * forca do power up ), player.b2body.getWorldCenter(), true);
-            //}else{
+
+        if (!player.isDead()) {
+            //Manipulando o pulo
+            if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
+                //if (player.getPowerUpAgua() == true){
+                //    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo() * forca do power up ), player.b2body.getWorldCenter(), true);
+                //}else{
                 player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
-            //}
+                //}
+            }
+
+            //Manipulando a corrida pra direita
+            if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
+
+                player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
+            }
+
+            //Manipulando a corrida pra esquerda
+            if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
+                player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
+            }
         }
-
-        //Manipulando a corrida pra direita
-        if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
-
-            player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
-        }
-
-        //Manipulando a corrida pra esquerda
-        if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
-            player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
-            ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(this.game));
-        }
-
     }
 
     @Override
@@ -138,6 +149,10 @@ public class PlayScreen implements Screen {
         batch.setProjectionMatrix(gameCam.combined);
         batch.begin();
         player.draw(batch);
+        for (Enemy enemy : creator.getOncas()) {
+            enemy.draw(batch);
+        }
+        
         batch.end();
 
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -151,6 +166,14 @@ public class PlayScreen implements Screen {
         gamePort.update(width, height);
 
         controller.resize(width, height);
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public TiledMap getMap() {
+        return map;
     }
 
     @Override

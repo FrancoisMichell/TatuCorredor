@@ -1,0 +1,18 @@
+Tatu64 - Copia.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tatu
+  rotate: false
+  xy: 0, 0
+  size: 1728, 64
+  orig: 1728, 64
+  offset: 0, 0
+  index: -1
+onca
+  rotate: false
+  xy: 1728, 0
+  size: 240, 64
+  orig: 1968, 64
+  offset: 0, 0
+  index: -1

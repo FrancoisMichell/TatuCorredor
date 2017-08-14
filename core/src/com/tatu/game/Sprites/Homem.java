@@ -1,14 +1,14 @@
 package com.tatu.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
+import com.tatu.game.Screens.PlayScreen;
 
 public class Homem extends InteractiveTileObject {
 
-    public Homem(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds, false);
+    public Homem(PlayScreen screen, Rectangle bounds) {
+        super(screen, bounds, true);
+
         fixture.setUserData(this);
     }
 

@@ -9,11 +9,18 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.Sprites.Agua;
+import com.tatu.game.Sprites.Onca;
 import com.tatu.game.TatuBola;
 
 public class B2WorldCreator {
-    public B2WorldCreator(World world, TiledMap map) {
+    private Array<Onca> oncas;
+
+    public B2WorldCreator(PlayScreen screen) {
+        World world = screen.getWorld();
+        TiledMap map = screen.getMap();
 
         BodyDef bDef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -37,16 +44,22 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get("gotaCarrera").getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Agua(world, map, rect);
+            new Agua(screen, rect);
 
         }
 
+        // Criar onças
+        oncas = new Array<Onca>();
+        for (MapObject object : map.getLayers().get("Onca").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            oncas.add(new Onca(screen, rect.getX() / TatuBola.PPM, rect.getY() / TatuBola.PPM));
 
+        }
         /*
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Jaguatirica(world, map, rect);
+            new Enemy(world, map, rect);
         }
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -67,4 +80,9 @@ public class B2WorldCreator {
         }
         */
     }
+
+    public Array<Onca> getOncas() {
+        return oncas;
+    }
+
 }

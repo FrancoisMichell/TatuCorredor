@@ -2,8 +2,6 @@ package com.tatu.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tatu.game.Screens.MenuScreen;
-import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.Screens.SplashScreen;
 
 public class TatuBola extends Game {
@@ -18,6 +16,7 @@ public class TatuBola extends Game {
     public static final short TATU_BIT = 2;
     public static final short AGUA_BIT = 4;
     public static final short DESTRUIDO_BIT = 8;
+    public static final short ENEMY_BIT = 16;
 
     public static SpriteBatch batch;
 
