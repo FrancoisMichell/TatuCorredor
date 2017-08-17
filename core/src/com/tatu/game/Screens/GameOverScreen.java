@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
@@ -20,7 +22,7 @@ public class GameOverScreen implements Screen {
 
     private Game game;
 
-    public GameOverScreen(Game game) {
+    public GameOverScreen(final Game game) {
         this.game = game;
         viewport = new FitViewport(TatuBola.V_WIDTH, TatuBola.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((TatuBola) game).batch);
@@ -33,12 +35,29 @@ public class GameOverScreen implements Screen {
 
         Label gameOverLabel = new Label("GAME OVER", font);
         Label playAgainLabel = new Label("Click to Play Again", font);
+        Label exitLabel = new Label("Click to Back Main Menu", font);
 
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10f);
 
         stage.addActor(table);
+
+        playAgainLabel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new PlayScreen((TatuBola) game));
+                dispose();
+            }
+        });
+
+        exitLabel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new MenuScreen((TatuBola) game));
+                dispose();
+            }
+        });
     }
 
     @Override
@@ -51,10 +70,10 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        if (Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((TatuBola) game));
-            dispose();
-        }
+        //if (Gdx.input.justTouched()) {
+        //    game.setScreen(new PlayScreen((TatuBola) game));
+        //    dispose();
+        //}
     }
 
     @Override

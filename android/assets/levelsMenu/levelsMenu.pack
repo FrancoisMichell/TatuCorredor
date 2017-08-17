@@ -1,0 +1,131 @@
+
+levelsMenu.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+menuscreen
+  rotate: false
+  xy: 1, 423
+  size: 800, 600
+  orig: 800, 600
+  offset: 0, 0
+  index: -1
+levels_menu
+  rotate: false
+  xy: 1, 1
+  size: 475, 420
+  orig: 475, 420
+  offset: 0, 0
+  index: -1
+lojaMenuButtons
+  rotate: false
+  xy: 803, 953
+  size: 65, 70
+  orig: 65, 70
+  offset: 0, 0
+  index: -1
+menuMenuButtons
+  rotate: false
+  xy: 478, 351
+  size: 65, 70
+  orig: 65, 70
+  offset: 0, 0
+  index: -1
+playButtonLevels
+  rotate: false
+  xy: 803, 881
+  size: 65, 70
+  orig: 65, 70
+  offset: 0, 0
+  index: -1
+btnLevelDisabled
+  rotate: false
+  xy: 870, 954
+  size: 65, 69
+  orig: 65, 69
+  offset: 0, 0
+  index: -1
+btnLevelEnable
+  rotate: false
+  xy: 478, 280
+  size: 65, 69
+  orig: 65, 69
+  offset: 0, 0
+  index: -1
+1star
+  rotate: false
+  xy: 545, 399
+  size: 69, 22
+  orig: 69, 22
+  offset: 0, 0
+  index: -1
+2star
+  rotate: false
+  xy: 937, 1001
+  size: 69, 22
+  orig: 69, 22
+  offset: 0, 0
+  index: -1
+3star
+  rotate: false
+  xy: 545, 375
+  size: 69, 22
+  orig: 69, 22
+  offset: 0, 0
+  index: -1
+number1
+  rotate: false
+  xy: 803, 852
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number2
+  rotate: false
+  xy: 870, 925
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number3
+  rotate: false
+  xy: 478, 251
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number4
+  rotate: false
+  xy: 616, 394
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number5
+  rotate: false
+  xy: 937, 972
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number6
+  rotate: false
+  xy: 545, 346
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number7
+  rotate: false
+  xy: 803, 823
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
+number8
+  rotate: false
+  xy: 826, 852
+  size: 21, 27
+  orig: 21, 27
+  offset: 0, 0
+  index: -1
