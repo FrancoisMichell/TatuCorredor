@@ -22,14 +22,14 @@ class MenuScreen implements Screen {
     private Stage stage;
     private TatuBola game;
 
-    private LevelScreen levelScreen;
+    //private LevelScreen levelScreen;
     //private OptionsScreen optionsScreen = new OptionsScreen();
     //private CreditsScreen creditsScreen = new CreditsScreen();
 
     MenuScreen(TatuBola game) {
 
         this.game = game;
-        this.levelScreen = new LevelScreen(game);
+        //this.levelScreen = new LevelScreen(game);
 
         //TODO corrigir problema com viewPort no menu
         OrthographicCamera cam = new OrthographicCamera();
@@ -67,7 +67,7 @@ class MenuScreen implements Screen {
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(levelScreen);
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
                 dispose();
             }
         });

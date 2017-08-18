@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.tatu.game.TatuBola;
+import com.tatu.game.Util.BdManager;
+import com.tatu.game.Util.Session;
+import com.tatu.game.entity.Usuario;
 
 import static com.tatu.game.TatuBola.V_HEIGHT;
 import static com.tatu.game.TatuBola.V_WIDTH;
@@ -25,6 +28,16 @@ public class SplashScreen implements Screen {
     public SplashScreen(TatuBola game){
         this.game = game;
         stage = new Stage(new StretchViewport(V_WIDTH, V_HEIGHT));
+
+        Usuario user = BdManager.getInstance().getUserFromSharedPref();
+        if ( user != null ) {
+            Session.setUsuarioLogado(user);
+        }else{
+            Usuario novoUsuario = new Usuario();
+            BdManager.getInstance().saveUserInSharedPref(novoUsuario);
+            Session.setUsuarioLogado(user);
+        }
+
     }
 
     @Override

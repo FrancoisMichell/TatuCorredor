@@ -1,34 +1,35 @@
 package com.tatu.game.Screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
-import com.tatu.game.Util.LevelStatus;
+import com.tatu.game.Util.Session;
 
 /**
  * Created by Matheus Uehara on 16/08/2017.
  */
 
-public class LevelScreen implements Screen {
+public class LevelScreen extends ClickListener implements Screen {
 
     private Skin skin;
     private Stage stage;
     private TatuBola game;
-    private LevelStatus status;
-
 
     public LevelScreen(TatuBola game){
         this.game = game;
 
-        //TODO corrigir problema com viewPort no menu
         OrthographicCamera cam = new OrthographicCamera();
         Viewport viewport = new FitViewport(800, 480, cam);
         stage = new Stage(viewport, TatuBola.batch);
@@ -41,66 +42,145 @@ public class LevelScreen implements Screen {
 
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
-        //background.setPosition(Gdx.graphics.getWidth()/2 - 800/2f , Gdx.graphics.getHeight()/2 - 300f);
         stage.addActor(background);
 
         Image levelsMenu = new Image(skin,"levels_menu");
         levelsMenu.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
         stage.addActor(levelsMenu);
-//65x69
-        Image level1 = new Image(skin,"btnLevelEnable");
-        level1.setPosition( (800 - (475 - 475/2)) , (480 - 420)/2 ) ;
+
+        Button level1 = new Button(skin,getEnableDisabledButton(0));
+        level1.setPosition( 210,290 ) ;
         stage.addActor(level1);
 
-        Image level2 = new Image(skin,"btnLevelEnable");
-        level2.setPosition( (800 - (475 - 475/2)) , (480 - 420)/2 ) ;
+        Button level2 = new Button(skin,getEnableDisabledButton(1));
+        level2.setPosition( 305,290 ) ;
         stage.addActor(level2);
 
-        Image level3 = new Image(skin,"btnLevelEnable");
-        level3.setPosition( (800 - (475 + 475/4)) , (480 - 420)/2 ) ;
+        Button level3 = new Button(skin,getEnableDisabledButton(2));
+        level3.setPosition( 415 , 290 ) ;
         stage.addActor(level3);
 
-        Image level4 = new Image(skin,"btnLevelEnable");
-        level4.setPosition( (800 - (475 + 475/2)) , (480 - 420)/2 ) ;
+        Button level4 = new Button(skin,getEnableDisabledButton(3));
+        level4.setPosition( 515 ,  290 );
         stage.addActor(level4);
-/*
-        Image level5 = new Image(skin,"btnLevelEnable");
-        level5.setPosition( (800 - 475/4)/2 , (480 - 420)/2 ) ;
+
+        Button level5 = new Button(skin,getEnableDisabledButton(4));
+        level5.setPosition( 215, 180 ) ;
         stage.addActor(level5);
 
-        Image level6 = new Image(skin,"btnLevelEnable");
-        level6.setPosition( (800 - 475/3)/2 , (480 - 420)/2 ) ;
+        Button level6 = new Button(skin,getEnableDisabledButton(5));
+        level6.setPosition( 318 , 180 );
         stage.addActor(level6);
 
-        Image level7 = new Image(skin,"btnLevelEnable");
-        level7.setPosition( (800 - 475/2)/2 , (480 - 420)/2 ) ;
+        Button level7 = new Button(skin,getEnableDisabledButton(6));
+        level7.setPosition( 415 , 180) ;
         stage.addActor(level7);
 
-        Image level8 = new Image(skin,"btnLevelEnable");
-        level8.setPosition( (800 - 475/1)/2 , (480 - 420)/2 ) ;
+        Button level8 = new Button(skin,getEnableDisabledButton(7));
+        level8.setPosition( 505 , 180 ) ;
         stage.addActor(level8);
-*/
-        /*
-        for ( int i = 0 ; i < 9 ; i ++ ){
 
+        Button btnLoja = new Button(skin,"lojaMenuButtons");
+        btnLoja.setPosition( 315,75 );
+        stage.addActor(btnLoja);
 
-            status.get();
-            switch (status.levels[i]){
+        Button menuMenuButtons = new Button(skin,"menuMenuButtons");
+        menuMenuButtons.setPosition( 400,75 );
+        stage.addActor(menuMenuButtons);
+
+        menuMenuButtons.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
+                dispose();
+            }
+        });
+
+        completeResources(level1,0);
+        completeResources(level2,1);
+        completeResources(level3,2);
+        completeResources(level4,3);
+        completeResources(level5,4);
+        completeResources(level6,5);
+        completeResources(level7,6);
+        completeResources(level8,7);
+
+    }
+
+    public String getEnableDisabledButton(int level){
+        String retorno = "btnLevelDisabled";
+        if (! Session.getUsuarioLogado().getLevels().get(level).getLocked()) {
+            retorno = "btnLevelEnable";
+        }
+        return retorno;
+    }
+
+    public void completeResources(Button button , final int level){
+        if (! Session.getUsuarioLogado().getLevels().get(level).getLocked()){
+            button.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    //TODO implementar o PlayScreen para receber um segundo argumento Level, nele indicaremos qual o nível
+                    //((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
+                    ((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
+                    dispose();
+                }
+            });
+
+            String spriteStar = "0star";
+            switch (Session.getUsuarioLogado().getLevels().get(level).getScore()){
                 case 0:
-                    Image
+                    spriteStar = "0star";
                     break;
                 case 1:
+                    spriteStar = "1star";
                     break;
                 case 2:
+                    spriteStar = "2star";
                     break;
                 case 3:
-                    break;
-                case 4:
+                    spriteStar = "3star";
                     break;
             }
 
+            Image score = new Image(skin,spriteStar);
+            score.setPosition( button.getX(),button.getY()-20 ) ;
+            stage.addActor(score);
+
         }
-        */
+
+        String numberString = "number1";
+
+        switch (level){
+            case 0:
+                numberString = "number1";
+                break;
+            case 1:
+                numberString = "number2";
+                break;
+            case 2:
+                numberString = "number3";
+                break;
+            case 3:
+                numberString = "number4";
+                break;
+            case 4:
+                numberString = "number5";
+                break;
+            case 5:
+                numberString = "number6";
+                break;
+            case 6:
+                numberString = "number7";
+                break;
+            case 7:
+                numberString = "number8";
+                break;
+        }
+
+        Image number = new Image(skin,numberString);
+        number.setPosition( button.getX()+25,button.getY()+25 ) ;
+        stage.addActor(number);
     }
 
     @Override
@@ -109,7 +189,6 @@ public class LevelScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
-
     }
 
     @Override
@@ -129,7 +208,7 @@ public class LevelScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
