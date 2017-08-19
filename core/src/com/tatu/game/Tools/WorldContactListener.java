@@ -24,27 +24,16 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        /*if ((fixA.getUserData() == "head") || (fixB.getUserData() == "head")) {
-            Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
-            Fixture obj = head == fixA ? fixB : fixA;
-
-            if (obj.getUserData() instanceof InteractiveTileObject) {
-                ((InteractiveTileObject) obj.getUserData()).onHeadHit();
-            }
-
-            if (obj.getUserData() instanceof Agua) {
-                tatu.setVelocidade(0.1f);
-            }
-        }*/
-
         switch (cDef) {
             case TatuBola.AGUA_BIT | TatuBola.TATU_BIT:
                 if (fixA.getFilterData().categoryBits == TatuBola.AGUA_BIT) {
                     ((Agua) fixA.getUserData()).onHeadHit();
-                    tatu.setVelocidade(0.1f);
+                    tatu.setVelocidade(0.2f);
+                    tatu.setPowerUpCarreira(true);
                 } else {
                     ((Agua) fixB.getUserData()).onHeadHit();
-                    tatu.setVelocidade(0.1f);
+                    tatu.setVelocidade(0.2f);
+                    tatu.setPowerUpCarreira(true);
                 }
                 break;
             case TatuBola.ENEMY_BIT | TatuBola.TATU_BIT:
@@ -55,8 +44,6 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
         }
-
-        //Gdx.app.log("Begin Contact", "MOPA");
     }
 
     @Override

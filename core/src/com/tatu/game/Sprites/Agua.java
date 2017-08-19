@@ -1,6 +1,5 @@
 package com.tatu.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Screens.PlayScreen;
@@ -18,7 +17,6 @@ public class Agua extends InteractiveTileObject {
 
     @Override
     public void onHeadHit() {
-        Gdx.app.log("Agua", "collision");
         setCategoryFilter(TatuBola.DESTRUIDO_BIT);
         Hud.setAguaCarreraScoreValueGlobal(Hud.getAguaCarreraScoreValueGlobal()+1);
         // Hud.addScore(200);
