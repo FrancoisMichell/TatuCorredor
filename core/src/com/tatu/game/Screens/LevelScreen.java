@@ -53,7 +53,7 @@ public class LevelScreen extends ClickListener implements Screen {
         stage.addActor(level1);
 
         Button level2 = new Button(skin,getEnableDisabledButton(1));
-        level2.setPosition( 305,290 ) ;
+        level2.setPosition( 310,290 ) ;
         stage.addActor(level2);
 
         Button level3 = new Button(skin,getEnableDisabledButton(2));
@@ -65,7 +65,7 @@ public class LevelScreen extends ClickListener implements Screen {
         stage.addActor(level4);
 
         Button level5 = new Button(skin,getEnableDisabledButton(4));
-        level5.setPosition( 215, 180 ) ;
+        level5.setPosition( 220, 180 ) ;
         stage.addActor(level5);
 
         Button level6 = new Button(skin,getEnableDisabledButton(5));
@@ -73,7 +73,7 @@ public class LevelScreen extends ClickListener implements Screen {
         stage.addActor(level6);
 
         Button level7 = new Button(skin,getEnableDisabledButton(6));
-        level7.setPosition( 415 , 180) ;
+        level7.setPosition( 410 , 180) ;
         stage.addActor(level7);
 
         Button level8 = new Button(skin,getEnableDisabledButton(7));

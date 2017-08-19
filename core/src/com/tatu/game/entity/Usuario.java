@@ -8,7 +8,14 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private String nome;
+    private int aguaCarreraMoney;
+    private int aguaPuloMoney;
+    private int aguaFreioMoney;
+
+    private float aguaCarreraPower;
+    private float aguaPuloPower;
+    private float aguaFreioPower;
+
     private ArrayList<Level> levels;
 
     public Usuario(){
@@ -31,14 +38,15 @@ public class Usuario {
         levels.add(level6);
         levels.add(level7);
         levels.add(level8);
-    }
 
-    public String getNome() {
-        return nome;
-    }
+        this.aguaCarreraMoney = 0;
+        this.aguaPuloMoney = 0;
+        this.aguaFreioMoney = 0;
 
-    public void setNome(String nome) {
-        this.nome = nome;
+        //DEFINIR
+        this.aguaCarreraPower = (float) 0.2;
+        this.aguaPuloPower = (float) 0.2;
+        this.aguaFreioPower = (float) 0.2;
     }
 
     public ArrayList<Level> getLevels() {
@@ -47,6 +55,54 @@ public class Usuario {
 
     public void setLevels(ArrayList<Level> levels) {
         this.levels = levels;
+    }
+
+    public int getAguaCarreraMoney() {
+        return aguaCarreraMoney;
+    }
+
+    public void setAguaCarreraMoney(int aguaCarreraMoney) {
+        this.aguaCarreraMoney = aguaCarreraMoney;
+    }
+
+    public int getAguaPuloMoney() {
+        return aguaPuloMoney;
+    }
+
+    public void setAguaPuloMoney(int aguaPuloMoney) {
+        this.aguaPuloMoney = aguaPuloMoney;
+    }
+
+    public int getAguaFreioMoney() {
+        return aguaFreioMoney;
+    }
+
+    public void setAguaFreioMoney(int aguaFreioMoney) {
+        this.aguaFreioMoney = aguaFreioMoney;
+    }
+
+    public float getAguaCarreraPower() {
+        return aguaCarreraPower;
+    }
+
+    public void setAguaCarreraPower(float aguaCarreraPower) {
+        this.aguaCarreraPower = aguaCarreraPower;
+    }
+
+    public float getAguaPuloPower() {
+        return aguaPuloPower;
+    }
+
+    public void setAguaPuloPower(float aguaPuloPower) {
+        this.aguaPuloPower = aguaPuloPower;
+    }
+
+    public float getAguaFreioPower() {
+        return aguaFreioPower;
+    }
+
+    public void setAguaFreioPower(float aguaFreioPower) {
+        this.aguaFreioPower = aguaFreioPower;
     }
 
 }

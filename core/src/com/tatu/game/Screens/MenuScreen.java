@@ -45,12 +45,7 @@ class MenuScreen implements Screen {
 
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
-        //background.setPosition(Gdx.graphics.getWidth()/2 - 800/2f , Gdx.graphics.getHeight()/2 - 300f);
         stage.addActor(background);
-
-        //bgMenu = new Image(skin,"menu_painel");
-        //bgMenu.setPosition( (800 - 637)/2 , (480 - 539)/2 ) ;
-        //stage.addActor(bgMenu);
 
         Button jogarButton = new Button(skin, "jogarButton");
         jogarButton.setPosition( 650 , 10+116+10+116+10) ;

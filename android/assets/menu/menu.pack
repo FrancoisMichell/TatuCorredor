@@ -1,54 +1,54 @@
-
 menu.png
+size: 800, 596
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
-menuscreen
-  rotate: false
-  xy: 1, 1
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-configuracoesButton
-  rotate: false
-  xy: 803, 365
-  size: 105, 116
-  orig: 105, 116
-  offset: 0, 0
-  index: -1
-jogarButton
-  rotate: false
-  xy: 910, 365
-  size: 105, 116
-  orig: 105, 116
-  offset: 0, 0
-  index: -1
-sairButton
-  rotate: false
-  xy: 803, 247
-  size: 105, 116
-  orig: 105, 116
-  offset: 0, 0
-  index: -1
-tempoScore
-  rotate: false
-  xy: 803, 182
-  size: 170, 63
-  orig: 170, 63
-  offset: 0, 0
-  index: -1
 aguaCarreraScore
   rotate: false
-  xy: 803, 117
+  xy: 315, 0
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
 aguaPuloScore
   rotate: false
-  xy: 803, 52
+  xy: 457, 0
   size: 142, 63
   orig: 142, 63
+  offset: 0, 0
+  index: -1
+configuracoesButton
+  rotate: false
+  xy: 210, 0
+  size: 105, 116
+  orig: 105, 116
+  offset: 0, 0
+  index: -1
+jogarButton
+  rotate: false
+  xy: 0, 0
+  size: 105, 116
+  orig: 105, 116
+  offset: 0, 0
+  index: -1
+menuscreen
+  rotate: false
+  xy: 0, 116
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+sairButton
+  rotate: false
+  xy: 105, 0
+  size: 105, 116
+  orig: 105, 116
+  offset: 0, 0
+  index: -1
+tempoScore
+  rotate: false
+  xy: 599, 0
+  size: 170, 63
+  orig: 170, 63
   offset: 0, 0
   index: -1
