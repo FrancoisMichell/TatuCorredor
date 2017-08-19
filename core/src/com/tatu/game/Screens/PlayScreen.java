@@ -29,6 +29,7 @@ import static com.tatu.game.TatuBola.batch;
 
 public class PlayScreen implements Screen {
     private TatuBola game;
+    private int level;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
 
@@ -48,7 +49,7 @@ public class PlayScreen implements Screen {
     private Controller controller;
 
 
-    public PlayScreen(TatuBola game) {
+    public PlayScreen(TatuBola game, int level) {
         this.game = game;
 
         atlas = new TextureAtlas("sprites/Tatu64 - Copia.atlas");
@@ -57,7 +58,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(batch);
 
         TmxMapLoader mapLoader = new TmxMapLoader();
-        map = mapLoader.load("mapas/map64.tmx");
+        map = mapLoader.load(loadMap(level));
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
@@ -72,6 +73,47 @@ public class PlayScreen implements Screen {
         world.setContactListener(new WorldContactListener(player));
 
         controller = Controller.getInstance();
+    }
+
+    private String loadMap(int level) {
+        String mapa;
+
+        switch (level) {
+            case 1:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 2:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 3:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 4:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 5:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 6:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 7:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 8:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 9:
+                mapa = "mapas/map64.tmx";
+                break;
+            case 10:
+                mapa = "mapas/map64.tmx";
+                break;
+            default:
+                mapa = "mapas/map64.tmx";
+                break;
+        }
+        return mapa;
     }
 
     public TextureAtlas getAtlas() {

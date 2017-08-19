@@ -122,7 +122,7 @@ public class LevelScreen extends ClickListener implements Screen {
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO implementar o PlayScreen para receber um segundo argumento Level, nele indicaremos qual o nível
                     //((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
-                    ((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
                     dispose();
                 }
             });

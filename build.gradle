@@ -84,8 +84,6 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
-
-        
     }
 }
 
