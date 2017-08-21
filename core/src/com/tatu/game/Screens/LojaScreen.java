@@ -21,13 +21,13 @@ import com.tatu.game.Util.Session;
  * Created by Matheus Uehara on 16/08/2017.
  */
 
-public class LevelScreen extends ClickListener implements Screen {
+public class LojaScreen implements Screen {
 
     private Skin skin;
     private Stage stage;
     private TatuBola game;
 
-    public LevelScreen(TatuBola game){
+    public LojaScreen(TatuBola game){
         this.game = game;
 
         OrthographicCamera cam = new OrthographicCamera();
@@ -38,15 +38,23 @@ public class LevelScreen extends ClickListener implements Screen {
 
     @Override
     public void show() {
-        skin = new Skin(Gdx.files.internal("levelsMenu/levelsMenu.json"),new TextureAtlas("levelsMenu/levelsMenu.pack"));
+        skin = new Skin(Gdx.files.internal("loja/lojaMenu.json"),new TextureAtlas("loja.pack"));
 
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
         stage.addActor(background);
 
-        Image levelsMenu = new Image(skin,"levels_menu");
-        levelsMenu.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
-        stage.addActor(levelsMenu);
+        Image lojascreen = new Image(skin,"lojascreen");
+        lojascreen.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
+        stage.addActor(lojascreen);
+
+        Image moneyCarrera = new Image(skin,"aguaCarreraSaldo");
+        moneyCarrera.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
+        stage.addActor(moneyCarrera);
+
+        Image moneyPulo = new Image(skin,"aguaPuloCarreraSaldo");
+        moneyPulo.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
+        stage.addActor(moneyPulo);
 
         Button level1 = new Button(skin,getEnableDisabledButton(0));
         level1.setPosition( 210,290 ) ;
@@ -64,21 +72,7 @@ public class LevelScreen extends ClickListener implements Screen {
         level4.setPosition( 515 ,  290 );
         stage.addActor(level4);
 
-        Button level5 = new Button(skin,getEnableDisabledButton(4));
-        level5.setPosition( 220, 180 ) ;
-        stage.addActor(level5);
 
-        Button level6 = new Button(skin,getEnableDisabledButton(5));
-        level6.setPosition( 318 , 180 );
-        stage.addActor(level6);
-
-        Button level7 = new Button(skin,getEnableDisabledButton(6));
-        level7.setPosition( 410 , 180) ;
-        stage.addActor(level7);
-
-        Button level8 = new Button(skin,getEnableDisabledButton(7));
-        level8.setPosition( 505 , 180 ) ;
-        stage.addActor(level8);
 
         Button btnLoja = new Button(skin,"lojaMenuButtons");
         btnLoja.setPosition( 315,75 );

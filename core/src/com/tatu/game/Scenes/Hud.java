@@ -51,7 +51,7 @@ public class Hud implements Disposable {
 */
     public Hud(SpriteBatch sb) {
 
-        worldTimer = 300;
+        worldTimer = 0;
         timeCount = 0;
         score = 0;
         viewport = new FitViewport(TatuBola.V_WIDTH, TatuBola.V_HEIGHT, new OrthographicCamera());
@@ -95,7 +95,7 @@ public class Hud implements Disposable {
         aguaCarreraLabel = new Label("Agua Carrera", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         aguaPuloLabel = new Label("Agua Pulo", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        tempoValue = new Label(worldTimer+"", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        tempoValue = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         tempoValue.setFontScale(2);
 
         aguaCarreraValue = new Label(aguaCarreraScoreValue+"", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -125,9 +125,12 @@ public class Hud implements Disposable {
 
     public void update(float dt) {
 
-        worldTimer ++;
-
-        tempoValue.setText(worldTimer +"");
+        timeCount += dt;
+        if (timeCount >= 1) {
+            worldTimer++;
+            tempoValue.setText(String.format("%03d", worldTimer));
+            timeCount = 0;
+        }
 
         aguaCarreraValue.setText(aguaCarreraScoreValueGlobal +"");
 

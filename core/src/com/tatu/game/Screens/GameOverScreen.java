@@ -62,8 +62,7 @@ public class GameOverScreen implements Screen {
         playAgainLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game));
-                //game.setScreen(new PlayScreen(game));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
                 dispose();
             }
         });
@@ -71,8 +70,9 @@ public class GameOverScreen implements Screen {
         exitLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
-                //game.setScreen(new MenuScreen(game));
+                //game.setScreen(new MenuScreen( game));
+                TatuBola game2 = new TatuBola();
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game2));
                 dispose();
             }
         });

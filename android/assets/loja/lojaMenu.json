@@ -1,0 +1,21 @@
+{
+  com.badlogic.gdx.graphics.g2d.BitmapFont:{
+  carterone-font: { file: fonts/cartwhel.fnt }
+},
+  com.badlogic.gdx.graphics.Color: {
+  green: { a: 1, b: 0, g: 1, r: 0 },
+  white: { a: 1, b: 1, g: 1, r: 1 },
+  red: { a: 1, b: 0, g: 0, r: 1 },
+  black: { a: 1, b: 0, g: 0, r: 0 }
+},
+  com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+  comprarAguaPulo1:{down: comprarAguaPulo1, up: comprarAguaPulo1},
+  comprarAguaPulo2: { down: comprarAguaPulo2, up: comprarAguaPulo2 },
+  comprarAguaPulo3: { down: comprarAguaPulo3, up: comprarAguaPulo3 },
+  comprarAguaCarrera1:{down: comprarAguaCarrera1, up: comprarAguaCarrera1},
+  comprarAguaCarrera2: { down: comprarAguaCarrera2, up: comprarAguaCarrera2 },
+  comprarAguaCarrera3: { down: comprarAguaCarrera3, up: comprarAguaCarrera3 },
+  closeButton: { down: closeButton, up: closeButton },
+}
+
+}

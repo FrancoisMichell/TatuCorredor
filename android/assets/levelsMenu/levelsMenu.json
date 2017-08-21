@@ -1,6 +1,6 @@
 {
 	com.badlogic.gdx.graphics.g2d.BitmapFont:{
-		carterone-font: { file: fonts/carterone.fnt }
+		carterone-font: { file: fonts/cartwhel.fnt }
 	},
 	com.badlogic.gdx.graphics.Color: {
 		green: { a: 1, b: 0, g: 1, r: 0 },
