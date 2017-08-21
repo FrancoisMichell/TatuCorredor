@@ -6,8 +6,6 @@ import com.tatu.game.Screens.SplashScreen;
 
 public class TatuBola extends Game {
 
-    //TODO IMPLEMENTAR SINGLETON
-
     public static final int V_WIDTH = 800;
     public static final int V_HEIGHT = 600;
     public static final float PPM = 100;

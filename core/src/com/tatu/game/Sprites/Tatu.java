@@ -12,11 +12,11 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
+import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
 
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
-
 
     private State currentState;
     private State previousState;
@@ -28,7 +28,7 @@ public class Tatu extends Sprite {
     private Animation<TextureRegion> tatuIdle;
     private Animation<TextureRegion> tatuJump;
 
-    private float pulo = 6f;
+    private float pulo = 5f;
     private float velocidade = 0.1f;
 
     private float timeCount;
@@ -206,15 +206,32 @@ public class Tatu extends Sprite {
     }
 
     public float getPulo() {
-        return pulo;
+        if (this.isPowerUpPulo()){
+            return pulo + Session.getUsuarioLogado().getAguaPuloPower();
+        }else{
+            return pulo;
+        }
     }
 
     public void setPulo(float pulo) {
         this.pulo = pulo;
     }
 
+    public boolean isPowerUpPulo() {
+        return powerUpPulo;
+    }
+
+    public void setPowerUpPulo(boolean powerUpPulo) {
+        this.powerUpPulo = powerUpPulo;
+        timeCount = 0;
+    }
+
     public float getVelocidade() {
-        return velocidade;
+        if (this.isPowerUpCarreira()){
+            return velocidade + Session.getUsuarioLogado().getAguaCarreraPower();
+        }else{
+            return velocidade;
+        }
     }
 
     public void setVelocidade(float velocidade) {
@@ -230,14 +247,6 @@ public class Tatu extends Sprite {
         timeCount = 0;
     }
 
-    public boolean isPowerUpPulo() {
-        return powerUpPulo;
-    }
-
-    public void setPowerUpPulo(boolean powerUpPulo) {
-        this.powerUpPulo = powerUpPulo;
-        timeCount = 0;
-    }
 
     public boolean isPowerUpFreio() {
         return powerUpFreio;

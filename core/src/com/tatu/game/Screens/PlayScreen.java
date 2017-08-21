@@ -71,7 +71,8 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener(player));
 
-        controller = Controller.getInstance();
+        //controller = Controller.getInstance();
+        controller = new Controller();
     }
 
     private String loadMap(int level) {
@@ -152,11 +153,8 @@ public class PlayScreen implements Screen {
         if (!player.isDead()) {
             //Manipulando o pulo
             if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
-                //if (player.getPowerUpAgua() == true){
-                //    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo() * forca do power up ), player.b2body.getWorldCenter(), true);
-                //}else{
-                player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
-                //}
+                    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
+
             }
 
             //Manipulando a corrida pra direita
@@ -229,7 +227,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void hide() {
-
+        //dispose();
     }
 
     @Override
@@ -240,6 +238,5 @@ public class PlayScreen implements Screen {
         b2dr.dispose();
         hud.dispose();
         controller.dispose();
-
     }
 }

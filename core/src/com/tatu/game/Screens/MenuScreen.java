@@ -16,6 +16,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 
+import static com.tatu.game.TatuBola.V_HEIGHT;
+import static com.tatu.game.TatuBola.V_WIDTH;
+
 class MenuScreen implements Screen {
 
     private Skin skin;
@@ -29,11 +32,10 @@ class MenuScreen implements Screen {
     MenuScreen(TatuBola game) {
 
         this.game = game;
-        //this.levelScreen = new LevelScreen(game);
 
-        //TODO corrigir problema com viewPort no menu
         OrthographicCamera cam = new OrthographicCamera();
         Viewport viewport = new FitViewport(800, 480, cam);
+        //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
     }

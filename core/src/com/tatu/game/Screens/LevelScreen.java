@@ -17,6 +17,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
+import static com.tatu.game.TatuBola.V_HEIGHT;
+import static com.tatu.game.TatuBola.V_WIDTH;
+
 /**
  * Created by Matheus Uehara on 16/08/2017.
  */
@@ -32,6 +35,7 @@ public class LevelScreen extends ClickListener implements Screen {
 
         OrthographicCamera cam = new OrthographicCamera();
         Viewport viewport = new FitViewport(800, 480, cam);
+        //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
     }
@@ -80,9 +84,17 @@ public class LevelScreen extends ClickListener implements Screen {
         level8.setPosition( 505 , 180 ) ;
         stage.addActor(level8);
 
-        Button btnLoja = new Button(skin,"lojaMenuButtons");
-        btnLoja.setPosition( 315,75 );
-        stage.addActor(btnLoja);
+        Button lojaMenuButtons = new Button(skin,"lojaMenuButtons");
+        lojaMenuButtons.setPosition( 315,75 );
+        stage.addActor(lojaMenuButtons);
+
+        lojaMenuButtons.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new LojaScreen(game));
+                dispose();
+            }
+        });
 
         Button menuMenuButtons = new Button(skin,"menuMenuButtons");
         menuMenuButtons.setPosition( 400,75 );
@@ -120,8 +132,6 @@ public class LevelScreen extends ClickListener implements Screen {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO implementar o PlayScreen para receber um segundo argumento Level, nele indicaremos qual o nível
-                    //((Game)Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
                     dispose();
                 }

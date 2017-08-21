@@ -32,6 +32,9 @@ public class Hud implements Disposable {
     private static Integer aguaPuloScoreValue = 0;
 
     private Integer worldTimer;
+
+    private Label.LabelStyle font;
+
     private Label tempoLabel;
     private Label tempoValue;
 
@@ -41,14 +44,6 @@ public class Hud implements Disposable {
     private Label aguaPuloLabel;
     private Label aguaPuloValue;
 
-    /*
-    private Label countdownLabel;
-    private static Label scoreLabel;
-    private Label timeLabel;
-    private Label levelLabel;
-    private Label worldLabel;
-    private Label tatuLabel;
-*/
     public Hud(SpriteBatch sb) {
 
         worldTimer = 0;
@@ -75,40 +70,18 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        /*countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        tatuLabel = new Label("TATU", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/cartwhel.fnt")), Color.WHITE);
 
-        table.add(tatuLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        tempoLabel = new Label("Tempo", font);
+        aguaCarreraLabel = new Label("Agua Carrera", font);
+        aguaPuloLabel = new Label("Agua Pulo", font);
 
-        table.row();
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
-*/
-        tempoLabel = new Label("Tempo", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        aguaCarreraLabel = new Label("Agua Carrera", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        aguaPuloLabel = new Label("Agua Pulo", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        tempoValue = new Label(String.format("%03d", worldTimer), font);
 
-        tempoValue = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        tempoValue.setFontScale(2);
+        aguaCarreraValue = new Label(aguaCarreraScoreValue+"", font);
 
-        aguaCarreraValue = new Label(aguaCarreraScoreValue+"", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        aguaCarreraValue.setFontScale(2);
+        aguaPuloValue= new Label(aguaPuloScoreValue+"", font);
 
-        aguaPuloValue= new Label(aguaPuloScoreValue+"", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        aguaPuloValue.setFontScale(2);
-
-        /*
-        table.add(tempoLabel).expandX().padTop(10);
-        table.add(aguaCarreraLabel).expandX().padTop(10);
-        table.add(aguaPuloLabel).expandX().padTop(10);
-        */
         table.add().expandX();
         table.add().expandX();
         table.add().expandX();
@@ -168,21 +141,6 @@ public class Hud implements Disposable {
         Hud.aguaPuloScoreValue = aguaPuloScoreValue;
     }
 
-    /*    public void update(float dt){
-            timeCount += dt;
-            if(timeCount >= 1){
-                worldTimer--;
-                countdownLabel.setText(String.format("%03d", worldTimer));
-                timeCount = 0;
-            }
-
-        }
-
-        public static void addScore(int value){
-            score += value;
-            scoreLabel.setText(String.format("%06d", score));
-        }
-    */
     @Override
     public void dispose() {
         skin.dispose();

@@ -12,22 +12,30 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.tatu.game.Screens.PlayScreen;
+
+import static com.tatu.game.TatuBola.V_HEIGHT;
+import static com.tatu.game.TatuBola.V_WIDTH;
 
 public class Controller implements Disposable {
+
     private Viewport viewport;
     private Stage stage;
     private boolean upPressed, leftPressed, rightPressed;
     private Long lastTap = System.currentTimeMillis();
 
+    //Removido SINGLETON DO CONTROLLER por causa bug ao reiniciar a fase
+    /*
     private static Controller controller = new Controller();
 
     public static Controller getInstance(){
         return controller;
-    }
+    }*/
 
-    private Controller() {
+    public Controller() {
         OrthographicCamera cam = new OrthographicCamera();
         viewport = new FitViewport(800, 480, cam);
+        //viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
 

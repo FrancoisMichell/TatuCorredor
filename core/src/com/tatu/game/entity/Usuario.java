@@ -44,9 +44,9 @@ public class Usuario {
         this.aguaFreioMoney = 0;
 
         //DEFINIR
-        this.aguaCarreraPower = (float) 0.2;
-        this.aguaPuloPower = (float) 0.2;
-        this.aguaFreioPower = (float) 0.2;
+        this.aguaCarreraPower = 0f;
+        this.aguaPuloPower = 0f;
+        this.aguaFreioPower = 0f;
     }
 
     public ArrayList<Level> getLevels() {
