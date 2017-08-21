@@ -9,13 +9,14 @@ import com.badlogic.gdx.utils.Array;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
-public class Onca extends Enemy {
+public class Jaguatirica extends Enemy {
 
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
+    private FixtureDef fdef;
 
-    public Onca(PlayScreen screen, float x, float y) {
+    public Jaguatirica(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         frames = new Array<TextureRegion>();
@@ -33,6 +34,7 @@ public class Onca extends Enemy {
         b2body.setLinearVelocity(velocity);
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(walkAnimation.getKeyFrame(stateTime, true));
+
     }
 
     @Override
@@ -42,16 +44,17 @@ public class Onca extends Enemy {
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
-        FixtureDef fdef = new FixtureDef();
+        this.fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(20 / TatuBola.PPM);
         // CATEGORIA DO OBJETO
-        fdef.filter.categoryBits = TatuBola.ONCA_BIT;
+        fdef.filter.categoryBits = TatuBola.JAGUATIRICA_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
         fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.TATU_BIT;
 
         fdef.shape = shape;
 
         b2body.createFixture(fdef).setUserData(this);
+        b2body.setActive(false);
     }
 }

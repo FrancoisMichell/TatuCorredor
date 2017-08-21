@@ -127,11 +127,21 @@ public class PlayScreen implements Screen {
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
+
+
+        for (Enemy enemy : creator.getJaguatiricas()) {
+            enemy.update(dt);
+            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(true);
+            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(false);
+            }
+        }
         for (Enemy enemy : creator.getOncas()) {
             enemy.update(dt);
             if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
                 enemy.b2body.setActive(true);
-            } else if (enemy.getX() > player.getX() + 512) {
+            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
                 enemy.b2body.setActive(false);
             }
         }
@@ -181,15 +191,18 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
-        //Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
+        //TODO Retirar o render das linhas de debug quando for apresentar
         b2dr.render(world, gameCam.combined);
 
         batch.setProjectionMatrix(gameCam.combined);
         batch.begin();
         player.draw(batch);
+        for (Enemy enemy : creator.getJaguatiricas()) {
+            enemy.draw(batch);
+        }
         for (Enemy enemy : creator.getOncas()) {
             enemy.draw(batch);
         }

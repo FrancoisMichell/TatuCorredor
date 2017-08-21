@@ -14,9 +14,12 @@ public class TatuBola extends Game {
 
     public static final short DEFAULT_BIT = 1;
     public static final short TATU_BIT = 2;
-    public static final short AGUA_BIT = 4;
-    public static final short DESTRUIDO_BIT = 8;
-    public static final short ENEMY_BIT = 16;
+    public static final short CARRERA_BIT = 4;
+    public static final short PULO_BIT = 8;
+    public static final short FREIO_BIT = 16;
+    public static final short DESTRUIDO_BIT = 32;
+    public static final short ONCA_BIT = 64;
+    public static final short JAGUATIRICA_BIT = 128;
 
     public static SpriteBatch batch;
 
