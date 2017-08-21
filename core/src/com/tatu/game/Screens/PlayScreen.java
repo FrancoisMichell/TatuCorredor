@@ -29,7 +29,6 @@ import static com.tatu.game.TatuBola.batch;
 
 public class PlayScreen implements Screen {
     private TatuBola game;
-    private int level;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
 

@@ -1,5 +1,6 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,9 +17,6 @@ public class Tatu extends Sprite {
 
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
 
-    public State getCurrentState() {
-        return currentState;
-    }
 
     private State currentState;
     private State previousState;
@@ -33,9 +31,14 @@ public class Tatu extends Sprite {
     private float pulo = 6f;
     private float velocidade = 0.1f;
 
+    private float timeCount;
+
     private boolean powerUpCarreira = false;
+    private Integer tempoCarrera;
     private boolean powerUpPulo = false;
+    private Integer tempoPulo;
     private boolean powerUpFreio = false ;
+    private Integer tempoFreio;
 
     private boolean runningRight;
     private float stateTimer;
@@ -77,6 +80,31 @@ public class Tatu extends Sprite {
         setPosition(b2body.getPosition().x - getHeight() / 2, b2body.getPosition().y - getHeight() / 3);
         setRegion(getFrame(dt));
         checkDeath();
+        checkUpgrade(dt);
+        Gdx.app.log("state", Float.toString(getVelocidade()));
+        Gdx.app.log("state", Float.toString(timeCount));
+    }
+
+    private void checkUpgrade(float dt) {
+        timeCount += dt;
+
+        if (isPowerUpCarreira()) {
+            if (timeCount >= 30) {
+                setPowerUpCarreira(false);
+                setVelocidade(-getVelocidade() + 0.1f);
+                timeCount = 0;
+            }
+        } else if (isPowerUpPulo()) {
+            if (timeCount > 3) {
+                setPowerUpPulo(false);
+                timeCount = 0;
+            }
+        } else if (isPowerUpFreio()) {
+            if (timeCount > 3) {
+                setPowerUpFreio(false);
+                timeCount = 0;
+            }
+        }
     }
 
     private void checkDeath(){
@@ -160,6 +188,10 @@ public class Tatu extends Sprite {
 
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
     public boolean isDead() {
         return tatuIsDead;
     }
@@ -187,5 +219,32 @@ public class Tatu extends Sprite {
 
     public void setVelocidade(float velocidade) {
         this.velocidade += velocidade;
+    }
+
+    public boolean isPowerUpCarreira() {
+        return powerUpCarreira;
+    }
+
+    public void setPowerUpCarreira(boolean powerUpCarreira) {
+        this.powerUpCarreira = powerUpCarreira;
+        timeCount = 0;
+    }
+
+    public boolean isPowerUpPulo() {
+        return powerUpPulo;
+    }
+
+    public void setPowerUpPulo(boolean powerUpPulo) {
+        this.powerUpPulo = powerUpPulo;
+        timeCount = 0;
+    }
+
+    public boolean isPowerUpFreio() {
+        return powerUpFreio;
+    }
+
+    public void setPowerUpFreio(boolean powerUpFreio) {
+        this.powerUpFreio = powerUpFreio;
+        timeCount = 0;
     }
 }
