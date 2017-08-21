@@ -5,21 +5,20 @@ import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
-public class Agua extends InteractiveTileObject {
+public class AguaPulo extends InteractiveTileObject {
 
-    public Agua(PlayScreen screen, Rectangle bounds) {
+    public AguaPulo(PlayScreen screen, Rectangle bounds) {
         super(screen, bounds, true);
 
         fixture.setUserData(this);
 
-        setCategoryFilter(TatuBola.AGUA_BIT);
+        setCategoryFilter(TatuBola.PULO_BIT);
     }
 
     @Override
     public void onHeadHit() {
         setCategoryFilter(TatuBola.DESTRUIDO_BIT);
-        Hud.setAguaCarreraScoreValueGlobal(Hud.getAguaCarreraScoreValueGlobal()+1);
-        // Hud.addScore(200);
+        Hud.setAguaPuloScoreValueGlobal(Hud.getAguaPuloScoreValueGlobal() + 1);
         getCell().setTile(null);
 
     }

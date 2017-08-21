@@ -5,7 +5,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.tatu.game.Sprites.Agua;
+import com.tatu.game.Sprites.AguaCarrera;
+import com.tatu.game.Sprites.AguaPulo;
 import com.tatu.game.Sprites.Tatu;
 import com.tatu.game.TatuBola;
 
@@ -25,23 +26,36 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
-            case TatuBola.AGUA_BIT | TatuBola.TATU_BIT:
-                if (fixA.getFilterData().categoryBits == TatuBola.AGUA_BIT) {
-                    ((Agua) fixA.getUserData()).onHeadHit();
+            case TatuBola.CARRERA_BIT | TatuBola.TATU_BIT:
+                if (fixA.getFilterData().categoryBits == TatuBola.CARRERA_BIT) {
+                    ((AguaCarrera) fixA.getUserData()).onHeadHit();
                     tatu.setVelocidade(0.2f);
                     tatu.setPowerUpCarreira(true);
                 } else {
-                    ((Agua) fixB.getUserData()).onHeadHit();
+                    ((AguaCarrera) fixB.getUserData()).onHeadHit();
                     tatu.setVelocidade(0.2f);
                     tatu.setPowerUpCarreira(true);
                 }
                 break;
-            case TatuBola.ENEMY_BIT | TatuBola.TATU_BIT:
-                if (fixA.getFilterData().categoryBits == TatuBola.TATU_BIT) {
-                    tatu.hit();
+
+            case TatuBola.PULO_BIT | TatuBola.TATU_BIT:
+                if (fixA.getFilterData().categoryBits == TatuBola.PULO_BIT) {
+                    ((AguaPulo) fixA.getUserData()).onHeadHit();
+                    tatu.setPulo(1f);
+                    tatu.setPowerUpPulo(true);
                 } else {
-                    tatu.hit();
+                    ((AguaPulo) fixA.getUserData()).onHeadHit();
+                    tatu.setPulo(1f);
+                    tatu.setPowerUpPulo(true);
                 }
+                break;
+
+            case TatuBola.JAGUATIRICA_BIT | TatuBola.TATU_BIT:
+                tatu.hit(TatuBola.JAGUATIRICA_BIT);
+                break;
+
+            case TatuBola.ONCA_BIT | TatuBola.TATU_BIT:
+                tatu.hit(TatuBola.ONCA_BIT);
                 break;
         }
     }

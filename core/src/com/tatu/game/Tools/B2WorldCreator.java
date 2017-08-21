@@ -11,11 +11,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tatu.game.Screens.PlayScreen;
-import com.tatu.game.Sprites.Agua;
+import com.tatu.game.Sprites.AguaCarrera;
+import com.tatu.game.Sprites.AguaPulo;
+import com.tatu.game.Sprites.Jaguatirica;
 import com.tatu.game.Sprites.Onca;
 import com.tatu.game.TatuBola;
 
 public class B2WorldCreator {
+    private Array<Jaguatirica> jaguatiricas;
     private Array<Onca> oncas;
 
     public B2WorldCreator(PlayScreen screen) {
@@ -44,7 +47,22 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get("gotaCarrera").getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Agua(screen, rect);
+            new AguaCarrera(screen, rect);
+
+        }
+
+        for (MapObject object : map.getLayers().get("gotaPulo").getObjects().getByType(RectangleMapObject.class)) {
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new AguaPulo(screen, rect);
+
+        }
+
+        // Criar jaguatiricas
+        jaguatiricas = new Array<Jaguatirica>();
+        for (MapObject object : map.getLayers().get("Jaguatirica").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            jaguatiricas.add(new Jaguatirica(screen, rect.getX() / TatuBola.PPM, rect.getY() / TatuBola.PPM));
 
         }
 
@@ -81,8 +99,11 @@ public class B2WorldCreator {
         */
     }
 
+    public Array<Jaguatirica> getJaguatiricas() {
+        return jaguatiricas;
+    }
+
     public Array<Onca> getOncas() {
         return oncas;
     }
-
 }

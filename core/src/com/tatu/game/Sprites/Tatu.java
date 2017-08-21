@@ -1,21 +1,21 @@
 package com.tatu.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
-
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
 
     private State currentState;
@@ -31,18 +31,18 @@ public class Tatu extends Sprite {
     private float pulo = 5f;
     private float velocidade = 0.1f;
 
-    private float timeCount;
-
     private boolean powerUpCarreira = false;
-    private Integer tempoCarrera;
+    private float tempoCarrera;
     private boolean powerUpPulo = false;
-    private Integer tempoPulo;
+    private float tempoPulo;
     private boolean powerUpFreio = false ;
-    private Integer tempoFreio;
+    private float tempoFreio;
 
     private boolean runningRight;
     private float stateTimer;
     private boolean tatuIsDead;
+
+    private float dt, tempoHit;
 
     public Tatu(PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
@@ -74,42 +74,40 @@ public class Tatu extends Sprite {
         defineTatu();
         setBounds(0, 0, imgSize / TatuBola.PPM, imgSize / TatuBola.PPM);
         setRegion(tatuStand);
+
     }
 
     public void update(float dt) {
+        this.dt = dt;
         setPosition(b2body.getPosition().x - getHeight() / 2, b2body.getPosition().y - getHeight() / 3);
         setRegion(getFrame(dt));
         checkDeath();
         checkUpgrade(dt);
-        Gdx.app.log("state", Float.toString(getVelocidade()));
-        Gdx.app.log("state", Float.toString(timeCount));
     }
 
     private void checkUpgrade(float dt) {
-        timeCount += dt;
+        tempoCarrera += dt;
+        tempoPulo += dt;
+        tempoFreio += dt;
 
         if (isPowerUpCarreira()) {
-            if (timeCount >= 30) {
+            if (tempoCarrera >= 15) {
                 setPowerUpCarreira(false);
                 setVelocidade(-getVelocidade() + 0.1f);
-                timeCount = 0;
+                tempoCarrera = 0;
             }
         } else if (isPowerUpPulo()) {
-            if (timeCount > 3) {
+            if (tempoPulo >= 15) {
                 setPowerUpPulo(false);
-                timeCount = 0;
-            }
-        } else if (isPowerUpFreio()) {
-            if (timeCount > 3) {
-                setPowerUpFreio(false);
-                timeCount = 0;
+                setPulo(-getPulo() + 6f);
+                tempoPulo = 0;
             }
         }
     }
 
     private void checkDeath(){
         if (b2body.getPosition().y < -50) {
-            hit();
+            tatuIsDead = true;
         }
     }
 
@@ -163,7 +161,7 @@ public class Tatu extends Sprite {
 
     private void defineTatu() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(384 / TatuBola.PPM, 256 / TatuBola.PPM);
+        bdef.position.set(1064 / TatuBola.PPM, 256 / TatuBola.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -173,7 +171,7 @@ public class Tatu extends Sprite {
         // CATEGORIA DO OBJETO
         fdef.filter.categoryBits = TatuBola.TATU_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
-        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.AGUA_BIT | TatuBola.ENEMY_BIT;
+        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.CARRERA_BIT | TatuBola.PULO_BIT | TatuBola.ONCA_BIT | TatuBola.JAGUATIRICA_BIT;
 
         fdef.shape = shape;
 
@@ -196,13 +194,50 @@ public class Tatu extends Sprite {
         return tatuIsDead;
     }
 
-    public float getStateTimer() {
-        return stateTimer;
+    public void hit(short inimigo) {
+        tempoHit += dt;
+        if (tempoHit > 0.03) {
+            if (powerUpCarreira || powerUpPulo) {
+                resetPowerUp();
+                tempoHit = 0;
+                voaTatu();
+            } else {
+                if (inimigo == TatuBola.JAGUATIRICA_BIT) {
+                    if (Hud.getAguaCarreraScoreValueGlobal() > 0) {
+                        Hud.setAguaCarreraScoreValueGlobal(Hud.getAguaCarreraScoreValueGlobal() - 1);
+                        voaTatu();
+                        tempoHit = 0;
+                    } else if (!tatuIsDead) {
+                        tatuIsDead = true;
+                    }
+                } else if (inimigo == TatuBola.ONCA_BIT) {
+                    if (Hud.getAguaPuloScoreValueGlobal() > 0) {
+                        Hud.setAguaPuloScoreValueGlobal(Hud.getAguaPuloScoreValueGlobal() - 1);
+                        voaTatu();
+                        tempoHit = 0;
+                    } else if (!tatuIsDead) {
+                        tatuIsDead = true;
+                    }
+                }
+            }
+        }
     }
 
-    public void hit() {
-        if (!tatuIsDead)
-            tatuIsDead = true;
+    private void resetPowerUp() {
+        setVelocidade(-getVelocidade() + 0.1f);
+        setPowerUpCarreira(false);
+        setPulo(-getPulo() + 6f);
+        setPowerUpPulo(false);
+        tempoCarrera = 0;
+        tempoPulo = 0;
+    }
+
+    private void voaTatu() {
+        if (runningRight) {
+            b2body.applyLinearImpulse(new Vector2(0.5f, 5f), b2body.getWorldCenter(), true);
+        } else {
+            b2body.applyLinearImpulse(new Vector2(-0.5f, 5f), b2body.getWorldCenter(), true);
+        }
     }
 
     public float getPulo() {
@@ -214,7 +249,7 @@ public class Tatu extends Sprite {
     }
 
     public void setPulo(float pulo) {
-        this.pulo = pulo;
+        this.pulo += pulo;
     }
 
     public boolean isPowerUpPulo() {
@@ -223,7 +258,7 @@ public class Tatu extends Sprite {
 
     public void setPowerUpPulo(boolean powerUpPulo) {
         this.powerUpPulo = powerUpPulo;
-        timeCount = 0;
+        //timeCount = 0;
     }
 
     public float getVelocidade() {
@@ -238,14 +273,15 @@ public class Tatu extends Sprite {
         this.velocidade += velocidade;
     }
 
-    public boolean isPowerUpCarreira() {
+    private boolean isPowerUpCarreira() {
         return powerUpCarreira;
     }
 
     public void setPowerUpCarreira(boolean powerUpCarreira) {
         this.powerUpCarreira = powerUpCarreira;
-        timeCount = 0;
+        tempoCarrera = 0;
     }
+
 
 
     public boolean isPowerUpFreio() {
@@ -254,6 +290,7 @@ public class Tatu extends Sprite {
 
     public void setPowerUpFreio(boolean powerUpFreio) {
         this.powerUpFreio = powerUpFreio;
-        timeCount = 0;
+        //timeCount = 0;
     }
+
 }

@@ -55,15 +55,15 @@ public class Hud implements Disposable {
         skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
         Image aguaCarreraScore = new Image (skin,"aguaCarreraScore");
-        aguaCarreraScore.setPosition( 40+170+10+142+20 , 500) ;
+        aguaCarreraScore.setPosition(580, 518);
         stage.addActor(aguaCarreraScore);
 
         Image aguaPuloScore = new Image (skin,"aguaPuloScore");
-        aguaPuloScore.setPosition( 40+170+20 , 500) ;
+        aguaPuloScore.setPosition(580, 458);
         stage.addActor(aguaPuloScore);
 
         Image tempoScore = new Image (skin,"tempoScore");
-        tempoScore.setPosition( 40 , 500) ;
+        tempoScore.setPosition(40, 518);
         stage.addActor(tempoScore );
 
         Table table = new Table();
@@ -84,13 +84,17 @@ public class Hud implements Disposable {
 
         table.add().expandX();
         table.add().expandX();
-        table.add().expandX();
 
 
-        table.row();
-        table.add(tempoValue).expandX().padTop(45);
-        table.add(aguaCarreraValue).expandX().padTop(45);
+        table.row().padTop(30);
+        table.add(tempoValue).expandX();
         table.add().expandX();
+        table.add(aguaCarreraValue).expandX();
+
+        table.row().padTop(20);
+        table.add().expandX();
+        table.add().expandX();
+        table.add(aguaPuloValue).expandX();
 
         stage.addActor(table);
 
@@ -105,7 +109,8 @@ public class Hud implements Disposable {
             timeCount = 0;
         }
 
-        aguaCarreraValue.setText(aguaCarreraScoreValueGlobal +"");
+        aguaCarreraValue.setText(String.format("%03d", getAguaCarreraScoreValueGlobal()));
+        aguaPuloValue.setText(String.format("%03d", getAguaPuloScoreValueGlobal()));
 
     }
 
