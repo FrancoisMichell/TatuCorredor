@@ -2,6 +2,7 @@ package com.tatu.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,7 +28,7 @@ public class SplashScreen implements Screen {
 
     private Session session = Session.getInstance();
 
-    public SplashScreen(TatuBola game){
+    public SplashScreen(TatuBola game, AssetManager manager) {
         this.game = game;
         stage = new Stage(new StretchViewport(V_WIDTH, V_HEIGHT));
 

@@ -1,5 +1,7 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +17,7 @@ public class Onca extends Enemy {
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
+    private Sound pulo;
 
     public Onca(PlayScreen screen, float x, float y) {
         super(screen, x, y);
@@ -23,10 +26,10 @@ public class Onca extends Enemy {
         for (int i = 0; i < 3; i++) {
             frames.add(new TextureRegion(screen.getAtlas().findRegion("onca"), i * 160, 0, 160, 128));
         }
-        walkAnimation = new Animation<TextureRegion>(0.18f, frames);
+        walkAnimation = new Animation<TextureRegion>(0.2f, frames);
         stateTime = 0;
         setBounds(getX(), getY(), 180 / TatuBola.PPM, 128 / TatuBola.PPM);
-
+        pulo = Gdx.audio.newSound(Gdx.files.internal("efeitos/onca.mp3"));
     }
 
     public void update(float dt) {
@@ -34,6 +37,9 @@ public class Onca extends Enemy {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.6f - getHeight() / 2);
         b2body.setLinearVelocity(velocity);
         setRegion(walkAnimation.getKeyFrame(stateTime, true));
+        if (stateTime % 0.6 == 0) {
+            pulo.play();
+        }
     }
 
     @Override

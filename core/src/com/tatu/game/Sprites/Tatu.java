@@ -1,6 +1,7 @@
 package com.tatu.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,8 @@ import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
+    private boolean somPulo;
+
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
 
     private State currentState;
@@ -46,6 +49,8 @@ public class Tatu extends Sprite {
 
     private float dt, tempoHit;
 
+    private Sound puloSound;
+
     public Tatu(PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
         this.screen = screen;
@@ -54,6 +59,7 @@ public class Tatu extends Sprite {
         previousState = State.IDLE;
         stateTimer = 0;
         runningRight = true;
+        puloSound = Gdx.audio.newSound(Gdx.files.internal("efeitos/puloTatu.wav"));
 
         Array<TextureRegion> framesIdle = new Array<TextureRegion>();
         Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -120,6 +126,10 @@ public class Tatu extends Sprite {
         switch (currentState) {
             case JUMPING:
                 region = tatuJump.getKeyFrame(stateTimer);
+                if (somPulo) {
+                    puloSound.play();
+                    somPulo = false;
+                }
                 break;
             case RUNNING:
                 region = tatuRun.getKeyFrame(stateTimer, true);
@@ -127,6 +137,7 @@ public class Tatu extends Sprite {
             case FALLING:
             case IDLE:
                 region = tatuIdle.getKeyFrame(stateTimer, true);
+                somPulo = true;
                 break;
             default:
                 region = tatuStand;
@@ -223,11 +234,14 @@ public class Tatu extends Sprite {
                     }
                 } else if (inimigo == TatuBola.HOMEM_BIT) {
                     if ((screen.getHud().getAguaPuloScoreValue() > 0) || (screen.getHud().getAguaCarreraScoreValue() > 0)) {
+                        String aux;
                         if (screen.getHud().getAguaPuloScoreValue() >= screen.getHud().getAguaCarreraScoreValue()) {
-                            screen.getHud().setAguaPuloScoreValue(screen.getHud().getAguaPuloScoreValue() - 1);
+                            aux = "pulo";
                         } else {
-                            screen.getHud().setAguaCarreraScoreValue(screen.getHud().getAguaCarreraScoreValue() - 1);
+                            aux = "carrera";
                         }
+                        tiraAgua(aux);
+
                         voaTatu();
                         tempoHit = 0;
                     } else if (!tatuIsDead) {
@@ -238,8 +252,15 @@ public class Tatu extends Sprite {
         }
     }
 
+    private void tiraAgua(String aux) {
+        if (aux.equals("pulo"))
+            screen.getHud().setAguaPuloScoreValue(screen.getHud().getAguaPuloScoreValue() - 1);
+        else
+            screen.getHud().setAguaCarreraScoreValue(screen.getHud().getAguaCarreraScoreValue() - 1);
+    }
+
     private void resetPowerUp() {
-        setVelocidade(-getVelocidade() + 0.1f);
+        setVelocidade(-getVelocidade() + 0.1f + session.getUsuarioLogado().getAguaCarreraPower());
         setPowerUpCarreira(false);
         setPulo(-getPulo() + 6f);
         setPowerUpPulo(false);
@@ -249,9 +270,9 @@ public class Tatu extends Sprite {
 
     private void voaTatu() {
         if (runningRight) {
-            b2body.applyLinearImpulse(new Vector2(-5, 0), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(-5, 2), b2body.getWorldCenter(), true);
         } else {
-            b2body.applyLinearImpulse(new Vector2(5, 0), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(5, 2), b2body.getWorldCenter(), true);
         }
     }
 
@@ -278,8 +299,6 @@ public class Tatu extends Sprite {
 
     public float getVelocidade() {
         if (this.isPowerUpCarreira()){
-            Gdx.app.log("vel", Float.toString(velocidade));
-            Gdx.app.log("power", Float.toString(session.getUsuarioLogado().getAguaCarreraPower()));
             return velocidade + session.getUsuarioLogado().getAguaCarreraPower();
         }else{
             return velocidade;

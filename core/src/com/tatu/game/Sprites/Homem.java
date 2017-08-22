@@ -1,5 +1,7 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -11,6 +13,8 @@ import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
 public class Homem extends Enemy {
+
+    private int count = 0;
 
     public enum State {IDLE, SHOOTING}
 
@@ -24,8 +28,12 @@ public class Homem extends Enemy {
     private FixtureDef fdef;
     private float time;
 
+    private Sound tiro;
+
     public Homem(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+
+        tiro = Gdx.audio.newSound(Gdx.files.internal("efeitos/tiro2.mp3"));
 
         standing = new Array<TextureRegion>();
         shooting = new Array<TextureRegion>();
@@ -54,12 +62,19 @@ public class Homem extends Enemy {
         time += dt;
 
         if (time < 4) {
+            count = 0;
             setCurrentState(State.IDLE);
             setRegion(standingAnimation.getKeyFrame(stateTime, true));
         } else if (time > 4 && time < 5) {
+            if (count == 0 && b2body.isActive()) {
+                tiro.play();
+            }
+            count++;
             setCurrentState(State.SHOOTING);
             setRegion(shootingAnimation.getKeyFrame(stateTime, true));
+
         } else {
+            b2body.setActive(false);
             time = 0;
         }
     }

@@ -1,6 +1,7 @@
 package com.tatu.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tatu.game.Screens.SplashScreen;
 
@@ -22,11 +23,13 @@ public class TatuBola extends Game {
     public static final short JAGUATIRICA_BIT = 512;
 
     public static SpriteBatch batch;
+    public AssetManager manager;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        setScreen(new SplashScreen(this));
+        manager = new AssetManager();
+        setScreen(new SplashScreen(this, manager));
         //setScreen(new PlayScreen(this, 1));
     }
 

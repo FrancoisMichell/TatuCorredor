@@ -1,5 +1,7 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -14,8 +16,12 @@ public class Jaguatirica extends Enemy {
 
     private float stateTime;
     private Animation<TextureRegion> attackAnimation;
+    private Animation<TextureRegion> standAnimation;
     private Array<TextureRegion> frames;
+    private Array<TextureRegion> stand;
     private FixtureDef fdef;
+    private Sound movimento;
+    private int count = 0;
 
     public Jaguatirica(PlayScreen screen, float x, float y) {
         super(screen, x, y);
@@ -25,14 +31,43 @@ public class Jaguatirica extends Enemy {
             frames.add(new TextureRegion(screen.getAtlas().findRegion("jaguatirica"), i * 180, 0, 180, 128));
         }
         attackAnimation = new Animation<TextureRegion>(0.2f, frames);
+
+        stand = new Array<TextureRegion>();
+        for (int i = 0; i < 1; i++) {
+            stand.add(new TextureRegion(screen.getAtlas().findRegion("jaguatirica"), i * 180, 0, 180, 128));
+        }
+        standAnimation = new Animation<TextureRegion>(1f, stand);
+
+
         stateTime = 0;
         setBounds(getX(), getY(), 180 / TatuBola.PPM, 128 / TatuBola.PPM);
+        movimento = Gdx.audio.newSound(Gdx.files.internal("efeitos/jaguatirica.mp3"));
+        setRegion(standAnimation.getKeyFrame(stateTime, true));
     }
 
     public void update(float dt) {
         stateTime += dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.6f - getHeight() / 2);
-        setRegion(attackAnimation.getKeyFrame(stateTime, true));
+        animaJaguatirica(dt);
+    }
+
+
+    private float time;
+
+    private void animaJaguatirica(float dt) {
+        time += dt;
+        if (time > 2) {
+            setRegion(attackAnimation.getKeyFrame(stateTime, true));
+            if (count == 0 && b2body.isActive()) {
+                count++;
+                movimento.play();
+            }
+            if (time >= 2 + attackAnimation.getAnimationDuration() && attackAnimation.isAnimationFinished(stateTime))
+                time = 0;
+        } else {
+            setRegion(standAnimation.getKeyFrame(stateTime, true));
+            count = 0;
+        }
     }
 
     @Override

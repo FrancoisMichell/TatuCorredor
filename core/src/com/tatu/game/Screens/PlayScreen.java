@@ -3,6 +3,7 @@ package com.tatu.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -49,6 +50,7 @@ public class PlayScreen implements Screen {
     private Controller controller;
 
     private boolean block;
+    private Music teste;
 
     public PlayScreen(TatuBola game, int level) {
         this.game = game;
@@ -75,6 +77,8 @@ public class PlayScreen implements Screen {
 
         //controller = Controller.getInstance();
         controller = new Controller();
+
+        teste = Gdx.audio.newMusic(Gdx.files.internal("efeitos/puloTatu.wav"));
     }
 
     private String loadMap(int level) {
@@ -131,12 +135,13 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
+
         for (Homem enemy : creator.getCangaceiros()) {
             enemy.update(dt);
-            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
-                enemy.b2body.setActive(true);
-            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+            if ((enemy.getX() + 512 / TatuBola.PPM < player.getX()) || (enemy.getX() > player.getX() + 512 / TatuBola.PPM)) {
                 enemy.b2body.setActive(false);
+            } else {
+                enemy.b2body.setActive(true);
             }
             if (enemy.getCurrentState() == Homem.State.SHOOTING) {
                 criaBala();
@@ -148,28 +153,28 @@ public class PlayScreen implements Screen {
 
         for (Enemy enemy : creator.getJaguatiricas()) {
             enemy.update(dt);
-            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
-                enemy.b2body.setActive(true);
-            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+            if ((enemy.getX() + 512 / TatuBola.PPM < player.getX()) || (enemy.getX() > player.getX() + 512 / TatuBola.PPM)) {
                 enemy.b2body.setActive(false);
+            } else {
+                enemy.b2body.setActive(true);
             }
         }
 
         for (Enemy enemy : creator.getBalas()) {
             enemy.update(dt);
-            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
-                enemy.b2body.setActive(true);
-            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+            if ((enemy.getX() > player.getX() + 512 / TatuBola.PPM)) {
                 enemy.b2body.setActive(false);
+            } else {
+                enemy.b2body.setActive(true);
             }
         }
 
         for (Enemy enemy : creator.getOncas()) {
             enemy.update(dt);
-            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
-                enemy.b2body.setActive(true);
-            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+            if ((enemy.getX() > player.getX() + 512 / TatuBola.PPM)) {
                 enemy.b2body.setActive(false);
+            } else {
+                enemy.b2body.setActive(true);
             }
         }
 
@@ -180,7 +185,6 @@ public class PlayScreen implements Screen {
         } else {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
-
         if (player.acabouFase()) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
@@ -199,7 +203,7 @@ public class PlayScreen implements Screen {
         if (!player.isDead()) {
             //Manipulando o pulo
             if (controller.isUpPressed() && (player.getCurrentState() == Tatu.State.IDLE || player.getCurrentState() == Tatu.State.RUNNING)) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(0, player.getPulo()), player.b2body.getWorldCenter(), true);
 
             }
 
@@ -207,13 +211,13 @@ public class PlayScreen implements Screen {
             if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
 
                 player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
-                Gdx.app.log("direita", Float.toString(player.getVelocidade()));
+                //Gdx.app.log("direita", Float.toString(player.getVelocidade()));
             }
 
             //Manipulando a corrida pra esquerda
             if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
                 player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
-                Gdx.app.log("esquerda", Float.toString(player.getVelocidade()));
+                //Gdx.app.log("esquerda", Float.toString(player.getVelocidade()));
             }
         }
     }
@@ -240,7 +244,6 @@ public class PlayScreen implements Screen {
         for (Enemy enemy : creator.getBalas()) {
             enemy.draw(batch);
         }
-
         for (Enemy enemy : creator.getJaguatiricas()) {
             enemy.draw(batch);
         }
@@ -257,6 +260,8 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
 
         controller.draw();
+
+        //teste.play();
     }
 
     @Override
