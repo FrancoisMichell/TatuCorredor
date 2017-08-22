@@ -26,6 +26,7 @@ public class LevelScreen extends ClickListener implements Screen {
     private Skin skin;
     private Stage stage;
     private TatuBola game;
+    private Session session = Session.getInstance();
 
     public LevelScreen(TatuBola game){
         this.game = game;
@@ -118,14 +119,14 @@ public class LevelScreen extends ClickListener implements Screen {
 
     public String getEnableDisabledButton(int level){
         String retorno = "btnLevelDisabled";
-        if (! Session.getUsuarioLogado().getLevels().get(level).getLocked()) {
+        if (! session.getUsuarioLogado().getLevels().get(level).getLocked()) {
             retorno = "btnLevelEnable";
         }
         return retorno;
     }
 
     public void completeResources(Button button , final int level){
-        if (! Session.getUsuarioLogado().getLevels().get(level).getLocked()){
+        if (! session.getUsuarioLogado().getLevels().get(level).getLocked()){
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -135,7 +136,7 @@ public class LevelScreen extends ClickListener implements Screen {
             });
 
             String spriteStar = "0star";
-            switch (Session.getUsuarioLogado().getLevels().get(level).getScore()){
+            switch (session.getUsuarioLogado().getLevels().get(level).getScore()){
                 case 0:
                     spriteStar = "0star";
                     break;

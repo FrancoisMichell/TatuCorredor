@@ -25,17 +25,19 @@ public class SplashScreen implements Screen {
     private MenuScreen menuScreen = new MenuScreen(new TatuBola());
     private TatuBola game;
 
+    private Session session = Session.getInstance();
+
     public SplashScreen(TatuBola game){
         this.game = game;
         stage = new Stage(new StretchViewport(V_WIDTH, V_HEIGHT));
 
         Usuario user = BdManager.getInstance().getUserFromSharedPref();
         if ( user != null ) {
-            Session.setUsuarioLogado(user);
+            session.setUsuarioLogado(user);
         }else{
             Usuario novoUsuario = new Usuario();
             BdManager.getInstance().saveUserInSharedPref(novoUsuario);
-            Session.setUsuarioLogado(user);
+            session.setUsuarioLogado(novoUsuario);
         }
 
     }

@@ -8,6 +8,17 @@ import com.tatu.game.entity.Usuario;
 
 public class Session {
 
+    private static Session mInstance;
+
+    private Session() {}
+
+    public static synchronized Session getInstance() {
+        if (mInstance == null) {
+            mInstance = new Session();
+        }
+        return mInstance;
+    }
+
     private static Usuario user;
 
     public static Usuario getUsuarioLogado() {

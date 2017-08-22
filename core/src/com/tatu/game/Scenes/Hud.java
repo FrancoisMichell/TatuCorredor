@@ -77,7 +77,7 @@ public class Hud implements Disposable {
         aguaCarreraLabel = new Label("Agua Carrera", font);
         aguaPuloLabel = new Label("Agua Pulo", font);
 
-        tempoValue = new Label(String.format("%03d", worldTimer), font);
+        tempoValue = new Label(worldTimer+"", font);
 
         aguaCarreraValue = new Label(aguaCarreraScoreValue+"", font);
 
@@ -104,12 +104,10 @@ public class Hud implements Disposable {
     public void update(float dt) {
 
         timeCount += dt;
-        if (timeCount >= 1) {
+        if (timeCount >= 2) {
             worldTimer++;
-            String dateAsText = new SimpleDateFormat("mm:ss")
-                    .format(new Date(worldTimer * 1000L));
+            String dateAsText = new SimpleDateFormat("mm:ss").format(new Date(worldTimer * 1000L));
             tempoValue.setText(dateAsText);
-            //tempoValue.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
 

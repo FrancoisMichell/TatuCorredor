@@ -14,10 +14,11 @@ public class TatuBola extends Game {
     public static final short TATU_BIT = 2;
     public static final short CARRERA_BIT = 4;
     public static final short PULO_BIT = 8;
-    public static final short FREIO_BIT = 16;
+    public static final short HOMEM_BIT = 16;
     public static final short DESTRUIDO_BIT = 32;
     public static final short ONCA_BIT = 64;
     public static final short JAGUATIRICA_BIT = 128;
+    public static final short PAREDE_BIT = 256;
 
     public static SpriteBatch batch;
 
@@ -25,7 +26,7 @@ public class TatuBola extends Game {
     public void create() {
         batch = new SpriteBatch();
         setScreen(new SplashScreen(this));
-        //setScreen(new PlayScreen(this));
+        //setScreen(new PlayScreen(this, 1));
     }
 
     @Override

@@ -1,0 +1,32 @@
+Tatu64 - Copia - Copia.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tatu
+  rotate: false
+  xy: 0, 0
+  size: 1728, 64
+  orig: 1728, 64
+  offset: 0, 0
+  index: -1
+onca
+  rotate: false
+  xy: 1728, 0
+  size: 480, 64
+  orig: 2208, 64
+  offset: 0, 0
+  index: -1
+jaguatirica
+  rotate: false
+  xy: 2208, 0
+  size: 900, 64
+  orig: 3108, 64
+  offset: 0, 0
+  index: -1
+cangaceiro
+  rotate: false
+  xy: 3108, 0
+  size: 1353, 64
+  orig: 4461, 64
+  offset: 0, 0
+  index: -1

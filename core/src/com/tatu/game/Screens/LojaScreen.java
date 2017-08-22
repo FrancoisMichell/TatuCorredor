@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
+import com.tatu.game.Util.BdManager;
 import com.tatu.game.Util.Session;
 
 /**
@@ -30,6 +32,7 @@ public class LojaScreen implements Screen {
     private Skin skin;
     private Stage stage;
     private TatuBola game;
+    private Session session = Session.getInstance();
 
     private Label.LabelStyle font;
 
@@ -88,79 +91,112 @@ public class LojaScreen implements Screen {
 
         font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/cartwhel.fnt")), Color.WHITE);
 
-        aguaCarreraSaldoValue = new Label(Session.getUsuarioLogado().getAguaCarreraMoney()+"", font);
+        aguaCarreraSaldoValue = new Label(session.getUsuarioLogado().getAguaCarreraMoney()+"", font);
         aguaCarreraSaldoValue.setPosition(aguaCarreraSaldo.getX()+45 , aguaCarreraSaldo.getY()+15);
 
-        aguaPuloSaldoValue = new Label(Session.getUsuarioLogado().getAguaPuloMoney()+"", font);
+        aguaPuloSaldoValue = new Label(session.getUsuarioLogado().getAguaPuloMoney()+"", font);
         aguaPuloSaldoValue.setPosition(aguaPuloSaldo.getX()+45 , aguaPuloSaldo.getY()+15);
 
         stage.addActor(aguaCarreraSaldoValue);
         stage.addActor(aguaPuloSaldoValue);
 
-        getLevelPower("carrera");
-        getLevelPower("pulo");
-
+        getLevelPowerCarrera();
+        getLevelPowerPulo();
     }
 
-    public void getLevelPower(String power){
-        if (power == "carrera"){
-            float powerValue = Session.getUsuarioLogado().getAguaCarreraPower();
-            String powerSkin = "lojaAguaCarrera0";
-            String btnUpgrade = "comprarAguaCarrera1";
-            if (powerValue == 0){
-                powerSkin = "lojaAguaCarrera0";
-                btnUpgrade = "comprarAguaCarrera1";
-            }else if ( powerValue == 0.1f ){
-                powerSkin = "lojaAguaCarrera1";
-                btnUpgrade = "comprarAguaCarrera2";
-            }else if ( powerValue == 0.2f ){
-                powerSkin = "lojaAguaCarrera2";
-                btnUpgrade = "comprarAguaCarrera3";
-            }else if ( powerValue == 0.3f){
-                powerSkin = "lojaAguaCarrera3";
-                //String btnUpgrade = "";
-            }
-
-            Image powerLevelCarrera = new Image(skin,powerSkin);
-            powerLevelCarrera.setPosition(aguaCarreraSaldo.getX(), aguaCarreraSaldo.getY()-100);
-            stage.addActor(powerLevelCarrera);
-
-            //TODO trocar tipo de Image para Button e Adicionar onClickListener de acordo com o nível que vier para realizar cobrança das aguas
-            Image btnMelhorarCarrera = new Image(skin,btnUpgrade);
-            btnMelhorarCarrera.setPosition(aguaPuloSaldo.getX()+50, aguaPuloSaldo.getY()-100);
-            stage.addActor(btnMelhorarCarrera);
-
-        }else if ( power == "pulo"){
-            float powerValue = Session.getUsuarioLogado().getAguaPuloPower();
-            String powerSkin = "lojaAguaPulo0";
-            String btnUpgrade = "comprarAguaPulo1";
-            if (powerValue == 0){
-                powerSkin = "lojaAguaPulo0";
-                btnUpgrade = "comprarAguaPulo1";
-            }else if ( powerValue == 0.1f ){
-                powerSkin = "lojaAguaPulo1";
-                btnUpgrade = "comprarAguaPulo2";
-            }else if ( powerValue == 0.2f ){
-                powerSkin = "lojaAguaPulo2";
-                btnUpgrade = "comprarAguaPulo3";
-            }else if ( powerValue == 0.3f){
-                powerSkin = "lojaAguaPulo3";
-                //String btnUpgrade = "comprarAguaPulo1";
-            }
-
-            Image powerLevelPulo = new Image(skin,powerSkin);
-            powerLevelPulo.setPosition(aguaCarreraSaldo.getX(), aguaCarreraSaldo.getY()-200);
-            stage.addActor(powerLevelPulo);
-
-            //TODO trocar tipo de Image para Button e Adicionar onClickListener de acordo com o nível que vier para realizar cobrança das aguas
-            Image btnMelhorarPulo = new Image(skin,btnUpgrade);
-            btnMelhorarPulo.setPosition(aguaPuloSaldo.getX()+50, aguaPuloSaldo.getY()-200);
-            stage.addActor(btnMelhorarPulo);
+    public void getLevelPowerCarrera() {
+        float carreraPowerValue = session.getUsuarioLogado().getAguaCarreraPower();
+        String carreraPowerSkin = "lojaAguaCarrera0";
+        String btnCarreraUpgrade = "comprarAguaCarrera1";
+        int precoPowerUpCarrera = 5;
+        if (carreraPowerValue == 0) {
+            carreraPowerSkin = "lojaAguaCarrera0";
+            btnCarreraUpgrade = "comprarAguaCarrera1";
+            precoPowerUpCarrera = 5;
+        } else if (carreraPowerValue == 0.2f) {
+            carreraPowerSkin = "lojaAguaCarrera1";
+            btnCarreraUpgrade = "comprarAguaCarrera2";
+            precoPowerUpCarrera = 15;
+        } else if (carreraPowerValue == 0.4f) {
+            carreraPowerSkin = "lojaAguaCarrera2";
+            btnCarreraUpgrade = "comprarAguaCarrera3";
+            precoPowerUpCarrera = 25;
+        } else if (carreraPowerValue == 0.6f) {
+            carreraPowerSkin = "lojaAguaCarrera3";
+            //String btnUpgrade = "";
         }
 
+        final Image powerLevelCarrera = new Image(skin, carreraPowerSkin);
+        powerLevelCarrera.setPosition(aguaCarreraSaldo.getX(), aguaCarreraSaldo.getY() - 100);
+        stage.addActor(powerLevelCarrera);
+
+        final Button btnMelhorarCarrera = new Button(skin, btnCarreraUpgrade);
+        btnMelhorarCarrera.setPosition(aguaPuloSaldo.getX() + 50, aguaPuloSaldo.getY() - 100);
+        stage.addActor(btnMelhorarCarrera);
+        final int finalPrecoPowerUpCarrera = precoPowerUpCarrera;
+        btnMelhorarCarrera.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (session.getUsuarioLogado().getAguaCarreraMoney() >= finalPrecoPowerUpCarrera) {
+                    session.getUsuarioLogado().setAguaCarreraMoney(session.getUsuarioLogado().getAguaCarreraMoney() - finalPrecoPowerUpCarrera);
+                    session.getUsuarioLogado().setAguaCarreraPower(session.getUsuarioLogado().getAguaCarreraPower() + 0.2f);
+                    BdManager.getInstance().saveUserInSharedPref(session.getUsuarioLogado());
+                    aguaCarreraSaldoValue.setText(session.getUsuarioLogado().getAguaCarreraMoney()+"");
+                    btnMelhorarCarrera.remove();
+                    powerLevelCarrera.remove();
+                    getLevelPowerCarrera();
+                }
+            }
+        });
     }
 
-    //TODO Implementar método de cobrança de águas
+    public void getLevelPowerPulo() {
+
+        float powerValue = session.getUsuarioLogado().getAguaPuloPower();
+        String puloPowerSkin = "lojaAguaPulo0";
+        String btnPuloUpgrade = "comprarAguaPulo1";
+        int precoPowerUpPulo = 5;
+        if (powerValue == 0){
+            puloPowerSkin = "lojaAguaPulo0";
+            btnPuloUpgrade = "comprarAguaPulo1";
+            precoPowerUpPulo = 5;
+        }else if ( powerValue == 0.2f ){
+            puloPowerSkin = "lojaAguaPulo1";
+            btnPuloUpgrade = "comprarAguaPulo2";
+            precoPowerUpPulo = 15;
+        }else if ( powerValue == 0.4f ){
+            puloPowerSkin = "lojaAguaPulo2";
+            btnPuloUpgrade = "comprarAguaPulo3";
+            precoPowerUpPulo = 25;
+        }else if ( powerValue == 0.6f){
+            puloPowerSkin = "lojaAguaPulo3";
+            //String btnUpgrade = "comprarAguaPulo1";
+        }
+
+        final Image powerLevelPulo = new Image(skin,puloPowerSkin);
+        powerLevelPulo.setPosition(aguaCarreraSaldo.getX(), aguaCarreraSaldo.getY()-200);
+        stage.addActor(powerLevelPulo);
+
+        final Button btnMelhorarPulo = new Button(skin,btnPuloUpgrade);
+        btnMelhorarPulo.setPosition(aguaPuloSaldo.getX()+50, aguaPuloSaldo.getY()-200);
+        stage.addActor(btnMelhorarPulo);
+
+        final int finalPrecoPowerUpPulo = precoPowerUpPulo;
+        btnMelhorarPulo.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                if(session.getUsuarioLogado().getAguaPuloMoney() >= finalPrecoPowerUpPulo){
+                    session.getUsuarioLogado().setAguaPuloMoney(session.getUsuarioLogado().getAguaPuloMoney() - finalPrecoPowerUpPulo);
+                    session.getUsuarioLogado().setAguaPuloPower(session.getUsuarioLogado().getAguaPuloPower()+0.2f);
+                    BdManager.getInstance().saveUserInSharedPref(session.getUsuarioLogado());
+                    aguaPuloSaldoValue.setText(session.getUsuarioLogado().getAguaPuloMoney()+"");
+                    btnMelhorarPulo.remove();
+                    powerLevelPulo.remove();
+                    getLevelPowerPulo();
+                }
+            }
+        });
+    }
 
     @Override
     public void render(float delta) {

@@ -21,6 +21,7 @@ public class Tatu extends Sprite {
     private State currentState;
     private State previousState;
     private PlayScreen screen;
+    private Session session = Session.getInstance();
 
     private World world;
     public Body b2body;
@@ -29,7 +30,7 @@ public class Tatu extends Sprite {
     private Animation<TextureRegion> tatuIdle;
     private Animation<TextureRegion> tatuJump;
 
-    private float pulo = 4f;
+    private float pulo = 4.5f;
     private float velocidade = 0.1f;
 
     private boolean powerUpCarreira = false;
@@ -58,17 +59,17 @@ public class Tatu extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
         int imgSize = 64;
         for (int i = 1; i < 8; i++)
-            frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
+            frames.add(new TextureRegion(getTexture(), i * imgSize, 64, imgSize, imgSize));
         tatuRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
 
         for (int i = 8; i < 14; i++)
-            framesIdle.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
+            framesIdle.add(new TextureRegion(getTexture(), i * imgSize, 64, imgSize, imgSize));
         tatuIdle = new Animation<TextureRegion>(0.1f, framesIdle);
         framesIdle.clear();
 
         for (int i = 16; i < 27; i++)
-            frames.add(new TextureRegion(getTexture(), i * imgSize, 0, imgSize, imgSize));
+            frames.add(new TextureRegion(getTexture(), i * imgSize, 64, imgSize, imgSize));
         tatuJump = new Animation<TextureRegion>(0.1f, frames);
 
         tatuStand = new TextureRegion(getTexture(), 0, 0, imgSize, imgSize);
@@ -173,7 +174,8 @@ public class Tatu extends Sprite {
         // CATEGORIA DO OBJETO
         fdef.filter.categoryBits = TatuBola.TATU_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
-        fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.CARRERA_BIT | TatuBola.PULO_BIT | TatuBola.ONCA_BIT | TatuBola.JAGUATIRICA_BIT;
+        fdef.filter.maskBits = (short) (TatuBola.DEFAULT_BIT | TatuBola.CARRERA_BIT | TatuBola.PULO_BIT | TatuBola.ONCA_BIT
+                | TatuBola.JAGUATIRICA_BIT | TatuBola.HOMEM_BIT | TatuBola.PAREDE_BIT);
 
         fdef.shape = shape;
 
@@ -237,15 +239,15 @@ public class Tatu extends Sprite {
 
     private void voaTatu() {
         if (runningRight) {
-            b2body.applyLinearImpulse(new Vector2(0.5f, 5f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(-5, 0), b2body.getWorldCenter(), true);
         } else {
-            b2body.applyLinearImpulse(new Vector2(-0.5f, 5f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(5, 0), b2body.getWorldCenter(), true);
         }
     }
 
     public float getPulo() {
         if (this.isPowerUpPulo()){
-            return pulo + Session.getUsuarioLogado().getAguaPuloPower();
+            return pulo + session.getUsuarioLogado().getAguaPuloPower();
         }else{
             return pulo;
         }
@@ -266,7 +268,7 @@ public class Tatu extends Sprite {
 
     public float getVelocidade() {
         if (this.isPowerUpCarreira()){
-            return velocidade + Session.getUsuarioLogado().getAguaCarreraPower();
+            return velocidade + session.getUsuarioLogado().getAguaCarreraPower();
         }else{
             return velocidade;
         }
@@ -284,8 +286,6 @@ public class Tatu extends Sprite {
         this.powerUpCarreira = powerUpCarreira;
         tempoCarrera = 0;
     }
-
-
 
     public boolean isPowerUpFreio() {
         return powerUpFreio;

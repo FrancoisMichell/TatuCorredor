@@ -10,29 +10,30 @@ import com.badlogic.gdx.utils.Array;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 
-public class Onca extends Enemy {
+public class Bala extends Enemy {
 
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
 
-    public Onca(PlayScreen screen, float x, float y) {
+    public Bala(PlayScreen screen, float x, float y) {
         super(screen, x, y);
 
         frames = new Array<TextureRegion>();
-        for (int i = 0; i < 3; i++) {
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("onca"), i * 160, 0, 160, 128));
+        for (int i = 10; i < 11; i++) {
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("cangaceiro"), i * 123, 0, 123, 128));
         }
         walkAnimation = new Animation<TextureRegion>(0.18f, frames);
         stateTime = 0;
-        setBounds(getX(), getY(), 180 / TatuBola.PPM, 128 / TatuBola.PPM);
+        setBounds(getX(), getY(), 123 / TatuBola.PPM, 128 / TatuBola.PPM);
+        b2body.setGravityScale(0);
 
     }
 
     public void update(float dt) {
         stateTime += dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.6f - getHeight() / 2);
-        b2body.setLinearVelocity(velocity);
+        b2body.setLinearVelocity(-2, 0);
         setRegion(walkAnimation.getKeyFrame(stateTime, true));
     }
 
@@ -45,17 +46,15 @@ public class Onca extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        Vector2[] vertice = new Vector2[6];
-        vertice[0] = new Vector2(-3, 3).scl(1 / TatuBola.PPM);
-        vertice[1] = new Vector2(-3, 40).scl(1 / TatuBola.PPM);
-        vertice[2] = new Vector2(-70, 40).scl(1 / TatuBola.PPM);
-        vertice[3] = new Vector2(-70, 70).scl(1 / TatuBola.PPM);
-        vertice[4] = new Vector2(60, 60).scl(1 / TatuBola.PPM);
-        vertice[5] = new Vector2(60, 3).scl(1 / TatuBola.PPM);
+        Vector2[] vertice = new Vector2[4];
+        vertice[0] = new Vector2(-5, 60).scl(1 / TatuBola.PPM);
+        vertice[1] = new Vector2(5, 60).scl(1 / TatuBola.PPM);
+        vertice[2] = new Vector2(-5, 50).scl(1 / TatuBola.PPM);
+        vertice[3] = new Vector2(5, 50).scl(1 / TatuBola.PPM);
         shape.set(vertice);
 
         // CATEGORIA DO OBJETO
-        fdef.filter.categoryBits = TatuBola.ONCA_BIT;
+        //fdef.filter.categoryBits = TatuBola.ONCA_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
         fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.TATU_BIT;
 
