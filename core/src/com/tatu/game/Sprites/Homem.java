@@ -77,10 +77,10 @@ public class Homem extends Enemy {
         Vector2[] vertice = new Vector2[6];
         vertice[0] = new Vector2(-3, 3).scl(1 / TatuBola.PPM);
         vertice[1] = new Vector2(-3, 40).scl(1 / TatuBola.PPM);
-        vertice[2] = new Vector2(-70, 40).scl(1 / TatuBola.PPM);
-        vertice[3] = new Vector2(-70, 70).scl(1 / TatuBola.PPM);
-        vertice[4] = new Vector2(60, 60).scl(1 / TatuBola.PPM);
-        vertice[5] = new Vector2(60, 3).scl(1 / TatuBola.PPM);
+        vertice[2] = new Vector2(-60, 40).scl(1 / TatuBola.PPM);
+        vertice[3] = new Vector2(-60, 70).scl(1 / TatuBola.PPM);
+        vertice[4] = new Vector2(30, 60).scl(1 / TatuBola.PPM);
+        vertice[5] = new Vector2(30, 3).scl(1 / TatuBola.PPM);
         shape.set(vertice);
 
         // CATEGORIA DO OBJETO

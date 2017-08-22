@@ -1,5 +1,6 @@
 package com.tatu.game.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Screens.PlayScreen;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
@@ -20,6 +20,8 @@ public class Tatu extends Sprite {
 
     private State currentState;
     private State previousState;
+
+    private boolean acabouFase = false;
     private PlayScreen screen;
     private Session session = Session.getInstance();
 
@@ -37,8 +39,6 @@ public class Tatu extends Sprite {
     private float tempoCarrera;
     private boolean powerUpPulo = false;
     private float tempoPulo;
-    private boolean powerUpFreio = false ;
-    private float tempoFreio;
 
     private boolean runningRight;
     private float stateTimer;
@@ -91,7 +91,6 @@ public class Tatu extends Sprite {
     private void checkUpgrade(float dt) {
         tempoCarrera += dt;
         tempoPulo += dt;
-        tempoFreio += dt;
 
         if (isPowerUpCarreira()) {
             if (tempoCarrera >= 15) {
@@ -175,7 +174,7 @@ public class Tatu extends Sprite {
         fdef.filter.categoryBits = TatuBola.TATU_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
         fdef.filter.maskBits = (short) (TatuBola.DEFAULT_BIT | TatuBola.CARRERA_BIT | TatuBola.PULO_BIT | TatuBola.ONCA_BIT
-                | TatuBola.JAGUATIRICA_BIT | TatuBola.HOMEM_BIT | TatuBola.PAREDE_BIT);
+                | TatuBola.JAGUATIRICA_BIT | TatuBola.HOMEM_BIT | TatuBola.PAREDE_BIT | TatuBola.FINAL_BIT);
 
         fdef.shape = shape;
 
@@ -222,11 +221,22 @@ public class Tatu extends Sprite {
                     } else if (!tatuIsDead) {
                         tatuIsDead = true;
                     }
+                } else if (inimigo == TatuBola.HOMEM_BIT) {
+                    if ((screen.getHud().getAguaPuloScoreValue() > 0) || (screen.getHud().getAguaCarreraScoreValue() > 0)) {
+                        if (screen.getHud().getAguaPuloScoreValue() >= screen.getHud().getAguaCarreraScoreValue()) {
+                            screen.getHud().setAguaPuloScoreValue(screen.getHud().getAguaPuloScoreValue() - 1);
+                        } else {
+                            screen.getHud().setAguaCarreraScoreValue(screen.getHud().getAguaCarreraScoreValue() - 1);
+                        }
+                        voaTatu();
+                        tempoHit = 0;
+                    } else if (!tatuIsDead) {
+                        tatuIsDead = true;
+                    }
                 }
             }
         }
     }
-
 
     private void resetPowerUp() {
         setVelocidade(-getVelocidade() + 0.1f);
@@ -257,7 +267,7 @@ public class Tatu extends Sprite {
         this.pulo += pulo;
     }
 
-    public boolean isPowerUpPulo() {
+    private boolean isPowerUpPulo() {
         return powerUpPulo;
     }
 
@@ -268,6 +278,8 @@ public class Tatu extends Sprite {
 
     public float getVelocidade() {
         if (this.isPowerUpCarreira()){
+            Gdx.app.log("vel", Float.toString(velocidade));
+            Gdx.app.log("power", Float.toString(session.getUsuarioLogado().getAguaCarreraPower()));
             return velocidade + session.getUsuarioLogado().getAguaCarreraPower();
         }else{
             return velocidade;
@@ -287,13 +299,11 @@ public class Tatu extends Sprite {
         tempoCarrera = 0;
     }
 
-    public boolean isPowerUpFreio() {
-        return powerUpFreio;
+    public boolean acabouFase() {
+        return acabouFase;
     }
 
-    public void setPowerUpFreio(boolean powerUpFreio) {
-        this.powerUpFreio = powerUpFreio;
-        //timeCount = 0;
+    public void setAcabouFase(boolean acabouFase) {
+        this.acabouFase = acabouFase;
     }
-
 }

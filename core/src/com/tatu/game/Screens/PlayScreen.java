@@ -181,6 +181,10 @@ public class PlayScreen implements Screen {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
 
+        if (player.acabouFase()) {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
+        }
+
         gameCam.update();
         renderer.setView(gameCam);
     }
@@ -203,11 +207,13 @@ public class PlayScreen implements Screen {
             if (controller.isRightPressed() && (player.b2body.getLinearVelocity().x <= 3)) {
 
                 player.b2body.applyLinearImpulse(new Vector2(player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
+                Gdx.app.log("direita", Float.toString(player.getVelocidade()));
             }
 
             //Manipulando a corrida pra esquerda
             if (controller.isLeftPressed() && (player.b2body.getLinearVelocity().x >= -3)) {
                 player.b2body.applyLinearImpulse(new Vector2(-player.getVelocidade(), 0), player.b2body.getWorldCenter(), true);
+                Gdx.app.log("esquerda", Float.toString(player.getVelocidade()));
             }
         }
     }

@@ -26,6 +26,10 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
+
+            case TatuBola.FINAL_BIT | TatuBola.TATU_BIT:
+                tatu.setAcabouFase(true);
+
             case TatuBola.CARRERA_BIT | TatuBola.TATU_BIT:
                 if (fixA.getFilterData().categoryBits == TatuBola.CARRERA_BIT) {
                     ((AguaCarrera) fixA.getUserData()).onHeadHit();
@@ -56,6 +60,10 @@ public class WorldContactListener implements ContactListener {
 
             case TatuBola.ONCA_BIT | TatuBola.TATU_BIT:
                 tatu.hit(TatuBola.ONCA_BIT);
+                break;
+
+            case TatuBola.HOMEM_BIT | TatuBola.TATU_BIT:
+                tatu.hit(TatuBola.HOMEM_BIT);
                 break;
         }
     }

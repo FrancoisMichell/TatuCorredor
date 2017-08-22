@@ -63,6 +63,21 @@ public class B2WorldCreator {
             body.createFixture(fDef);
         }
 
+        for (MapObject object : map.getLayers().get("FinalLevel").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bDef.type = BodyDef.BodyType.StaticBody;
+            bDef.position.set((rect.getX() + rect.getWidth() / 2) / TatuBola.PPM, (rect.getY() + rect.getHeight() / 2) / TatuBola.PPM);
+
+            body = world.createBody(bDef);
+
+            shape.setAsBox((rect.getWidth() / 2) / TatuBola.PPM, (rect.getHeight() / 2) / TatuBola.PPM);
+            fDef.filter.categoryBits = TatuBola.FINAL_BIT;
+            fDef.shape = shape;
+
+            body.createFixture(fDef);
+        }
+
         for (MapObject object : map.getLayers().get("gotaCarrera").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new AguaCarrera(screen, rect);

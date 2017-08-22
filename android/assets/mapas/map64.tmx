@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="140" height="15" tilewidth="64" tileheight="64" nextobjectid="105">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="140" height="15" tilewidth="64" tileheight="64" nextobjectid="112">
  <tileset firstgid="1" name="Ground" tilewidth="64" tileheight="64" spacing="1" tilecount="6" columns="6">
   <image source="Ground64.png" width="389" height="64"/>
  </tileset>
  <tileset firstgid="7" source="gota64.tsx"/>
  <tileset firstgid="8" source="new_bg.tsx"/>
  <tileset firstgid="408" source="gotaPulo.tsx"/>
+ <tileset firstgid="409" source="sign.tsx"/>
  <layer name="Camada de Tiles 1" width="140" height="15">
   <data encoding="base64" compression="zlib">
-   eJztzPe3lwMAx/HvI6OEpCgjRUVFpIFSUSnRQBNJRtLe3ea9dVfz3rr7RsPWoGFLobKjoUJUFBpECxVRXv6D59fnnOdzzuu3z3knJRKJkYxiNGMYyziSSWE8/RnAQAYxmCEMZRjDGUFS3ItkL+ymMo0sspnODHLIJY98JpBKGulkkMlEJjGZKXEvsr2wm8uTPMXTPMOzPMfzvMA8CiikiGJm8jhPMIvZzIl7ke2F3Su8ymu8zhu8yVss422WM58FLORFXmIRi1nCUl6Oe5Hthd1HfMwnfMoaPuNz1rKO9azgHd7lPVayitW8zwd8GPci2wu7b9nKNrbzHd+zg538wI9s4As2sonNfMlXfM0Wvol7ke2F3X4OcJBDHOZ3/uBPjnCUn9jFbvawl5/5hX38ym9xL7K9sDslSCRKcCqncTpnUJJSnElpjvn+xd8c5x/+5QQn/w/5BEHci2ov7C7wrUBFLuQiLuYSKnEplTmLszmHMpxLWc6jHOU5P4h7Ue2FXS3fq7ia2lzDtdThOupSjypcxuVUpRrVuYIrqUHNIO5FtRd2TX1v5haa0ZwW3EpLWnEb9WnA9dzAjTSkETfRmCZB3ItqL+w6+HakE53pQlfu4V7uoxutuZ07aENb2tGeO7mLu4O4F9Ve2PXyfYze9KEv/ejPAAYyiPvpzgP04EEe4mEeoSePBnEvqr2wG+M7lnEkk8J4JpBKGukMZghDGcZwRpDESEYxOoh7Ue2F3XTfGeSQSx75FFBIEcVkkMlEJjGZKUxlGllkB3Evqr2w+w/TJtBp
+   eJztzOe7lwMAgOHfKSqEUomMlGiibGnSUKGhJRINijp7j845jTPrjDojs0loiJIVKkTDSvYeTW0VQrr/jvd6P9zfnutJjkQiKaSSRjoZZJLFZLKZyCSiiSGWOOJJIJEkksNfoH9FFDODmZRQShnlzGI2OeQyhalMYzp55FNAYfgL/O8p5jKP+SxgIYt4mmdYTAWVVFHNHB7lMR7nCZ4Mf4H/vcRKVvEyq3mFV3mN13mDZ3mO51nCUpaxnBdYwYvhL/C/DbzPB2xkE5vZwod8xMes4U3e4m3Wso71vMO7vBf+Av/7hm/5ju/5gR/5iZ/5hV/5hE/Zymds43O+4Eu+4uvwF/jffg5wkEMc5g+OcJRj/MlvbGcHO9nFbvbwO3vZF/4C/6sRFYnU5BROpRa1qcNpnM4Z/KX9m+P8w7/8xwn+J6KJigp/Qf+dS2PO43yacAEXchEX05S6nMlZnE096nMODWhIo/AX+F8b2tKOK7iSq2hPB67mGi6hGc25lBZcxuW0pBWtw1/gf13oSje6cwu30oOe9KI313Id13MDN3ITHbmZTnQOf4H/DeIuBjOEoQxjOHczgnu4jT70pR+3cwd30p8BDAx/gf89yEOMZwIP8wgTmUQ0MdzLSO5jFPfzAKMZw1jGhb/A/9LJIJMsJpNNDrlMYSqxxBFPAokkkUwKqaSFv8D/SiiljHJmMZsKKqmimmlMJ498CiikiGJmMDP8Bf53EpfwHLM=
   </data>
  </layer>
  <layer name="objects" width="140" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt1DsKgEAMBND43ft3HlcFbVLYWIRl34PpUgwEJgIAAACAXrXqAkCX8nYckz0B/nk35JqT2FO2dHNvDjCupThz6rM+qe41UvIPvpwHGALx
+   eJzt1CsOgFAMBMDyv7+D2wIJmAYFonlkJllXsaYbAQAAAECrluoCQJPydqydPQG+uTfkmJOYU6Z0c24O8A/bi38eitOnPuOV6l7ynB16DgOq
   </data>
  </layer>
  <objectgroup name="Ground">
   <object id="2" x="20.8788" y="897.333" width="2092.45" height="64"/>
   <object id="3" x="897.333" y="767.333" width="383.333" height="25.3333"/>
-  <object id="26" x="2304.36" y="896" width="3648.55" height="66"/>
+  <object id="26" x="2304.36" y="896" width="6648.55" height="66"/>
   <object id="33" x="920" y="795" width="333" height="9"/>
   <object id="34" x="935" y="802" width="309" height="10"/>
   <object id="40" x="2112.76" y="959.818" width="0.666667" height="3471.7"/>
@@ -27,30 +28,34 @@
  </objectgroup>
  <objectgroup name="Paredes">
   <object id="102" x="572.727" y="-3.0303" height="903.03"/>
+  <object id="109" x="8313.45" y="-4.36348" width="9.09091" height="903.03"/>
  </objectgroup>
  <objectgroup name="gotaCarrera">
-  <object id="10" x="765.515" y="394.424" width="37" height="31"/>
-  <object id="23" x="909.333" y="316.969" width="37.6667" height="38.6667"/>
-  <object id="24" x="1228.75" y="459.561" width="38.75" height="39.25"/>
+  <object id="10" x="777.637" y="776.242" width="37" height="31"/>
+  <object id="23" x="906.303" y="650.303" width="37.6667" height="38.6667"/>
+  <object id="24" x="1231.78" y="656.531" width="38.75" height="39.25"/>
   <object id="45" x="1483.64" y="519.697" width="39.6667" height="46.3333"/>
-  <object id="86" x="1356.63" y="647.042" width="38.75" height="39.25"/>
+  <object id="86" x="1359.66" y="783.406" width="38.75" height="39.25"/>
  </objectgroup>
  <objectgroup name="Jaguatirica">
-  <object id="90" x="1919.03" y="831.273" width="64" height="64"/>
+  <object id="90" x="1925.09" y="1022.18" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="Cangaceiro">
   <object id="94" x="1214" y="835" width="64" height="64"/>
-  <object id="95" x="1866.67" y="487.879"/>
+  <object id="105" x="1731.39" y="1059.27" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="Bala">
   <object id="96" x="1214" y="834" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="gotaPulo">
-  <object id="87" x="1484.13" y="645.011" width="38.75" height="39.25"/>
-  <object id="88" x="1161.26" y="456.738" width="38.75" height="39.25"/>
+  <object id="87" x="1484.13" y="772.284" width="38.75" height="39.25"/>
+  <object id="88" x="1164.29" y="653.708" width="38.75" height="39.25"/>
  </objectgroup>
  <objectgroup name="Onca">
-  <object id="35" x="2559.39" y="816.848" width="64" height="64"/>
+  <object id="35" x="2559.39" y="1107.76" width="64" height="64"/>
   <object id="38" x="1088.49" y="836.364" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="FinalLevel">
+  <object id="110" x="8020" y="0" width="68" height="894.5"/>
  </objectgroup>
 </map>

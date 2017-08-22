@@ -33,7 +33,7 @@ public class Bala extends Enemy {
     public void update(float dt) {
         stateTime += dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.6f - getHeight() / 2);
-        b2body.setLinearVelocity(-2, 0);
+        b2body.setLinearVelocity(-3, 0);
         setRegion(walkAnimation.getKeyFrame(stateTime, true));
     }
 
@@ -54,7 +54,7 @@ public class Bala extends Enemy {
         shape.set(vertice);
 
         // CATEGORIA DO OBJETO
-        //fdef.filter.categoryBits = TatuBola.ONCA_BIT;
+        fdef.filter.categoryBits = TatuBola.HOMEM_BIT;
         // COM QUAIS CATEGORIAS ELE PODE COLIDIR?
         fdef.filter.maskBits = TatuBola.DEFAULT_BIT | TatuBola.TATU_BIT;
 

@@ -11,14 +11,15 @@ public class TatuBola extends Game {
     public static final float PPM = 100;
 
     public static final short DEFAULT_BIT = 1;
-    public static final short TATU_BIT = 2;
-    public static final short CARRERA_BIT = 4;
-    public static final short PULO_BIT = 8;
-    public static final short HOMEM_BIT = 16;
-    public static final short DESTRUIDO_BIT = 32;
-    public static final short ONCA_BIT = 64;
-    public static final short JAGUATIRICA_BIT = 128;
-    public static final short PAREDE_BIT = 256;
+    public static final short PAREDE_BIT = 2;
+    public static final short FINAL_BIT = 4;
+    public static final short TATU_BIT = 8;
+    public static final short CARRERA_BIT = 16;
+    public static final short PULO_BIT = 32;
+    public static final short DESTRUIDO_BIT = 64;
+    public static final short HOMEM_BIT = 128;
+    public static final short ONCA_BIT = 256;
+    public static final short JAGUATIRICA_BIT = 512;
 
     public static SpriteBatch batch;
 
