@@ -252,4 +252,12 @@ public class PlayScreen implements Screen {
         hud.dispose();
         controller.dispose();
     }
+
+    public Hud getHud() {
+        return hud;
+    }
+
+    public void setHud(Hud hud) {
+        this.hud = hud;
+    }
 }

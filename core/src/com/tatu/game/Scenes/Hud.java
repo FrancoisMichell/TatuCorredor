@@ -16,6 +16,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
@@ -25,11 +28,9 @@ public class Hud implements Disposable {
     private Skin skin;
     //private static Integer score;
 
-    private static Integer aguaCarreraScoreValueGlobal = 0;
-    private static Integer aguaCarreraScoreValue = 0;
+    private Integer aguaCarreraScoreValue = 0;
 
-    private static Integer aguaPuloScoreValueGlobal = 0;
-    private static Integer aguaPuloScoreValue = 0;
+    private Integer aguaPuloScoreValue = 0;
 
     private Integer worldTimer;
 
@@ -105,15 +106,18 @@ public class Hud implements Disposable {
         timeCount += dt;
         if (timeCount >= 1) {
             worldTimer++;
-            tempoValue.setText(String.format("%03d", worldTimer));
+            String dateAsText = new SimpleDateFormat("mm:ss")
+                    .format(new Date(worldTimer * 1000L));
+            tempoValue.setText(dateAsText);
+            //tempoValue.setText(String.format("%03d", worldTimer));
             timeCount = 0;
         }
 
-        aguaCarreraValue.setText(String.format("%03d", getAguaCarreraScoreValueGlobal()));
-        aguaPuloValue.setText(String.format("%03d", getAguaPuloScoreValueGlobal()));
+        aguaCarreraValue.setText(String.format("%03d", getAguaCarreraScoreValue()));
+        aguaPuloValue.setText(String.format("%03d", getAguaPuloScoreValue()));
 
     }
-
+/*
     public static Integer getAguaCarreraScoreValueGlobal() {
         return aguaCarreraScoreValueGlobal;
     }
@@ -129,21 +133,21 @@ public class Hud implements Disposable {
     public static void setAguaPuloScoreValueGlobal(Integer aguaPuloScoreValueGlobal) {
         Hud.aguaPuloScoreValueGlobal = aguaPuloScoreValueGlobal;
     }
-
-    public static Integer getAguaCarreraScoreValue() {
-        return aguaCarreraScoreValue;
+*/
+    public Integer getAguaCarreraScoreValue() {
+        return this.aguaCarreraScoreValue;
     }
 
-    public static void setAguaCarreraScoreValue(Integer aguaCarreraScoreValue) {
-        Hud.aguaCarreraScoreValue = aguaCarreraScoreValue;
+    public void setAguaCarreraScoreValue(Integer aguaCarreraScoreValue) {
+        this.aguaCarreraScoreValue = aguaCarreraScoreValue;
     }
 
-    public static Integer getAguaPuloScoreValue() {
-        return aguaPuloScoreValue;
+    public Integer getAguaPuloScoreValue() {
+        return this.aguaPuloScoreValue;
     }
 
-    public static void setAguaPuloScoreValue(Integer aguaPuloScoreValue) {
-        Hud.aguaPuloScoreValue = aguaPuloScoreValue;
+    public void setAguaPuloScoreValue(Integer aguaPuloScoreValue) {
+        this.aguaPuloScoreValue = aguaPuloScoreValue;
     }
 
     @Override

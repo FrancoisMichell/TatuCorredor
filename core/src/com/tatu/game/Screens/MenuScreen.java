@@ -16,18 +16,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 
-import static com.tatu.game.TatuBola.V_HEIGHT;
-import static com.tatu.game.TatuBola.V_WIDTH;
-
 class MenuScreen implements Screen {
 
     private Skin skin;
     private Stage stage;
     private TatuBola game;
-
-    //private LevelScreen levelScreen;
-    //private OptionsScreen optionsScreen = new OptionsScreen();
-    //private CreditsScreen creditsScreen = new CreditsScreen();
 
     MenuScreen(TatuBola game) {
 
@@ -49,32 +42,52 @@ class MenuScreen implements Screen {
         background.setPosition(0,0);
         stage.addActor(background);
 
-        Button jogarButton = new Button(skin, "jogarButton");
+        final Button jogarButton = new Button(skin, "jogarButton");
         jogarButton.setPosition( 650 , 10+116+10+116+10) ;
         stage.addActor(jogarButton);
 
-        Button configuracoesButton = new Button(skin, "configuracoesButton");
+        final Button configuracoesButton = new Button(skin, "configuracoesButton");
         configuracoesButton.setPosition( 650 , 10+116+10) ;
         stage.addActor(configuracoesButton);
 
-        Button sairButton = new Button(skin, "sairButton");
+        final Button sairButton = new Button(skin, "sairButton");
         sairButton.setPosition( 650 , 10) ;
         stage.addActor(sairButton);
 
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
-                dispose();
+            animateButtonClick(jogarButton);
+            ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
+            dispose();
             }
         });
+
+        //configuracoesButton.
 
         sairButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                animateButtonClick(sairButton);
                 Gdx.app.exit();
             }
+
         });
+    }
+
+    public void animateButtonClick(Button button){
+        float n = 15f;
+        button.setWidth(button.getWidth() + n);
+        button.setHeight(button.getHeight() + n);
+
+        // re-adjust position
+        button.setPosition(button.getX() - n/2, button.getY() - n/2);
+        /*
+        button.setWidth(button.getWidth() - n);
+        button.setHeight(button.getHeight() - n);
+
+        button.setPosition(button.getX() + n/2, button.getY() + n/2);
+        */
     }
 
     @Override

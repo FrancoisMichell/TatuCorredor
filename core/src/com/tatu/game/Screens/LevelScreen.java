@@ -17,9 +17,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
-import static com.tatu.game.TatuBola.V_HEIGHT;
-import static com.tatu.game.TatuBola.V_WIDTH;
-
 /**
  * Created by Matheus Uehara on 16/08/2017.
  */
@@ -132,7 +129,7 @@ public class LevelScreen extends ClickListener implements Screen {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
                     dispose();
                 }
             });

@@ -12,10 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tatu.game.Screens.PlayScreen;
-
-import static com.tatu.game.TatuBola.V_HEIGHT;
-import static com.tatu.game.TatuBola.V_WIDTH;
 
 public class Controller implements Disposable {
 

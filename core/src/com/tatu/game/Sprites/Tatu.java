@@ -20,6 +20,7 @@ public class Tatu extends Sprite {
 
     private State currentState;
     private State previousState;
+    private PlayScreen screen;
 
     private World world;
     public Body b2body;
@@ -28,7 +29,7 @@ public class Tatu extends Sprite {
     private Animation<TextureRegion> tatuIdle;
     private Animation<TextureRegion> tatuJump;
 
-    private float pulo = 5f;
+    private float pulo = 4f;
     private float velocidade = 0.1f;
 
     private boolean powerUpCarreira = false;
@@ -46,6 +47,7 @@ public class Tatu extends Sprite {
 
     public Tatu(PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
+        this.screen = screen;
         this.world = screen.getWorld();
         currentState = State.IDLE;
         previousState = State.IDLE;
@@ -203,16 +205,16 @@ public class Tatu extends Sprite {
                 voaTatu();
             } else {
                 if (inimigo == TatuBola.JAGUATIRICA_BIT) {
-                    if (Hud.getAguaCarreraScoreValueGlobal() > 0) {
-                        Hud.setAguaCarreraScoreValueGlobal(Hud.getAguaCarreraScoreValueGlobal() - 1);
+                    if (screen.getHud().getAguaCarreraScoreValue() > 0) {
+                        screen.getHud().setAguaCarreraScoreValue(screen.getHud().getAguaCarreraScoreValue() - 1);
                         voaTatu();
                         tempoHit = 0;
                     } else if (!tatuIsDead) {
                         tatuIsDead = true;
                     }
                 } else if (inimigo == TatuBola.ONCA_BIT) {
-                    if (Hud.getAguaPuloScoreValueGlobal() > 0) {
-                        Hud.setAguaPuloScoreValueGlobal(Hud.getAguaPuloScoreValueGlobal() - 1);
+                    if (screen.getHud().getAguaPuloScoreValue() > 0) {
+                        screen.getHud().setAguaPuloScoreValue(screen.getHud().getAguaPuloScoreValue() - 1);
                         voaTatu();
                         tempoHit = 0;
                     } else if (!tatuIsDead) {
@@ -222,6 +224,7 @@ public class Tatu extends Sprite {
             }
         }
     }
+
 
     private void resetPowerUp() {
         setVelocidade(-getVelocidade() + 0.1f);

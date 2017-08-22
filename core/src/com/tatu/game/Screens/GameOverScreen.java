@@ -16,9 +16,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
 
-import static com.tatu.game.TatuBola.V_HEIGHT;
-import static com.tatu.game.TatuBola.V_WIDTH;
-
 public class GameOverScreen implements Screen {
 
     private Viewport viewport;

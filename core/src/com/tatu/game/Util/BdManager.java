@@ -3,7 +3,6 @@ package com.tatu.game.Util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.google.gson.Gson;
-import com.tatu.game.entity.Level;
 import com.tatu.game.entity.Usuario;
 
 

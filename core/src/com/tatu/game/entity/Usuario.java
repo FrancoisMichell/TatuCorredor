@@ -39,8 +39,8 @@ public class Usuario {
         levels.add(level7);
         levels.add(level8);
 
-        this.aguaCarreraMoney = 0;
-        this.aguaPuloMoney = 0;
+        this.aguaCarreraMoney = 10;
+        this.aguaPuloMoney = 10;
         this.aguaFreioMoney = 0;
 
         //DEFINIR
