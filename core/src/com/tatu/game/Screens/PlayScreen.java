@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
 import com.tatu.game.Scenes.Hud;
 import com.tatu.game.Sprites.Enemy;
+import com.tatu.game.Sprites.Homem;
 import com.tatu.game.Sprites.Tatu;
 import com.tatu.game.TatuBola;
 import com.tatu.game.Tools.B2WorldCreator;
@@ -47,11 +48,12 @@ public class PlayScreen implements Screen {
 
     private Controller controller;
 
+    private boolean block;
 
     public PlayScreen(TatuBola game, int level) {
         this.game = game;
 
-        atlas = new TextureAtlas("sprites/Tatu64 - Copia.atlas");
+        atlas = new TextureAtlas("sprites/Tatu64 - Copia - Copia.atlas");
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
         gamePort = new StretchViewport(V_WIDTH / PPM, V_HEIGHT / PPM, gameCam);
         hud = new Hud(batch);
@@ -129,6 +131,20 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
+        for (Homem enemy : creator.getCangaceiros()) {
+            enemy.update(dt);
+            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(true);
+            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(false);
+            }
+            if (enemy.getCurrentState() == Homem.State.SHOOTING) {
+                criaBala();
+                block = true;
+            } else {
+                block = false;
+            }
+        }
 
         for (Enemy enemy : creator.getJaguatiricas()) {
             enemy.update(dt);
@@ -138,6 +154,16 @@ public class PlayScreen implements Screen {
                 enemy.b2body.setActive(false);
             }
         }
+
+        for (Enemy enemy : creator.getBalas()) {
+            enemy.update(dt);
+            if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(true);
+            } else if (enemy.getX() > player.getX() - 512 / TatuBola.PPM) {
+                enemy.b2body.setActive(false);
+            }
+        }
+
         for (Enemy enemy : creator.getOncas()) {
             enemy.update(dt);
             if (enemy.getX() < player.getX() + 512 / TatuBola.PPM) {
@@ -146,6 +172,7 @@ public class PlayScreen implements Screen {
                 enemy.b2body.setActive(false);
             }
         }
+
         hud.update(dt);
 
         if (!player.isDead()) {
@@ -156,6 +183,11 @@ public class PlayScreen implements Screen {
 
         gameCam.update();
         renderer.setView(gameCam);
+    }
+
+    private void criaBala() {
+        if (!block)
+            creator.criaBala(this, map);
     }
 
     private void handleInput() {
@@ -198,13 +230,21 @@ public class PlayScreen implements Screen {
         batch.setProjectionMatrix(gameCam.combined);
         batch.begin();
         player.draw(batch);
+
+        for (Enemy enemy : creator.getBalas()) {
+            enemy.draw(batch);
+        }
+
         for (Enemy enemy : creator.getJaguatiricas()) {
             enemy.draw(batch);
         }
         for (Enemy enemy : creator.getOncas()) {
             enemy.draw(batch);
         }
-        
+        for (Enemy enemy : creator.getCangaceiros()) {
+            enemy.draw(batch);
+        }
+
         batch.end();
 
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
