@@ -3,6 +3,7 @@ package com.tatu.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,7 +27,9 @@ public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private TatuBola game;
+    private Sound selecionado;
     Skin skin;
+
 
     public GameOverScreen(final TatuBola game) {
         this.game = game;
@@ -36,11 +39,14 @@ public class GameOverScreen implements Screen {
         //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
+        selecionado = Gdx.audio.newSound(Gdx.files.internal("efeitos/selecionado.wav"));
 
     }
 
     @Override
     public void show() {
+        // ADICIONAR SOM DE FALHA
+        //Sound falhaLevel = Gdx.audio.newSound(Gdx.files.internal("efeitos/"));
 
         skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
@@ -49,21 +55,22 @@ public class GameOverScreen implements Screen {
         stage.addActor(background);
 
         Image gameOver = new Image(skin,"gameOver");
-        gameOver.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
+        gameOver.setPosition( ( 800 - 484)/2 , (480 - 345)/2 ) ;
         stage.addActor(gameOver);
 
         Button gameOverSim = new Button(skin,"gameOverSim");
-        gameOverSim.setPosition(220,150);
+        gameOverSim.setPosition(265,100);
         stage.addActor(gameOverSim);
 
         Button gameOverNao = new Button(skin,"gameOverNao");
-        gameOverNao.setPosition(380,150);
+        gameOverNao.setPosition(425,100);
         stage.addActor(gameOverNao);
 
         gameOverSim.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // TO DO passar o level como parametro no construtor
+                selecionado.play();
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
                 dispose();
             }
@@ -72,6 +79,7 @@ public class GameOverScreen implements Screen {
         gameOverNao.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
                 dispose();
             }

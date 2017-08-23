@@ -21,7 +21,7 @@ public class Controller implements Disposable {
 
     private Viewport viewport;
     private Stage stage;
-    private boolean upPressed, leftPressed, rightPressed, pausa;
+    private boolean upPressed, leftPressed, rightPressed;
     private Long lastTap = System.currentTimeMillis();
     //private Skin skin;
 
@@ -130,30 +130,6 @@ public class Controller implements Disposable {
     public boolean isRightPressed() {
         return rightPressed;
     }
-
-    public boolean isPausa(){ return pausa;}
-
-    public Stage getStage() {
-        return stage;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setPausa(boolean pausa) {
-        this.pausa = pausa;
-    }
-
-    /*
-    public Skin getSkin() {
-        return skin;
-    }
-
-    public void setSkin(Skin skin) {
-        this.skin = skin;
-    }
-    */
 
     public void dispose() {
         stage.dispose();

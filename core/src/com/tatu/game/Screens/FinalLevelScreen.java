@@ -25,9 +25,21 @@ public class FinalLevelScreen implements Screen {
     private Stage stage;
     private TatuBola game;
 
+    private int mortes;
+    private int tempo;
+    private int aguaCarrera;
+    private int aguaPulo;
+
+    //public FinalLevelScreen(TatuBola game, int mortes , int tempo, int aguaCarrera, int aguaPulo) {
     public FinalLevelScreen(TatuBola game) {
 
         this.game = game;
+        /*
+        this.mortes = mortes;
+        this.tempo = tempo;
+        this.aguaCarrera = aguaCarrera;
+        this.aguaPulo = aguaPulo;
+        */
 
         OrthographicCamera cam = new OrthographicCamera();
         Viewport viewport = new FitViewport(800, 480, cam);
@@ -39,57 +51,44 @@ public class FinalLevelScreen implements Screen {
     @Override
     public void show() {
 
-        skin = new Skin(Gdx.files.internal("finalLevel/finalLevel.json"),new TextureAtlas("finalLevel/finalLevel.pack"));
+        skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
         stage.addActor(background);
 
-        final Button jogarButton = new Button(skin, "jogarButton");
-        jogarButton.setPosition( 650 , 10+116+10+116+10) ;
+        Image gameOver = new Image(skin,"faseConcluida");
+        gameOver.setPosition( ( 800 - 372)/2 , (480 - 434)/2 ) ;
+        stage.addActor(gameOver);
+
+        Image star = new Image(skin,"1star");
+        star.setPosition( 260 , 270 ) ;
+        stage.addActor(star);
+
+        Button jogarButton = new Button(skin, "jogarButton");
+        jogarButton.setPosition( 200 , 50) ;
         stage.addActor(jogarButton);
 
-        final Button configuracoesButton = new Button(skin, "configuracoesButton");
-        configuracoesButton.setPosition( 650 , 10+116+10) ;
-        stage.addActor(configuracoesButton);
 
-        final Button sairButton = new Button(skin, "sairButton");
-        sairButton.setPosition( 650 , 10) ;
+        Button sairButton = new Button(skin, "sairButton");
+        sairButton.setPosition( 350 , 50) ;
         stage.addActor(sairButton);
 
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                animateButtonClick(jogarButton);
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
                 dispose();
             }
         });
 
-        //configuracoesButton.
-
         sairButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                animateButtonClick(sairButton);
-                Gdx.app.exit();
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
+                dispose();
             }
         });
-    }
-
-    public void animateButtonClick(Button button){
-        float n = 15f;
-        button.setWidth(button.getWidth() + n);
-        button.setHeight(button.getHeight() + n);
-
-        // re-adjust position
-        button.setPosition(button.getX() - n/2, button.getY() - n/2);
-        /*
-        button.setWidth(button.getWidth() - n);
-        button.setHeight(button.getHeight() - n);
-
-        button.setPosition(button.getX() + n/2, button.getY() + n/2);
-        */
     }
 
     @Override

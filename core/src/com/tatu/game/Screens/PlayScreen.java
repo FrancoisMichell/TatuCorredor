@@ -84,7 +84,6 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener(player));
 
-        //controller = Controller.getInstance();
         controller = new Controller();
 
         musica = Gdx.audio.newMusic(Gdx.files.internal("musicas/music.mp3"));
@@ -144,11 +143,6 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
-        if (controller.isPausa()){
-            pause();
-        }
-
-
         for (Homem enemy : creator.getCangaceiros()) {
             enemy.update(dt);
             if ((enemy.getX() + 512 / TatuBola.PPM < player.getX()) || (enemy.getX() > player.getX() + 512 / TatuBola.PPM)) {
@@ -202,10 +196,6 @@ public class PlayScreen implements Screen {
         }
         if (player.acabouFase()) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
-        }
-
-        if (controller.isPausa()){
-            pause();
         }
 
         gameCam.update();
@@ -299,30 +289,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-        pauseGroup = new Group();
-        Image semiTransparentBG =new Image(new Texture(Gdx.files.internal("menu/pausaMenu.png")));
-        // setSize(Size of screen) and make it semi transparent.
-        Button fechar = new Button(controller.getSkin(), "closeButton");
-        fechar.setPosition(500,300);
-
-        fechar.addListener(new ClickListener(){
-           @Override
-            public void clicked(InputEvent event, float x, float y) {
-               resume();
-           }
-        });
-        pauseGroup.addActor(semiTransparentBG);
-
-        //crate all other pause UI buttons with listener and add to pauseGroup
-
-        controller.getStage().addActor(pauseGroup);
-
     }
 
     @Override
     public void resume() {
-        controller.setPausa(false);
-        pauseGroup.remove();
     }
 
     @Override

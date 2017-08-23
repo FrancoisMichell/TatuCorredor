@@ -26,6 +26,11 @@ class MenuScreen implements Screen {
     private TatuBola game;
     private Sound selecionado;
 
+    private Button jogarButton;
+    private Button configuracoesButton;
+    private Button sairButton;
+    private Button lojaButton;
+
     MenuScreen(TatuBola game) {
 
         this.game = game;
@@ -47,8 +52,9 @@ class MenuScreen implements Screen {
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
 
-        Button jogarButton = new Button(skin, "jogarButton");
-        jogarButton.setPosition( 650 , 10+116+10+116+10) ;
+        jogarButton = new Button(skin, "jogarButton");
+        //jogarButton.setPosition( 650 , 10+116+10+116+10) ;
+        jogarButton.setPosition( 150 , 0) ;
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -58,8 +64,9 @@ class MenuScreen implements Screen {
             }
         });
 
-        Button configuracoesButton = new Button(skin, "configuracoesButton");
-        configuracoesButton.setPosition( 650 , 10+116+10) ;
+        configuracoesButton = new Button(skin, "configuracoesButton");
+        //configuracoesButton.setPosition( 650 , 10+116+10) ;
+        configuracoesButton.setPosition( 300 , 0) ;
         configuracoesButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -68,8 +75,9 @@ class MenuScreen implements Screen {
 
         });
 
-        Button sairButton = new Button(skin, "sairButton");
-        sairButton.setPosition( 650 , 10) ;
+        sairButton = new Button(skin, "sairButton");
+        //sairButton.setPosition( 650 , 10) ;
+        sairButton.setPosition( 450 , 0) ;
         sairButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -80,8 +88,9 @@ class MenuScreen implements Screen {
         });
 
 
-        Button lojaButton = new Button(skin,"lojaButton");
-        lojaButton.setPosition( 650 , 10+116+10+116+10+116+10) ;
+        lojaButton = new Button(skin,"lojaButton");
+        //lojaButton.setPosition( 650 , 10+116+10+116+10+116+10) ;
+        lojaButton.setPosition( 600 , 0) ;
 
         lojaButton.addListener(new ClickListener() {
             @Override
