@@ -3,6 +3,7 @@ package com.tatu.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -23,6 +24,7 @@ class MenuScreen implements Screen {
     private Skin skin;
     private Stage stage;
     private TatuBola game;
+    private Sound selecionado;
 
     MenuScreen(TatuBola game) {
 
@@ -33,6 +35,8 @@ class MenuScreen implements Screen {
         //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
+
+        selecionado = Gdx.audio.newSound(Gdx.files.internal("efeitos/selecionado.wav"));
     }
 
     @Override
@@ -48,6 +52,7 @@ class MenuScreen implements Screen {
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
                 dispose();
             }
@@ -58,6 +63,7 @@ class MenuScreen implements Screen {
         configuracoesButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
             }
 
         });
@@ -67,6 +73,7 @@ class MenuScreen implements Screen {
         sairButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
                 Gdx.app.exit();
             }
 
@@ -79,6 +86,7 @@ class MenuScreen implements Screen {
         lojaButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new LojaScreen(game));
                 dispose();
             }

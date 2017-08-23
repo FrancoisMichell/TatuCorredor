@@ -26,21 +26,18 @@ public class SplashScreen implements Screen {
     private MenuScreen menuScreen = new MenuScreen(new TatuBola());
     private TatuBola game;
 
-    private Session session = Session.getInstance();
-
     public SplashScreen(TatuBola game, AssetManager manager) {
         this.game = game;
         stage = new Stage(new StretchViewport(V_WIDTH, V_HEIGHT));
 
         Usuario user = BdManager.getInstance().getUserFromSharedPref();
         if ( user != null ) {
-            session.setUsuarioLogado(user);
+            Session.setUsuarioLogado(user);
         }else{
             Usuario novoUsuario = new Usuario();
             BdManager.getInstance().saveUserInSharedPref(novoUsuario);
-            session.setUsuarioLogado(novoUsuario);
+            Session.setUsuarioLogado(novoUsuario);
         }
-
     }
 
     @Override
@@ -62,6 +59,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();

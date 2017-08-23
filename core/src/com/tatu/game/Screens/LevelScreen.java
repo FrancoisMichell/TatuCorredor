@@ -3,6 +3,7 @@ package com.tatu.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -24,6 +25,7 @@ import com.tatu.game.Util.Session;
 
 public class LevelScreen extends ClickListener implements Screen {
 
+    private final Sound selecionado;
     private Skin skin;
     private Stage stage;
     private TatuBola game;
@@ -37,6 +39,8 @@ public class LevelScreen extends ClickListener implements Screen {
         //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
+
+        selecionado = Gdx.audio.newSound(Gdx.files.internal("efeitos/selecionado.wav"));
     }
 
     @Override
@@ -83,7 +87,6 @@ public class LevelScreen extends ClickListener implements Screen {
         level8.setPosition( 505 , 180 ) ;
         stage.addActor(level8);
 
-
         Button closeButton = new Button(skin,"closeButton");
         closeButton.setPosition( 600,385 );
         stage.addActor(closeButton);
@@ -92,6 +95,7 @@ public class LevelScreen extends ClickListener implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
+                selecionado.play();
                 dispose();
             }
         });
@@ -120,6 +124,7 @@ public class LevelScreen extends ClickListener implements Screen {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    selecionado.play();
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
                     dispose();
                 }

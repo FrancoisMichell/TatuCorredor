@@ -10,6 +10,7 @@
   <image source="decoracao/Sign.png" width="85" height="88"/>
  </tileset>
  <tileset firstgid="410" source="untitled.tsx"/>
+ <tileset firstgid="420" source="meioTerra.tsx"/>
  <layer name="Background" width="140" height="15">
   <data encoding="base64" compression="zlib">
    eJztzOe7lwMAgOHfKSqEUomMlGiibGnSUKGhJRINijp7j845jTPrjDojs0loiJIVKkTDSvYeTW0VQrr/jvd6P9zfnutJjkQiKaSSRjoZZJLFZLKZyCSiiSGWOOJJIJEkksNfoH9FFDODmZRQShnlzGI2OeQyhalMYzp55FNAYfgL/O8p5jKP+SxgIYt4mmdYTAWVVFHNHB7lMR7nCZ4Mf4H/vcRKVvEyq3mFV3mN13mDZ3mO51nCUpaxnBdYwYvhL/C/DbzPB2xkE5vZwod8xMes4U3e4m3Wso71vMO7vBf+Av/7hm/5ju/5gR/5iZ/5hV/5hE/Zymds43O+4Eu+4uvwF/jffg5wkEMc5g+OcJRj/MlvbGcHO9nFbvbwO3vZF/4C/6sRFYnU5BROpRa1qcNpnM4Z/KX9m+P8w7/8xwn+J6KJigp/Qf+dS2PO43yacAEXchEX05S6nMlZnE096nMODWhIo/AX+F8b2tKOK7iSq2hPB67mGi6hGc25lBZcxuW0pBWtw1/gf13oSje6cwu30oOe9KI313Id13MDN3ITHbmZTnQOf4H/DeIuBjOEoQxjOHczgnu4jT70pR+3cwd30p8BDAx/gf89yEOMZwIP8wgTmUQ0MdzLSO5jFPfzAKMZw1jGhb/A/9LJIJMsJpNNDrlMYSqxxBFPAokkkUwKqaSFv8D/SiiljHJmMZsKKqmimmlMJ498CiikiGJmMDP8Bf53EpfwHLM=
@@ -17,7 +18,7 @@
  </layer>
  <layer name="objects" width="140" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt1u0KgzAMQFGzufn+/2b3oXMvuhYVpGytFEdmuAdCkRaSVAlWFQAAAABgbxrtAgBAifg4R3FSrciWT/dr5Z4vol0BYN+vZrTmv++yp2+9pGanhfmpgZlt2zN6v51/vsm4ptyjfZc5f03s937vIeOaM0xnXiu/Szf1M0dc9xZyvQeh3qEwd6jZybo8bUGOo3Ic/qyeLXqod54nFW86SBJN
+   eJzt19sKwjAMBuDFTX3/O63nKZOxlzSlEyS4tI5KdPs/CGW0rMkOgRYFAAAAAABYWVsnAAAAf6niKDkW1okYII6ViKVpRr+vpTB2PN5IX/vu+U7lOW8itUPQJHwnAENSe/Sn/6Pluem1pqE+qPXOKfTPb7ijz8zaRbz/E1/vKYyag5h3kfU7Zf7Mc0cKY0zdr7kmfreur+cZMu8cYrV7Pt965N4+Z0dp+2xH7FEahzxHWeeTo4Yq470t9tHiAUTRFkU=
   </data>
  </layer>
  <objectgroup name="Ground">
@@ -52,7 +53,7 @@
   <object id="109" x="8313.45" y="-4.36348" width="9.09091" height="903.03"/>
  </objectgroup>
  <objectgroup name="gotaCarrera">
-  <object id="162" x="2764.85" y="404.834" width="37" height="31.6667"/>
+  <object id="162" x="2573" y="337.667" width="37" height="31.6667"/>
   <object id="164" x="2956.5" y="721.167" width="37" height="31.6667"/>
  </objectgroup>
  <objectgroup name="Jaguatirica">
@@ -67,7 +68,7 @@
  </objectgroup>
  <objectgroup name="Bala"/>
  <objectgroup name="gotaPulo">
-  <object id="158" x="1996" y="785" width="36.5" height="31.5"/>
+  <object id="158" x="2188" y="723" width="36.5" height="31.5"/>
   <object id="161" x="5517.42" y="595.917" width="36.5" height="31.5"/>
  </objectgroup>
  <objectgroup name="Onca">

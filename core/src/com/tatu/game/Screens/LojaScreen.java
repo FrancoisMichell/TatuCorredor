@@ -3,6 +3,7 @@ package com.tatu.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -41,6 +42,8 @@ public class LojaScreen implements Screen {
 
     private Image aguaCarreraSaldo;
     private Image aguaPuloSaldo;
+    private Sound selecionado;
+
 
     public LojaScreen(TatuBola game){
         this.game = game;
@@ -50,6 +53,8 @@ public class LojaScreen implements Screen {
         //Viewport viewport = new FitViewport(V_WIDTH, V_HEIGHT, cam);
         stage = new Stage(viewport, TatuBola.batch);
         Gdx.input.setInputProcessor(stage);
+
+        selecionado = Gdx.audio.newSound(Gdx.files.internal("efeitos/selecionado.wav"));
     }
 
     @Override
@@ -79,6 +84,7 @@ public class LojaScreen implements Screen {
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                selecionado.play();
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
                 dispose();
             }
@@ -138,9 +144,13 @@ public class LojaScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (session.getUsuarioLogado().getAguaCarreraMoney() >= finalPrecoPowerUpCarrera) {
+
+                    selecionado.play();
+
                     session.getUsuarioLogado().setAguaCarreraMoney(session.getUsuarioLogado().getAguaCarreraMoney() - finalPrecoPowerUpCarrera);
                     session.getUsuarioLogado().setAguaCarreraPower(session.getUsuarioLogado().getAguaCarreraPower() + 0.2f);
                     BdManager.getInstance().saveUserInSharedPref(session.getUsuarioLogado());
+
                     aguaCarreraSaldoValue.setText(session.getUsuarioLogado().getAguaCarreraMoney()+"");
                     btnMelhorarCarrera.remove();
                     powerLevelCarrera.remove();
@@ -186,9 +196,13 @@ public class LojaScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 if(session.getUsuarioLogado().getAguaPuloMoney() >= finalPrecoPowerUpPulo){
+
+                    selecionado.play();
+
                     session.getUsuarioLogado().setAguaPuloMoney(session.getUsuarioLogado().getAguaPuloMoney() - finalPrecoPowerUpPulo);
                     session.getUsuarioLogado().setAguaPuloPower(session.getUsuarioLogado().getAguaPuloPower()+0.2f);
                     BdManager.getInstance().saveUserInSharedPref(session.getUsuarioLogado());
+
                     aguaPuloSaldoValue.setText(session.getUsuarioLogado().getAguaPuloMoney()+"");
                     btnMelhorarPulo.remove();
                     powerLevelPulo.remove();

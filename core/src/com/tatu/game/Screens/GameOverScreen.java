@@ -42,7 +42,6 @@ public class GameOverScreen implements Screen {
     @Override
     public void show() {
 
-        //migliaLabel = new Label("label", new Label.LabelStyle(new BitmapFont(Gdx.files.internal("Kalam-Regular.fnt")), Color.MAGENTA));
         skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
         Image background = new Image(skin, "menuscreen");
@@ -54,36 +53,30 @@ public class GameOverScreen implements Screen {
         stage.addActor(gameOver);
 
         Button gameOverSim = new Button(skin,"gameOverSim");
-        gameOverSim.setPosition(250,250);
-        gameOverSim.addListener(new ClickListener(){
+        gameOverSim.setPosition(220,150);
+        stage.addActor(gameOverSim);
 
-        });
-
-        Button gameOverNao = new Button(skin,"gameOverSim");
-        gameOverNao.setPosition(250,250);
-        gameOverNao.addListener(new ClickListener(){
-
-        });
+        Button gameOverNao = new Button(skin,"gameOverNao");
+        gameOverNao.setPosition(380,150);
+        stage.addActor(gameOverNao);
 
         gameOverSim.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                // TO DO passar o level como parametro no construtor
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
                 dispose();
             }
         });
 
-
-/*        exitLabel.addListener(new ClickListener() {
+        gameOverNao.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //game.setScreen(new MenuScreen( game));
-                TatuBola game2 = new TatuBola();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game2));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
                 dispose();
             }
         });
-*/
+
     }
 
     @Override
@@ -92,10 +85,6 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
-        //if (Gdx.input.justTouched()) {
-        //    game.setScreen(new PlayScreen((TatuBola) game));
-        //    dispose();
-        //}
     }
 
     @Override
