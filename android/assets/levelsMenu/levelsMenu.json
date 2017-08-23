@@ -1,6 +1,6 @@
 {
 	com.badlogic.gdx.graphics.g2d.BitmapFont:{
-		carterone-font: { file: fonts/cartwhel.fnt }
+		cartwhel: { file: fonts/cartwhel.fnt }
 	},
 	com.badlogic.gdx.graphics.Color: {
 		green: { a: 1, b: 0, g: 1, r: 0 },
@@ -9,10 +9,11 @@
 		black: { a: 1, b: 0, g: 0, r: 0 }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-		btnLevelEnable:{down: btnLevelEnable, up: btnLevelEnable},
-		btnLevelDisabled: { down: btnLevelDisabled, up: btnLevelDisabled },
-		menuMenuButtons: { down: menuMenuButtons, up: menuMenuButtons },
-		lojaMenuButtons: { down: lojaMenuButtons, up: lojaMenuButtons },
-}
+		closeButton: { down: closeButtonPressed, up: closeButton },
+	},
+	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+		btnLevelEnable:{font:cartwhel, down: btnLevelEnablePressed, up: btnLevelEnable},
+		btnLevelDisabled: {font:cartwhel,  down: btnLevelDisabledPressed, up: btnLevelDisabled },
+	}
 	
 }

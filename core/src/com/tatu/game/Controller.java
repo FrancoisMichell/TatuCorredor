@@ -4,11 +4,15 @@ package com.tatu.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -17,16 +21,9 @@ public class Controller implements Disposable {
 
     private Viewport viewport;
     private Stage stage;
-    private boolean upPressed, leftPressed, rightPressed;
+    private boolean upPressed, leftPressed, rightPressed, pausa;
     private Long lastTap = System.currentTimeMillis();
-
-    //Removido SINGLETON DO CONTROLLER por causa bug ao reiniciar a fase
-    /*
-    private static Controller controller = new Controller();
-
-    public static Controller getInstance(){
-        return controller;
-    }*/
+    private Skin skin;
 
     public Controller() {
         OrthographicCamera cam = new OrthographicCamera();
@@ -38,6 +35,20 @@ public class Controller implements Disposable {
         Table table = new Table();
         table.top();
         table.setFillParent(true);
+
+        skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
+
+        Button pause = new Button(skin,"pauseButton");
+        pause.setPosition(700,370);
+        pause.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                //System.out.println("OPA FIONNN");
+                pausa = true;
+            }
+        });
+        stage.addActor(pause);
+
 
         Image upImg = new Image(new Texture("controles/up.png"));
         upImg.setSize(150, 150);
@@ -117,6 +128,28 @@ public class Controller implements Disposable {
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+
+    public boolean isPausa(){ return pausa;}
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setPausa(boolean pausa) {
+        this.pausa = pausa;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public void setSkin(Skin skin) {
+        this.skin = skin;
     }
 
     public void dispose() {

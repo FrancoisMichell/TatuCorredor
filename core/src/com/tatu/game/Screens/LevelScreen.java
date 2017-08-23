@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -50,55 +51,44 @@ public class LevelScreen extends ClickListener implements Screen {
         levelsMenu.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
         stage.addActor(levelsMenu);
 
-        Button level1 = new Button(skin,getEnableDisabledButton(0));
+        TextButton level1 = new TextButton("1",skin,getEnableDisabledButton(0));
         level1.setPosition( 210,290 ) ;
         stage.addActor(level1);
 
-        Button level2 = new Button(skin,getEnableDisabledButton(1));
+        TextButton level2 = new TextButton("2",skin,getEnableDisabledButton(1));
         level2.setPosition( 310,290 ) ;
         stage.addActor(level2);
 
-        Button level3 = new Button(skin,getEnableDisabledButton(2));
+        TextButton level3 = new TextButton("3",skin,getEnableDisabledButton(2));
         level3.setPosition( 415 , 290 ) ;
         stage.addActor(level3);
 
-        Button level4 = new Button(skin,getEnableDisabledButton(3));
+        TextButton level4 = new TextButton("4",skin,getEnableDisabledButton(3));
         level4.setPosition( 515 ,  290 );
         stage.addActor(level4);
 
-        Button level5 = new Button(skin,getEnableDisabledButton(4));
+        TextButton level5 = new TextButton("5",skin,getEnableDisabledButton(4));
         level5.setPosition( 220, 180 ) ;
         stage.addActor(level5);
 
-        Button level6 = new Button(skin,getEnableDisabledButton(5));
+        TextButton level6 = new TextButton("6",skin,getEnableDisabledButton(5));
         level6.setPosition( 318 , 180 );
         stage.addActor(level6);
 
-        Button level7 = new Button(skin,getEnableDisabledButton(6));
+        TextButton level7 = new TextButton("7",skin,getEnableDisabledButton(6));
         level7.setPosition( 410 , 180) ;
         stage.addActor(level7);
 
-        Button level8 = new Button(skin,getEnableDisabledButton(7));
+        TextButton level8 = new TextButton("8",skin,getEnableDisabledButton(7));
         level8.setPosition( 505 , 180 ) ;
         stage.addActor(level8);
 
-        Button lojaMenuButtons = new Button(skin,"lojaMenuButtons");
-        lojaMenuButtons.setPosition( 315,75 );
-        stage.addActor(lojaMenuButtons);
 
-        lojaMenuButtons.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new LojaScreen(game));
-                dispose();
-            }
-        });
+        Button closeButton = new Button(skin,"closeButton");
+        closeButton.setPosition( 600,385 );
+        stage.addActor(closeButton);
 
-        Button menuMenuButtons = new Button(skin,"menuMenuButtons");
-        menuMenuButtons.setPosition( 400,75 );
-        stage.addActor(menuMenuButtons);
-
-        menuMenuButtons.addListener(new ClickListener() {
+        closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
@@ -156,39 +146,6 @@ public class LevelScreen extends ClickListener implements Screen {
             stage.addActor(score);
 
         }
-
-        String numberString = "number1";
-
-        switch (level){
-            case 0:
-                numberString = "number1";
-                break;
-            case 1:
-                numberString = "number2";
-                break;
-            case 2:
-                numberString = "number3";
-                break;
-            case 3:
-                numberString = "number4";
-                break;
-            case 4:
-                numberString = "number5";
-                break;
-            case 5:
-                numberString = "number6";
-                break;
-            case 6:
-                numberString = "number7";
-                break;
-            case 7:
-                numberString = "number8";
-                break;
-        }
-
-        Image number = new Image(skin,numberString);
-        number.setPosition( button.getX()+25,button.getY()+25 ) ;
-        stage.addActor(number);
     }
 
     @Override

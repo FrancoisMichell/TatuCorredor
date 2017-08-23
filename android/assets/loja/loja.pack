@@ -1,137 +1,186 @@
 loja.png
-size: 984, 1235
+size: 984, 1298
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 aguaCarreraSaldo
   rotate: false
-  xy: 0, 0
+  xy: 308, 63
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
 aguaPuloSaldo
   rotate: false
-  xy: 142, 0
+  xy: 450, 63
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
 closeButton
   rotate: false
-  xy: 284, 0
+  xy: 0, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+closeButtonPressed
+  rotate: false
+  xy: 50, 0
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 comprarAguaCarrera1
   rotate: false
-  xy: 334, 0
+  xy: 592, 63
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaCarrera1Pressed
+  rotate: false
+  xy: 308, 126
   size: 154, 63
   orig: 154, 63
   offset: 0, 0
   index: -1
 comprarAguaCarrera2
   rotate: false
-  xy: 488, 0
+  xy: 0, 126
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaCarrera2Pressed
+  rotate: false
+  xy: 154, 126
   size: 154, 63
   orig: 154, 63
   offset: 0, 0
   index: -1
 comprarAguaCarrera3
   rotate: false
-  xy: 642, 0
+  xy: 746, 63
   size: 154, 63
   orig: 154, 63
   offset: 0, 0
   index: -1
-comprarAguaPulo1
-  rotate: false
-  xy: 796, 0
-  size: 154, 63
-  orig: 154, 63
-  offset: 0, 0
-  index: -1
-comprarAguaPulo2
+comprarAguaCarrera3Pressed
   rotate: false
   xy: 0, 63
   size: 154, 63
   orig: 154, 63
   offset: 0, 0
   index: -1
-comprarAguaPulo3
+comprarAguaPulo1
+  rotate: false
+  xy: 100, 0
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaPulo1Pressed
+  rotate: false
+  xy: 254, 0
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaPulo2
+  rotate: false
+  xy: 408, 0
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaPulo2Pressed
   rotate: false
   xy: 154, 63
   size: 154, 63
   orig: 154, 63
   offset: 0, 0
   index: -1
+comprarAguaPulo3
+  rotate: false
+  xy: 562, 0
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
+comprarAguaPulo3Pressed
+  rotate: false
+  xy: 716, 0
+  size: 154, 63
+  orig: 154, 63
+  offset: 0, 0
+  index: -1
 lojaAguaCarrera0
   rotate: false
-  xy: 308, 63
+  xy: 0, 268
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaCarrera1
   rotate: false
-  xy: 554, 63
+  xy: 738, 197
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaCarrera2
   rotate: false
-  xy: 0, 134
+  xy: 246, 268
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaCarrera3
   rotate: false
-  xy: 246, 134
+  xy: 492, 197
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaPulo0
   rotate: false
-  xy: 492, 134
+  xy: 0, 197
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaPulo1
   rotate: false
-  xy: 738, 134
+  xy: 462, 126
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaPulo2
   rotate: false
-  xy: 0, 205
+  xy: 246, 197
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojaAguaPulo3
   rotate: false
-  xy: 246, 205
+  xy: 708, 126
   size: 246, 71
   orig: 246, 71
   offset: 0, 0
   index: -1
 lojascreen
   rotate: false
-  xy: 492, 205
+  xy: 492, 268
   size: 481, 430
   orig: 481, 430
   offset: 0, 0
   index: -1
 menuscreen
   rotate: false
-  xy: 0, 635
+  xy: 0, 698
   size: 800, 600
   orig: 800, 600
   offset: 0, 0

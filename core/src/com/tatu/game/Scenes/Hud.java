@@ -6,11 +6,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -28,9 +31,9 @@ public class Hud implements Disposable {
     private Skin skin;
     //private static Integer score;
 
-    private Integer aguaCarreraScoreValue = 0;
+    private Integer aguaCarreraScoreValue;
 
-    private Integer aguaPuloScoreValue = 0;
+    private Integer aguaPuloScoreValue;
 
     private Integer worldTimer;
 
@@ -46,7 +49,8 @@ public class Hud implements Disposable {
     private Label aguaPuloValue;
 
     public Hud(SpriteBatch sb) {
-
+        aguaPuloScoreValue = 0;
+        aguaCarreraScoreValue = 0;
         worldTimer = 0;
         timeCount = 0;
         score = 0;
@@ -115,23 +119,7 @@ public class Hud implements Disposable {
         aguaPuloValue.setText(String.format("%03d", getAguaPuloScoreValue()));
 
     }
-/*
-    public static Integer getAguaCarreraScoreValueGlobal() {
-        return aguaCarreraScoreValueGlobal;
-    }
 
-    public static void setAguaCarreraScoreValueGlobal(Integer aguaCarreraScoreValueGlobal) {
-        Hud.aguaCarreraScoreValueGlobal = aguaCarreraScoreValueGlobal;
-    }
-
-    public static Integer getAguaPuloScoreValueGlobal() {
-        return aguaPuloScoreValueGlobal;
-    }
-
-    public static void setAguaPuloScoreValueGlobal(Integer aguaPuloScoreValueGlobal) {
-        Hud.aguaPuloScoreValueGlobal = aguaPuloScoreValueGlobal;
-    }
-*/
     public Integer getAguaCarreraScoreValue() {
         return this.aguaCarreraScoreValue;
     }

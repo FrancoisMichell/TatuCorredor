@@ -1,53 +1,158 @@
 menu.png
-size: 800, 596
+size: 940, 1538
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+1star
+  rotate: false
+  xy: 286, 205
+  size: 286, 106
+  orig: 286, 106
+  offset: 0, 0
+  index: -1
+2star
+  rotate: false
+  xy: 0, 205
+  size: 286, 106
+  orig: 286, 106
+  offset: 0, 0
+  index: -1
+3star
+  rotate: false
+  xy: 654, 99
+  size: 286, 106
+  orig: 286, 106
+  offset: 0, 0
+  index: -1
 aguaCarreraScore
   rotate: false
-  xy: 315, 0
+  xy: 142, 99
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
 aguaPuloScore
   rotate: false
-  xy: 457, 0
+  xy: 0, 99
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
+closeButton
+  rotate: false
+  xy: 0, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+closeButtonPressed
+  rotate: false
+  xy: 50, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
 configuracoesButton
   rotate: false
-  xy: 210, 0
-  size: 105, 116
-  orig: 105, 116
+  xy: 460, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+configuracoesButtonPressed
+  rotate: false
+  xy: 370, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+fase_concluida
+  rotate: false
+  xy: 0, 624
+  size: 372, 434
+  orig: 372, 434
+  offset: 0, 0
+  index: -1
+gameOver
+  rotate: false
+  xy: 372, 624
+  size: 484, 345
+  orig: 484, 345
   offset: 0, 0
   index: -1
 jogarButton
   rotate: false
-  xy: 0, 0
-  size: 105, 116
-  orig: 105, 116
+  xy: 550, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+jogarButtonPressed
+  rotate: false
+  xy: 100, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+lojaButton
+  rotate: false
+  xy: 190, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+lojaButtonPressed
+  rotate: false
+  xy: 280, 0
+  size: 90, 99
+  orig: 90, 99
   offset: 0, 0
   index: -1
 menuscreen
   rotate: false
-  xy: 0, 116
+  xy: 0, 1058
   size: 800, 480
   orig: 800, 480
   offset: 0, 0
   index: -1
+pausaMenu
+  rotate: false
+  xy: 572, 205
+  size: 270, 419
+  orig: 270, 419
+  offset: 0, 0
+  index: -1
+pauseButton
+  rotate: false
+  xy: 384, 99
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+pauseButtonPressed
+  rotate: false
+  xy: 284, 99
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 sairButton
   rotate: false
-  xy: 105, 0
-  size: 105, 116
-  orig: 105, 116
+  xy: 640, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+sairButtonPressed
+  rotate: false
+  xy: 730, 0
+  size: 90, 99
+  orig: 90, 99
   offset: 0, 0
   index: -1
 tempoScore
   rotate: false
-  xy: 599, 0
+  xy: 484, 99
   size: 170, 63
   orig: 170, 63
   offset: 0, 0

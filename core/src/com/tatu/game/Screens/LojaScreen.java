@@ -79,7 +79,7 @@ public class LojaScreen implements Screen {
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new MenuScreen(game));
                 dispose();
             }
         });

@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -40,54 +42,53 @@ class MenuScreen implements Screen {
 
         Image background = new Image(skin, "menuscreen");
         background.setPosition(0,0);
-        stage.addActor(background);
 
-        final Button jogarButton = new Button(skin, "jogarButton");
+        Button jogarButton = new Button(skin, "jogarButton");
         jogarButton.setPosition( 650 , 10+116+10+116+10) ;
-        stage.addActor(jogarButton);
-
-        final Button configuracoesButton = new Button(skin, "configuracoesButton");
-        configuracoesButton.setPosition( 650 , 10+116+10) ;
-        stage.addActor(configuracoesButton);
-
-        final Button sairButton = new Button(skin, "sairButton");
-        sairButton.setPosition( 650 , 10) ;
-        stage.addActor(sairButton);
-
         jogarButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-            animateButtonClick(jogarButton);
-            ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
-            dispose();
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new LevelScreen(game));
+                dispose();
             }
         });
 
-        //configuracoesButton.
+        Button configuracoesButton = new Button(skin, "configuracoesButton");
+        configuracoesButton.setPosition( 650 , 10+116+10) ;
+        configuracoesButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+            }
 
+        });
+
+        Button sairButton = new Button(skin, "sairButton");
+        sairButton.setPosition( 650 , 10) ;
         sairButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                animateButtonClick(sairButton);
                 Gdx.app.exit();
             }
 
         });
-    }
 
-    public void animateButtonClick(Button button){
-        float n = 15f;
-        button.setWidth(button.getWidth() + n);
-        button.setHeight(button.getHeight() + n);
 
-        // re-adjust position
-        button.setPosition(button.getX() - n/2, button.getY() - n/2);
-        /*
-        button.setWidth(button.getWidth() - n);
-        button.setHeight(button.getHeight() - n);
+        Button lojaButton = new Button(skin,"lojaButton");
+        lojaButton.setPosition( 650 , 10+116+10+116+10+116+10) ;
 
-        button.setPosition(button.getX() + n/2, button.getY() + n/2);
-        */
+        lojaButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game)Gdx.app.getApplicationListener()).setScreen(new LojaScreen(game));
+                dispose();
+            }
+        });
+
+        stage.addActor(background);
+        stage.addActor(jogarButton);
+        stage.addActor(configuracoesButton);
+        stage.addActor(sairButton);
+        stage.addActor(lojaButton);
     }
 
     @Override

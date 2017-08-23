@@ -7,10 +7,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -21,6 +26,7 @@ public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private TatuBola game;
+    Skin skin;
 
     public GameOverScreen(final TatuBola game) {
         this.game = game;
@@ -37,33 +43,29 @@ public class GameOverScreen implements Screen {
     public void show() {
 
         //migliaLabel = new Label("label", new Label.LabelStyle(new BitmapFont(Gdx.files.internal("Kalam-Regular.fnt")), Color.MAGENTA));
+        skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("fonts/cartwhel.fnt")), Color.WHITE);
+        Image background = new Image(skin, "menuscreen");
+        background.setPosition(0,0);
+        stage.addActor(background);
 
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
+        Image gameOver = new Image(skin,"gameOver");
+        gameOver.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
+        stage.addActor(gameOver);
 
-        Label gameOverLabel = new Label("GAME OVER", font);
-        gameOverLabel.scaleBy(5);
+        Button gameOverSim = new Button(skin,"gameOverSim");
+        gameOverSim.setPosition(250,250);
+        gameOverSim.addListener(new ClickListener(){
 
-        Label playAgainLabel = new Label("Click to Play Again", font);
-        playAgainLabel.scaleBy(3);
+        });
 
-        Label exitLabel = new Label("Click to Back Main Menu", font);
-        exitLabel.scaleBy(3);
+        Button gameOverNao = new Button(skin,"gameOverSim");
+        gameOverNao.setPosition(250,250);
+        gameOverNao.addListener(new ClickListener(){
 
-        table.add(gameOverLabel).expandX();
-        table.row();
-        table.row();
-        table.add(playAgainLabel).expandX().padTop(10);
-        table.row();
-        table.row();
-        table.add(exitLabel).expandX().padTop(10);
+        });
 
-        stage.addActor(table);
-
-        playAgainLabel.addListener(new ClickListener() {
+        gameOverSim.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
@@ -71,7 +73,8 @@ public class GameOverScreen implements Screen {
             }
         });
 
-        exitLabel.addListener(new ClickListener() {
+
+/*        exitLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //game.setScreen(new MenuScreen( game));
@@ -80,7 +83,7 @@ public class GameOverScreen implements Screen {
                 dispose();
             }
         });
-
+*/
     }
 
     @Override

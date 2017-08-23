@@ -1,138 +1,89 @@
 levelsMenu.png
-size: 800, 1090
+size: 800, 1089
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 0star
   rotate: false
-  xy: 493, 0
+  xy: 0, 0
   size: 69, 22
   orig: 69, 22
   offset: 0, 0
   index: -1
 1star
   rotate: false
-  xy: 700, 0
+  xy: 69, 0
   size: 69, 22
   orig: 69, 22
   offset: 0, 0
   index: -1
 2star
   rotate: false
-  xy: 562, 0
+  xy: 138, 0
   size: 69, 22
   orig: 69, 22
   offset: 0, 0
   index: -1
 3star
   rotate: false
-  xy: 631, 0
+  xy: 207, 0
   size: 69, 22
   orig: 69, 22
   offset: 0, 0
   index: -1
 btnLevelDisabled
   rotate: false
-  xy: 233, 0
+  xy: 276, 0
+  size: 65, 69
+  orig: 65, 69
+  offset: 0, 0
+  index: -1
+btnLevelDisabledPressed
+  rotate: false
+  xy: 341, 0
   size: 65, 69
   orig: 65, 69
   offset: 0, 0
   index: -1
 btnLevelEnable
   rotate: false
-  xy: 298, 0
+  xy: 406, 0
   size: 65, 69
   orig: 65, 69
   offset: 0, 0
   index: -1
+btnLevelEnablePressed
+  rotate: false
+  xy: 471, 0
+  size: 65, 69
+  orig: 65, 69
+  offset: 0, 0
+  index: -1
+closeButton
+  rotate: false
+  xy: 536, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+closeButtonPressed
+  rotate: false
+  xy: 586, 0
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
 levels_menu
   rotate: false
-  xy: 0, 70
+  xy: 0, 69
   size: 475, 420
   orig: 475, 420
   offset: 0, 0
   index: -1
-lojaMenuButtons
-  rotate: false
-  xy: 363, 0
-  size: 65, 70
-  orig: 65, 70
-  offset: 0, 0
-  index: -1
-menuMenuButtons
-  rotate: false
-  xy: 168, 0
-  size: 65, 70
-  orig: 65, 70
-  offset: 0, 0
-  index: -1
 menuscreen
   rotate: false
-  xy: 0, 490
+  xy: 0, 489
   size: 800, 600
   orig: 800, 600
-  offset: 0, 0
-  index: -1
-number1
-  rotate: false
-  xy: 21, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number2
-  rotate: false
-  xy: 0, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number3
-  rotate: false
-  xy: 147, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number4
-  rotate: false
-  xy: 42, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number5
-  rotate: false
-  xy: 63, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number6
-  rotate: false
-  xy: 126, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number7
-  rotate: false
-  xy: 84, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-number8
-  rotate: false
-  xy: 105, 0
-  size: 21, 27
-  orig: 21, 27
-  offset: 0, 0
-  index: -1
-playButtonLevels
-  rotate: false
-  xy: 428, 0
-  size: 65, 70
-  orig: 65, 70
   offset: 0, 0
   index: -1

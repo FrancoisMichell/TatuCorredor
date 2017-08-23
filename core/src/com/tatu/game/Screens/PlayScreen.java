@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -13,6 +14,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
@@ -51,6 +58,8 @@ public class PlayScreen implements Screen {
 
     private boolean block;
     private Music teste;
+
+    private Group pauseGroup;
 
     public PlayScreen(TatuBola game, int level) {
         this.game = game;
@@ -135,6 +144,10 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
+        if (controller.isPausa()){
+            pause();
+        }
+
 
         for (Homem enemy : creator.getCangaceiros()) {
             enemy.update(dt);
@@ -189,6 +202,10 @@ public class PlayScreen implements Screen {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
 
+        if (controller.isPausa()){
+            pause();
+        }
+
         gameCam.update();
         renderer.setView(gameCam);
     }
@@ -223,9 +240,7 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() { }
 
     @Override
     public void render(float delta) {
@@ -281,12 +296,30 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
+        pauseGroup = new Group();
+        Image semiTransparentBG =new Image(new Texture(Gdx.files.internal("menu/pausaMenu.png")));
+        // setSize(Size of screen) and make it semi transparent.
+        Button fechar = new Button(controller.getSkin(), "closeButton");
+        fechar.setPosition(500,300);
+
+        fechar.addListener(new ClickListener(){
+           @Override
+            public void clicked(InputEvent event, float x, float y) {
+               resume();
+           }
+        });
+        pauseGroup.addActor(semiTransparentBG);
+
+        //crate all other pause UI buttons with listener and add to pauseGroup
+
+        controller.getStage().addActor(pauseGroup);
 
     }
 
     @Override
     public void resume() {
-
+        controller.setPausa(false);
+        pauseGroup.remove();
     }
 
     @Override

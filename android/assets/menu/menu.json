@@ -14,9 +14,12 @@
 		black: { a: 1, b: 0, g: 0, r: 0 }
 	},
 	com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-		jogarButton: { down: jogarButton, up: jogarButton },
-		configuracoesButton: { down: configuracoesButton, up: configuracoesButton },
-		sairButton: { down: sairButton, up: sairButton },	
+		pauseButton: { up: pauseButton, down: pauseButtonPressed  },
+		jogarButton: { up: jogarButton, down: jogarButtonPressed  },
+		lojaButton: { up: lojaButton, down: lojaButtonPressed  },
+		configuracoesButton: { up: configuracoesButton, down: configuracoesButtonPressed  },
+		sairButton: { up: sairButton, down: sairButtonPressed  },
+		closeButton: { up: closeButton, down: closeButtonPressed  },
 	}
 	
 }
