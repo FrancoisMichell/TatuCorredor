@@ -23,7 +23,7 @@ public class Controller implements Disposable {
     private Stage stage;
     private boolean upPressed, leftPressed, rightPressed, pausa;
     private Long lastTap = System.currentTimeMillis();
-    private Skin skin;
+    //private Skin skin;
 
     public Controller() {
         OrthographicCamera cam = new OrthographicCamera();
@@ -36,6 +36,7 @@ public class Controller implements Disposable {
         table.top();
         table.setFillParent(true);
 
+        /*
         skin = new Skin(Gdx.files.internal("menu/menu.json"),new TextureAtlas("menu/menu.pack"));
 
         Button pause = new Button(skin,"pauseButton");
@@ -47,7 +48,7 @@ public class Controller implements Disposable {
                 pausa = true;
             }
         });
-        stage.addActor(pause);
+        stage.addActor(pause);*/
 
 
         Image upImg = new Image(new Texture("controles/up.png"));
@@ -144,6 +145,7 @@ public class Controller implements Disposable {
         this.pausa = pausa;
     }
 
+    /*
     public Skin getSkin() {
         return skin;
     }
@@ -151,6 +153,7 @@ public class Controller implements Disposable {
     public void setSkin(Skin skin) {
         this.skin = skin;
     }
+    */
 
     public void dispose() {
         stage.dispose();
