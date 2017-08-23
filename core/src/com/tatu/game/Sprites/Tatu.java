@@ -17,7 +17,7 @@ import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
-    private boolean somPulo;
+    private boolean somPulo, somCaindo = false;
 
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
 
@@ -50,6 +50,7 @@ public class Tatu extends Sprite {
     private float dt, tempoHit;
 
     private Sound puloSound;
+    private Sound caindoSound;
 
     public Tatu(PlayScreen screen) {
         super(screen.getAtlas().findRegion("tatu"));
@@ -60,6 +61,7 @@ public class Tatu extends Sprite {
         stateTimer = 0;
         runningRight = true;
         puloSound = Gdx.audio.newSound(Gdx.files.internal("efeitos/puloTatu.wav"));
+        caindoSound = Gdx.audio.newSound(Gdx.files.internal("efeitos/caindo.mp3"));
 
         Array<TextureRegion> framesIdle = new Array<TextureRegion>();
         Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -114,7 +116,11 @@ public class Tatu extends Sprite {
     }
 
     private void checkDeath(){
-        if (b2body.getPosition().y < -50) {
+        if (b2body.getPosition().y < 0 && !somCaindo) {
+            caindoSound.play();
+            somCaindo = true;
+        }
+        if (b2body.getPosition().y < -10) {
             tatuIsDead = true;
         }
     }
@@ -241,7 +247,6 @@ public class Tatu extends Sprite {
                             aux = "carrera";
                         }
                         tiraAgua(aux);
-
                         voaTatu();
                         tempoHit = 0;
                     } else if (!tatuIsDead) {
@@ -270,9 +275,9 @@ public class Tatu extends Sprite {
 
     private void voaTatu() {
         if (runningRight) {
-            b2body.applyLinearImpulse(new Vector2(-5, 2), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(-5, 3), b2body.getWorldCenter(), true);
         } else {
-            b2body.applyLinearImpulse(new Vector2(5, 2), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(5, 3), b2body.getWorldCenter(), true);
         }
     }
 

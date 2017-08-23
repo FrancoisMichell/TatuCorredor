@@ -50,7 +50,7 @@ public class PlayScreen implements Screen {
     private Controller controller;
 
     private boolean block;
-    private Music teste;
+    private Music musica;
 
     public PlayScreen(TatuBola game, int level) {
         this.game = game;
@@ -78,7 +78,7 @@ public class PlayScreen implements Screen {
         //controller = Controller.getInstance();
         controller = new Controller();
 
-        teste = Gdx.audio.newMusic(Gdx.files.internal("efeitos/puloTatu.wav"));
+        musica = Gdx.audio.newMusic(Gdx.files.internal("musicas/music.mp3"));
     }
 
     private String loadMap(int level) {
@@ -89,7 +89,7 @@ public class PlayScreen implements Screen {
                 mapa = "mapas/map64.tmx";
                 break;
             case 2:
-                mapa = "mapas/map64.tmx";
+                mapa = "mapas/map2.tmx";
                 break;
             case 3:
                 mapa = "mapas/map64.tmx";
@@ -183,6 +183,8 @@ public class PlayScreen implements Screen {
         if (!player.isDead()) {
             gameCam.position.x = player.b2body.getPosition().x;
         } else {
+            musica.stop();
+            musica.setVolume(0);
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
         if (player.acabouFase()) {
@@ -261,7 +263,8 @@ public class PlayScreen implements Screen {
 
         controller.draw();
 
-        //teste.play();
+        musica.play();
+        musica.setLooping(true);
     }
 
     @Override
