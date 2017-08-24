@@ -30,6 +30,7 @@ public class LevelScreen extends ClickListener implements Screen {
     private Stage stage;
     private TatuBola game;
     private Session session = Session.getInstance();
+    private TextButton level1;
 
     public LevelScreen(TatuBola game){
         this.game = game;
@@ -55,7 +56,7 @@ public class LevelScreen extends ClickListener implements Screen {
         levelsMenu.setPosition( ( 800 - 475)/2 , (480 - 420)/2 ) ;
         stage.addActor(levelsMenu);
 
-        TextButton level1 = new TextButton("1",skin,getEnableDisabledButton(0));
+        level1 = new TextButton("1", skin, getEnableDisabledButton(0));
         level1.setPosition( 210,290 ) ;
         stage.addActor(level1);
 
@@ -119,13 +120,18 @@ public class LevelScreen extends ClickListener implements Screen {
         return retorno;
     }
 
-    public void completeResources(Button button , final int level){
+    public void completeResources(final Button button, final int level) {
         if (! session.getUsuarioLogado().getLevels().get(level).getLocked()){
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     selecionado.play();
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game,level));
+                    if (button == level1 && !session.getUsuarioLogado().isViuTutorial()) {
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new TutorialScreen(game));
+                        session.getUsuarioLogado().setViuTutorial(true);
+                    } else {
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
+                    }
                     dispose();
                 }
             });

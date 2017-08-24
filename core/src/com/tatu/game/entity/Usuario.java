@@ -16,6 +16,8 @@ public class Usuario {
     private float aguaPuloPower;
     private float aguaFreioPower;
 
+    private boolean viuTutorial;
+
     private ArrayList<Level> levels;
 
     public Usuario(){
@@ -47,6 +49,8 @@ public class Usuario {
         this.aguaCarreraPower = 0f;
         this.aguaPuloPower = 0f;
         this.aguaFreioPower = 0f;
+
+        this.viuTutorial = false;
     }
 
     public ArrayList<Level> getLevels() {
@@ -105,4 +109,11 @@ public class Usuario {
         this.aguaFreioPower = aguaFreioPower;
     }
 
+    public boolean isViuTutorial() {
+        return viuTutorial;
+    }
+
+    public void setViuTutorial(boolean viuTutorial) {
+        this.viuTutorial = viuTutorial;
+    }
 }

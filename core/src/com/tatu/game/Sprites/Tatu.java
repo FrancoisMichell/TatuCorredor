@@ -180,7 +180,7 @@ public class Tatu extends Sprite {
 
     private void defineTatu() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(1064 / TatuBola.PPM, 256 / TatuBola.PPM);
+        bdef.position.set(640 / TatuBola.PPM, 128 / TatuBola.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

@@ -47,7 +47,7 @@ public class Jaguatirica extends Enemy {
 
     public void update(float dt) {
         stateTime += dt;
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.6f - getHeight() / 2);
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y + 0.5f - getHeight() / 2);
         animaJaguatirica(dt);
     }
 

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -15,11 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.Controller;
@@ -94,7 +88,7 @@ public class PlayScreen implements Screen {
 
         switch (level) {
             case 1:
-                mapa = "mapas/map64.tmx";
+                mapa = "mapas/map2.tmx";
                 break;
             case 2:
                 mapa = "mapas/map2.tmx";
@@ -195,6 +189,8 @@ public class PlayScreen implements Screen {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
         if (player.acabouFase()) {
+            musica.stop();
+            musica.setVolume(0);
             ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
         }
 
@@ -241,7 +237,6 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
 
-        //TODO Retirar o render das linhas de debug quando for apresentar
         b2dr.render(world, gameCam.combined);
 
         batch.setProjectionMatrix(gameCam.combined);

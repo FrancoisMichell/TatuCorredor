@@ -17,7 +17,7 @@
  </layer>
  <layer name="objects" width="140" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt1u0KgzAMQFGzufn+/2b3oXMvuhYVpGytFEdmuAdCkRaSVAlWFQAAAABgbxrtAgBAifg4R3FSrciWT/dr5Z4vol0BYN+vZrTmv++yp2+9pGanhfmpgZlt2zN6v51/vsm4ptyjfZc5f03s937vIeOaM0xnXiu/Szf1M0dc9xZyvQeh3qEwd6jZybo8bUGOo3Ic/qyeLXqod54nFW86SBJN
+   eJzt1n0LgjAQx3GvrN7/fzV7tDfahgZx1Cai3Dq+HxhDNtjvphw2DQAAAADg3xysAwCAEYljr8bONJEv3+7Xyz0fxToB4N9aPdry3/ezpl+15Hqnh/5pgZ7t20O931t8Pssw51zUeijs7zLr97h2lWEu6cc9z4nfZRjreQ+dewml2pOUt595dsocZNo5pxlnbI3HRuVpK8hUaw013NULO+gSTg==
   </data>
  </layer>
  <objectgroup name="Ground">
