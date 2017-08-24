@@ -28,11 +28,14 @@ public class GameOverScreen implements Screen {
     private Stage stage;
     private TatuBola game;
     private Sound selecionado;
+    private int level;
     Skin skin;
 
 
-    public GameOverScreen(final TatuBola game) {
+    public GameOverScreen(final TatuBola game, int level) {
+
         this.game = game;
+        this.level = level;
 
         OrthographicCamera cam = new OrthographicCamera();
         Viewport viewport = new FitViewport(800, 480, cam);
@@ -71,7 +74,7 @@ public class GameOverScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 // TO DO passar o level como parametro no construtor
                 selecionado.play();
-                ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
                 dispose();
             }
         });

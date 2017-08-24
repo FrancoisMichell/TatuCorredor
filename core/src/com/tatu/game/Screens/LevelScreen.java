@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tatu.game.TatuBola;
+import com.tatu.game.Util.BdManager;
 import com.tatu.game.Util.Session;
 
 /**
@@ -129,6 +130,7 @@ public class LevelScreen extends ClickListener implements Screen {
                     if (button == level1 && !session.getUsuarioLogado().isViuTutorial()) {
                         ((Game) Gdx.app.getApplicationListener()).setScreen(new TutorialScreen(game));
                         session.getUsuarioLogado().setViuTutorial(true);
+                        BdManager.getInstance().saveUserInSharedPref(session.getUsuarioLogado());
                     } else {
                         ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, level));
                     }

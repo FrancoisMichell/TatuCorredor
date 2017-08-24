@@ -189,7 +189,7 @@ public class PlayScreen implements Screen {
         } else {
             musica.stop();
             musica.setVolume(0);
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game,level));
         }
         if (player.acabouFase()) {
             musica.stop();
