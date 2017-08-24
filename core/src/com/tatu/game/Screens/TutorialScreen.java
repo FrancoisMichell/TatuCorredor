@@ -41,7 +41,7 @@ public class TutorialScreen implements Screen {
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 1));
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen(game, 0));
                     }
                 })));
     }

@@ -90,11 +90,14 @@ public class PlayScreen implements Screen {
         String mapa;
 
         switch (level) {
+            case 0:
+                mapa = "mapas/map1.tmx";
+                break;
             case 1:
                 mapa = "mapas/map2.tmx";
                 break;
             case 2:
-                mapa = "mapas/map2.tmx";
+                mapa = "mapas/map3.tmx";
                 break;
             case 3:
                 mapa = "mapas/map64.tmx";
@@ -115,9 +118,6 @@ public class PlayScreen implements Screen {
                 mapa = "mapas/map64.tmx";
                 break;
             case 9:
-                mapa = "mapas/map64.tmx";
-                break;
-            case 10:
                 mapa = "mapas/map64.tmx";
                 break;
             default:

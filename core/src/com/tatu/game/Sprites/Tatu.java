@@ -17,6 +17,9 @@ import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
+    private final float BASE_PULO = 4.5f;
+    private final float BASE_VELOCIDADE = 0.1f;
+
     private boolean somPulo, somCaindo = false;
 
     public enum State {FALLING, JUMPING, RUNNING, IDLE, DEAD}
@@ -35,8 +38,8 @@ public class Tatu extends Sprite {
     private Animation<TextureRegion> tatuIdle;
     private Animation<TextureRegion> tatuJump;
 
-    private float pulo = 4.5f;
-    private float velocidade = 0.1f;
+    private float pulo = BASE_PULO;
+    private float velocidade = BASE_VELOCIDADE;
 
     private boolean powerUpCarreira = false;
     private float tempoCarrera;
@@ -103,13 +106,13 @@ public class Tatu extends Sprite {
         if (isPowerUpCarreira()) {
             if (tempoCarrera >= 15) {
                 setPowerUpCarreira(false);
-                setVelocidade(-getVelocidade() + 0.1f);
+                setVelocidade(-getVelocidade() + BASE_VELOCIDADE);
                 tempoCarrera = 0;
             }
         } else if (isPowerUpPulo()) {
             if (tempoPulo >= 15) {
                 setPowerUpPulo(false);
-                setPulo(-getPulo() + 6f);
+                setPulo(-getPulo() + BASE_PULO);
                 tempoPulo = 0;
             }
         }
@@ -197,21 +200,23 @@ public class Tatu extends Sprite {
 
         b2body.createFixture(fdef);
 
-        CircleShape head = new CircleShape();
-        head.setRadius(20 / TatuBola.PPM);
-        fdef.shape = head;
-        fdef.isSensor = true;
-
-        b2body.createFixture(fdef);
-
     }
 
-    public State getCurrentState() {
-        return currentState;
+    private void resetPowerUp() {
+        setVelocidade(-getVelocidade() + BASE_VELOCIDADE + session.getUsuarioLogado().getAguaCarreraPower());
+        setPowerUpCarreira(false);
+        setPulo(-getPulo() + BASE_PULO);
+        setPowerUpPulo(false);
+        tempoCarrera = 0;
+        tempoPulo = 0;
     }
 
-    public boolean isDead() {
-        return tatuIsDead;
+    private void voaTatu() {
+        if (runningRight) {
+            b2body.applyLinearImpulse(new Vector2(-5, 3), b2body.getWorldCenter(), true);
+        } else {
+            b2body.applyLinearImpulse(new Vector2(5, 3), b2body.getWorldCenter(), true);
+        }
     }
 
     public void hit(short inimigo) {
@@ -257,28 +262,19 @@ public class Tatu extends Sprite {
         }
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public boolean isDead() {
+        return tatuIsDead;
+    }
+
     private void tiraAgua(String aux) {
         if (aux.equals("pulo"))
             screen.getHud().setAguaPuloScoreValue(screen.getHud().getAguaPuloScoreValue() - 1);
         else
             screen.getHud().setAguaCarreraScoreValue(screen.getHud().getAguaCarreraScoreValue() - 1);
-    }
-
-    private void resetPowerUp() {
-        setVelocidade(-getVelocidade() + 0.1f + session.getUsuarioLogado().getAguaCarreraPower());
-        setPowerUpCarreira(false);
-        setPulo(-getPulo() + 6f);
-        setPowerUpPulo(false);
-        tempoCarrera = 0;
-        tempoPulo = 0;
-    }
-
-    private void voaTatu() {
-        if (runningRight) {
-            b2body.applyLinearImpulse(new Vector2(-5, 3), b2body.getWorldCenter(), true);
-        } else {
-            b2body.applyLinearImpulse(new Vector2(5, 3), b2body.getWorldCenter(), true);
-        }
     }
 
     public float getPulo() {
