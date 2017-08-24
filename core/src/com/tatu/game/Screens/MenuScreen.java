@@ -62,7 +62,6 @@ class MenuScreen implements Screen {
         });
 
         lojaButton = new Button(skin, "lojaButton");
-        //lojaButton.setPosition( 650 , 10+116+10+116+10+116+10) ;
         lojaButton.setPosition(350, 0);
 
         lojaButton.addListener(new ClickListener() {

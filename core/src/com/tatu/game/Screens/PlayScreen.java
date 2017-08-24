@@ -52,11 +52,14 @@ public class PlayScreen implements Screen {
 
     private boolean block;
     private Music musica;
+    private int level;
 
     private Group pauseGroup;
 
     public PlayScreen(TatuBola game, int level) {
         this.game = game;
+
+        this.level = level;
 
         atlas = new TextureAtlas("sprites/Tatu64 - Copia - Copia.atlas");
         gameCam = new OrthographicCamera(V_WIDTH, V_HEIGHT);
@@ -191,7 +194,7 @@ public class PlayScreen implements Screen {
         if (player.acabouFase()) {
             musica.stop();
             musica.setVolume(0);
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new GameOverScreen(game));
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new FinalLevelScreen(game,level, hud.getWorldTimer() ,hud.getAguaCarreraScoreValue(), hud.getAguaPuloScoreValue()));
         }
 
         gameCam.update();

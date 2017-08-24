@@ -1,39 +1,39 @@
 menu.png
-size: 904, 1531
+size: 1024, 1563
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 1star
   rotate: false
-  xy: 0, 272
+  xy: 370, 198
   size: 286, 106
   orig: 286, 106
   offset: 0, 0
   index: -1
 2star
   rotate: false
-  xy: 290, 166
+  xy: 656, 198
   size: 286, 106
   orig: 286, 106
   offset: 0, 0
   index: -1
 3star
   rotate: false
-  xy: 576, 166
+  xy: 0, 304
   size: 286, 106
   orig: 286, 106
   offset: 0, 0
   index: -1
 aguaCarreraScore
   rotate: false
-  xy: 100, 0
+  xy: 322, 99
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
   index: -1
 aguaPuloScore
   rotate: false
-  xy: 242, 0
+  xy: 180, 99
   size: 142, 63
   orig: 142, 63
   offset: 0, 0
@@ -54,133 +54,161 @@ closeButtonPressed
   index: -1
 configuracoesButton
   rotate: false
-  xy: 814, 67
+  xy: 90, 99
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 configuracoesButtonPressed
   rotate: false
-  xy: 0, 166
+  xy: 0, 99
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 faseConcluida
   rotate: false
-  xy: 270, 617
+  xy: 556, 304
   size: 372, 434
   orig: 372, 434
   offset: 0, 0
   index: -1
 gameOver
   rotate: false
-  xy: 286, 272
+  xy: 0, 738
   size: 484, 345
   orig: 484, 345
   offset: 0, 0
   index: -1
 gameOverNao
   rotate: false
-  xy: 697, 0
+  xy: 738, 99
   size: 143, 67
   orig: 143, 67
   offset: 0, 0
   index: -1
 gameOverNaoPressed
   rotate: false
-  xy: 554, 0
+  xy: 881, 99
   size: 143, 67
   orig: 143, 67
   offset: 0, 0
   index: -1
 gameOverSim
   rotate: false
-  xy: 137, 67
+  xy: 464, 99
   size: 137, 67
   orig: 137, 67
   offset: 0, 0
   index: -1
 gameOverSimPressed
   rotate: false
-  xy: 0, 67
+  xy: 601, 99
   size: 137, 67
   orig: 137, 67
   offset: 0, 0
   index: -1
+homeButton
+  rotate: false
+  xy: 730, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+homeButtonPressed
+  rotate: false
+  xy: 370, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
 jogarButton
   rotate: false
-  xy: 364, 67
+  xy: 100, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 jogarButtonPressed
   rotate: false
-  xy: 274, 67
+  xy: 550, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 lojaButton
   rotate: false
-  xy: 724, 67
+  xy: 460, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 lojaButtonPressed
   rotate: false
-  xy: 454, 67
+  xy: 280, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 menuscreen
   rotate: false
-  xy: 0, 1051
+  xy: 0, 1083
   size: 800, 480
   orig: 800, 480
   offset: 0, 0
   index: -1
 pausaMenu
   rotate: false
-  xy: 0, 617
+  xy: 286, 304
   size: 270, 419
   orig: 270, 419
   offset: 0, 0
   index: -1
 pauseButton
   rotate: false
-  xy: 90, 166
+  xy: 0, 198
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 pauseButtonPressed
   rotate: false
-  xy: 190, 166
+  xy: 100, 198
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+playAgainButton
+  rotate: false
+  xy: 190, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
+playAgainButtonPressed
+  rotate: false
+  xy: 640, 0
+  size: 90, 99
+  orig: 90, 99
+  offset: 0, 0
+  index: -1
 sairButton
   rotate: false
-  xy: 634, 67
+  xy: 910, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 sairButtonPressed
   rotate: false
-  xy: 544, 67
+  xy: 820, 0
   size: 90, 99
   orig: 90, 99
   offset: 0, 0
   index: -1
 tempoScore
   rotate: false
-  xy: 384, 0
+  xy: 200, 198
   size: 170, 63
   orig: 170, 63
   offset: 0, 0

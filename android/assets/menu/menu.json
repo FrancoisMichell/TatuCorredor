@@ -16,7 +16,9 @@
 		sairButton: { up: sairButton, down: sairButtonPressed  },
 		closeButton: { up: closeButton, down: closeButtonPressed  },
 		gameOverNao: { up: gameOverNao, down: gameOverNaoPressed  },
-		gameOverSim: { up: gameOverSim, down: gameOverSimPressed  }
+		gameOverSim: { up: gameOverSim, down: gameOverSimPressed  },
+		homeButton: { up: homeButton, down: homeButtonPressed  },
+		playAgainButton: { up: playAgainButton, down: playAgainButtonPressed  }
 	}
 	
 }

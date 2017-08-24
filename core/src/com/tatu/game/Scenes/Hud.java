@@ -136,6 +136,14 @@ public class Hud implements Disposable {
         this.aguaPuloScoreValue = aguaPuloScoreValue;
     }
 
+    public Integer getWorldTimer() {
+        return worldTimer;
+    }
+
+    public void setWorldTimer(Integer worldTimer) {
+        this.worldTimer = worldTimer;
+    }
+
     @Override
     public void dispose() {
         skin.dispose();
