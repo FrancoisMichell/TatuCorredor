@@ -10,14 +10,22 @@
   <image source="decoracao/Sign.png" width="85" height="88"/>
  </tileset>
  <tileset firstgid="410" source="untitled.tsx"/>
+ <tileset firstgid="420" name="desert64" tilewidth="64" tileheight="64" tilecount="12" columns="3">
+  <image source="desert64.png" width="192" height="256"/>
+ </tileset>
  <layer name="Background" width="140" height="15">
   <data encoding="base64" compression="zlib">
    eJztzOe7lwMAgOHfKSqEUomMlGiibGnSUKGhJRINijp7j845jTPrjDojs0loiJIVKkTDSvYeTW0VQrr/jvd6P9zfnutJjkQiKaSSRjoZZJLFZLKZyCSiiSGWOOJJIJEkksNfoH9FFDODmZRQShnlzGI2OeQyhalMYzp55FNAYfgL/O8p5jKP+SxgIYt4mmdYTAWVVFHNHB7lMR7nCZ4Mf4H/vcRKVvEyq3mFV3mN13mDZ3mO51nCUpaxnBdYwYvhL/C/DbzPB2xkE5vZwod8xMes4U3e4m3Wso71vMO7vBf+Av/7hm/5ju/5gR/5iZ/5hV/5hE/Zymds43O+4Eu+4uvwF/jffg5wkEMc5g+OcJRj/MlvbGcHO9nFbvbwO3vZF/4C/6sRFYnU5BROpRa1qcNpnM4Z/KX9m+P8w7/8xwn+J6KJigp/Qf+dS2PO43yacAEXchEX05S6nMlZnE096nMODWhIo/AX+F8b2tKOK7iSq2hPB67mGi6hGc25lBZcxuW0pBWtw1/gf13oSje6cwu30oOe9KI313Id13MDN3ITHbmZTnQOf4H/DeIuBjOEoQxjOHczgnu4jT70pR+3cwd30p8BDAx/gf89yEOMZwIP8wgTmUQ0MdzLSO5jFPfzAKMZw1jGhb/A/9LJIJMsJpNNDrlMYSqxxBFPAokkkUwKqaSFv8D/SiiljHJmMZsKKqmimmlMJ498CiikiGJmMDP8Bf53EpfwHLM=
   </data>
  </layer>
+ <layer name="midLayer" width="140" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsKgDAMBcD2/tcQP7d01YXaFsGCts5AVtkk4ZEQAAAAAABCmGK5N1d6X7bGY9HOEq/3TbV1emt5eSb3Q9Lv+ENeet3jLblMbAPl5TxnaR9/5x55kZfWRrrjCDvU7BnHOWc=
+  </data>
+ </layer>
  <layer name="objects" width="140" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt1n0LgjAQx3GvrN7/fzV7tDfahgZx1Cai3Dq+HxhDNtjvphw2DQAAAADg3xysAwCAEYljr8bONJEv3+7Xyz0fxToB4N9aPdry3/ezpl+15Hqnh/5pgZ7t20O931t8Pssw51zUeijs7zLr97h2lWEu6cc9z4nfZRjreQ+dewml2pOUt595dsocZNo5pxlnbI3HRuVpK8hUaw013NULO+gSTg==
+   eJztlusOgjAMhTcv8f3/4bwhouhbSsOakGZsOjQFPV/SbLAlnJaTdcYAAAAAAAAAAJgbG20BAACgRG2NuYq4WW1VvwOVUtaXY60tLoOm543Czx/wCxigCXgDfnmP0BnyibND8+5bD/Sbvl9CvQl9ahzFTGtGvrj7kO9D8xD/cO6cRY6n9nlvuzHGQay7xP5dZL1s1462G1NUfs/lxX/jfD4cUjczxi+ce8wvpLfK9BNpdjZdY2Kb8Y2lciyEntUENOXmwB75Vg5TqNUTQOkwXA==
   </data>
  </layer>
  <objectgroup name="Ground">

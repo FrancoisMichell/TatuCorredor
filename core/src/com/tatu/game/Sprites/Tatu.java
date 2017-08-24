@@ -200,6 +200,13 @@ public class Tatu extends Sprite {
 
         b2body.createFixture(fdef);
 
+        CircleShape head = new CircleShape();
+        head.setRadius(20 / TatuBola.PPM);
+        fdef.shape = head;
+        fdef.isSensor = true;
+
+        b2body.createFixture(fdef);
+
     }
 
     private void resetPowerUp() {
