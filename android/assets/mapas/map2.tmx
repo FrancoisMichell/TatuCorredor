@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="left-up" width="140" height="16" tilewidth="64" tileheight="64" nextobjectid="280">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="left-up" width="140" height="16" tilewidth="64" tileheight="64" nextobjectid="296">
  <tileset firstgid="1" source="gota64.tsx"/>
  <tileset firstgid="2" source="gotaPulo.tsx"/>
  <tileset firstgid="3" name="Sign" tilewidth="85" tileheight="88" tilecount="1" columns="1">
@@ -45,10 +45,16 @@
   <object id="235" x="2880" y="832" width="704" height="64"/>
   <object id="237" x="4736" y="640" width="256" height="384"/>
   <object id="238" x="4992" y="896" width="256" height="64"/>
-  <object id="249" x="6528" y="706" width="192" height="29.3333"/>
+  <object id="249" x="6404" y="574" width="192" height="29.3333"/>
   <object id="250" x="6720" y="446.667" width="192" height="28"/>
   <object id="252" x="7168" y="894" width="192" height="64"/>
   <object id="277" x="1984.67" y="896.667" width="64.6667" height="64"/>
+  <object id="280" x="6540" y="701.333" width="192" height="29.3333"/>
+  <object id="286" x="6136" y="444" width="196" height="20"/>
+  <object id="290" x="5700" y="492" width="312" height="32"/>
+  <object id="291" x="6012" y="492"/>
+  <object id="293" x="5548" y="696" width="272" height="28"/>
+  <object id="295" x="6084" y="708" width="192" height="320"/>
  </objectgroup>
  <objectgroup name="Paredes">
   <object id="102" x="572.788" y="-2.94697" height="903.03"/>
@@ -60,11 +66,6 @@
   <object id="273" x="7116.88" y="275.75" width="38.25" height="32.5"/>
  </objectgroup>
  <objectgroup name="Jaguatirica">
-  <object id="244" x="5568" y="704" width="256" height="16"/>
-  <object id="245" x="5696" y="512" width="256" height="18"/>
-  <object id="246" x="6080" y="704" width="192" height="320"/>
-  <object id="247" x="6144" y="448" width="192" height="21"/>
-  <object id="248" x="6400" y="576" width="192" height="30.6667"/>
   <object id="254" x="960" y="896" width="64" height="64"/>
   <object id="257" x="1343.83" y="513.333" width="63" height="63"/>
   <object id="260" x="2240" y="768" width="64" height="64"/>

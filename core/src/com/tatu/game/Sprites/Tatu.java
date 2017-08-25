@@ -17,7 +17,7 @@ import com.tatu.game.TatuBola;
 import com.tatu.game.Util.Session;
 
 public class Tatu extends Sprite {
-    private final float BASE_PULO = 4.5f;
+    private final float BASE_PULO = 6f;
     private final float BASE_VELOCIDADE = 0.1f;
 
     private boolean somPulo, somCaindo = false;

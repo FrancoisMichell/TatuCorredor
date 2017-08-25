@@ -122,7 +122,7 @@ public class LevelScreen extends ClickListener implements Screen {
     }
 
     public void completeResources(final Button button, final int level) {
-        if (! session.getUsuarioLogado().getLevels().get(level).getLocked()){
+        //if (! session.getUsuarioLogado().getLevels().get(level).getLocked()){
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -158,7 +158,7 @@ public class LevelScreen extends ClickListener implements Screen {
             score.setPosition( button.getX(),button.getY()-20 ) ;
             stage.addActor(score);
 
-        }
+//        }
     }
 
     @Override
